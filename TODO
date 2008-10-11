@@ -1,0 +1,41 @@
+* Backends:
+    * Map ( for all UUID <-> serialized blob mappings )
+    * Backend::CAS (content addressible map based on serialize)
+    * Backend::Store
+        * BDB
+        * Dir
+            * Flat
+            * Trie
+    * DBI
+        * props + blob column with Serialize role
+    * SQLite
+        * with dynamic alter table statements?
+        * audrey style indexing?
+    * BDB
+        * Set::Object/Hash sharding
+    * RDF
+        * generate triples
+            * predicates as FQ attr names names
+            * predicates as short attr names
+            * predicates as UUIDs?
+            * no collapsing by default
+        * SPARQL matching with simple search
+    * Backend::Locking
+        * exclusive write lock TXNs using deferred writes
+
+* typemap
+    * default types
+        * per backend
+        * backend_typemap => 0 to avoid inheriting the user typemap and the
+          backend typemap
+    * runtime role support
+        * json in class field?
+        * Reference in class field?
+            * fully DB resident metaclass?
+
+* tools
+    * consistency checker
+    * generic garbage collector
+
+* query
+    * http://www.ietf.org/rfc/rfc1960.txt

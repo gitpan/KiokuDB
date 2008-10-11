@@ -1,0 +1,531 @@
+=pod
+
+=head1 NAME
+
+KiokuDB::Tutorial - Getting started with L<KiokuDB>
+
+=head1 INSTALLATION
+
+L<KiokuDB> depends on L<Moose> and a few other modules out of the box, but no
+specific storage module.
+
+L<KiokuDB> is a frontend to several backends, much like L<DBI> uses DBDs to
+connect to actual databases.
+
+For development and testing you can use the L<KiokuDB::Backend::Hash> backend,
+which is an in memory store, but for production L<KiokuDB::Backend::BDB> is
+the recommended backend.
+
+See below for instructions on getting L<KiokuDB::Backend::BDB> installed.
+
+=head1 CREATING A DIRECTORY
+
+A KiokuDB directory is the object that contains all the common functionality
+regardless of the backend.
+
+The simplest directory ready for use can be created like this:
+
+    my $dir = KiokuDB->new(
+        backend => KiokuDB::Backend::Hash->new
+    );
+
+We will revisit other more interesting backend configuration later in this
+document, but for now this will do.
+
+=head1 INSERTING OBJECTS
+
+Let's start with this simple class:
+
+    package Person;
+    use Moose;
+
+    has name => (
+        isa => "Str",
+        is  => "rw",
+    );
+
+We can instantiate it:
+
+    my $obj = Person->new( name => "Homer Simpson" );
+
+and insert the object to the database as follows:
+
+    my $scope = $dir->new_scope;
+
+    my $homer_id = $dir->store($obj);
+
+This is very trivial use of L<KiokuDB>, but it illustrates a few important
+things.
+
+First, no schema is necessary. L<KiokuDB> can use L<Moose> to introspect your
+object without needing to predefine anything like tables.
+
+Second, every object in the database has an ID. If you don't choose an ID for
+an object, L<KiokuDB> will assign a UUID instead. The ID is like a primary key
+in a relational database. If you want to choose an ID for your object, you can
+do something like:
+
+    $dir->store( homer => $obj );
+
+and C<$obj>'s ID will be C<homer>. If you don't provide an ID a UUID will be
+assigned automatically.
+
+Third, all L<KiokuDB> operations need to be performed within a B<scope>. The
+scope does not apply to a simple example like the above, but becomes necessary
+once weak references are used. We will look into that in more detail later.
+
+=head1 LOADING OBJECTS
+
+So now that Homer has been inserted into the database, we can fetch him out of
+there using the ID we got from C<store>.
+
+    my $homer = $dir->lookup($homer_id);
+
+Assuming that C<$scope> and C<$obj> are still in scope, C<$homer> and C<$obj>
+will actually be the same reference:
+
+    refaddr($homer) == refaddr($obj)
+
+This is because L<KiokuDB> tracks which objects are "live" in the
+B<live object set> (L<KiokuDB::LiveObjects>).
+
+If C<$obj> and C<$scope> are no longer in scope you'd need to create a new
+scope, and then fetch the object from the database again:
+
+    my $scope = $dir->new_scope;
+
+    my $homer = $dir->lookup($homer_id);
+
+In this case since the original instance of Homer is no longer live, but has
+been garbage collected by Perl, L<KiokuDB> will fetch it from the backend.
+
+=head1 OBJECT RELATIONSHIPS
+
+Let's extend the C<Person> class to hold some more interesting data than just a
+C<name>:
+
+    package Person;
+
+    has spouse => (
+        isa => __PACKAGE__,
+        is  => "rw",
+        weak_ref => 1,
+    );
+
+This new C<spouse> attribute will hold a reference to another person object.
+
+Let's first create and insert another object:
+
+    my $marge_id = $dir->store(
+        Person->new( name => "Marge Simpson" ),
+    );
+
+Now that we have both objects in the database, lets link them together:
+
+    {
+        my $scope = $dir->new_scope;
+
+        my ( $marge, $homer ) = $dir->lookup( $marge_id, $homer_id );
+
+        $marge->spouse($homer);
+        $homer->spouse($marge);
+
+        $dir->store( $marge, $homer );
+    }
+
+Now we have created a persistent B<object graph>, that is several objects which
+point to each other.
+
+The reason C<spouse> was had the C<weak_ref> option was so that this circular
+structure will not leak.
+
+When then objects are updated in the database L<KiokuDB> sees that their
+C<spouse> attribute contains references, and this relationship will be encoded
+using their unique ID in storage.
+
+To load the graph, we can do something like this:
+
+    {
+        my $scope = $dir->new_scope;
+
+        my $homer = $dir->lookup($homer_id);
+
+        print $homer->spouse->name; # Marge Simpson
+    }
+
+    {
+        my $scope = $dir->new_scope;
+
+        my $marge = $dir->lookup($marge_id);
+
+        print $marge->spouse->name; # Homer Simpson
+
+        refaddr($marge) == refaddr($marge->spouse->spouse); # true
+    }
+
+When L<KiokuDB> is loading the initial object, all the objects the object
+depends on will also be loaded. The C<spouse> attribute contains a
+reference to another object (by ID), and this link is resolved at inflation
+time.
+
+=head2 The purpose of C<new_scope>
+
+This is where C<new_scope> becomes important. As objects are inflated from the
+database, they are pushed onto the live object scope, in order to increase
+their reference count.
+
+If this was not done, by the time C<$homer> was returned from C<lookup> his
+C<spouse> attribute would have been cleared because there is no other reference
+to Marge.
+
+If, on the other hand the circular structure was not weak it would have to be
+broken manually, which is very error prone.
+
+By using this idiom:
+
+    {
+        my $scope = $dir->new_scope;
+        
+        # do all KiokuDB work in here
+    }
+
+You are ensuring that the objects live at least as long as is necessary.
+
+In a web application context usually you create one new scope per request.
+
+While scopes can nest, this is not a requirement.
+
+You are free to create as many or as few scopes as you like, as long as there
+is at least one, but note that child scopes refer to their parents to ensure
+that all objects that were already live at the time that a scope is created are
+still alive
+
+=head1 OBJECT SETS
+
+More complex relationships (not necessarily 1 to 1) are fairly easy to model
+with L<Set::Object>.
+
+Let's extend the C<Person> class to add such a relationship:
+
+    package Person;
+
+    has children => (
+        does => "KiokuDB::Set",
+        is   => "rw",
+    );
+
+L<KiokuDB::Set> objects are L<KiokuDB> specific wrappers for L<Set::Object>.
+
+    my @kids = map { Person->new( name => $_ ) } qw(maggie lisa bart);
+
+    use KiokuDB::Util qw(set);
+
+    my $set = set(@kids);
+
+    $homer->children($set);
+
+    $dir->store($homer);
+
+The C<set> convenience function creates a new L<KiokuDB::Set::Transient>
+object. A transient set is one which started its life in memory space.
+
+The C<weak_set> convenience function also exists, creating a transient set with
+L<Set::Object::Weak> used internally to help avoid circular structures (for
+instance if setting a C<parent> attribute in our example).
+
+The set object behaves pretty much like a normal L<Set::Object>:
+
+    my @kids = $dir->lookup($homer_id)->children->members;
+
+The main difference is that sets coming from the database are deferred by
+default, that is the objects in C<@kids> are not loaded until they are actually
+needed.
+
+This allows large object graphs to exist in the database, while only being
+partially loaded, without breaking the encapsulation of user objects. This
+behavior is implemented in L<KiokuDB::Set::Deferred> and
+L<KiokuDB::Set::Loaded>.
+
+This set object is optimized to make most operations defer loading. For
+instance, if you intersect two deferred sets, only the members of the
+intersection set will need to be loaded.
+
+=head1 THE TYPEMAP
+
+Storing an object with L<KiokuDB> involves passing it to L<KiokuDB::Collapser>,
+the object that "flattens" objects into L<KiokuDB::Entry> before the entries
+are inserted into the backend.
+
+The collapser uses a L<KiokuDB::TypeMap> object that tells it how objects of
+each type should be collapsed.
+
+During retrieval of objects the same typemap is used to reinflate objects back
+into working objects.
+
+Trying to store an object that is not in the typemap is an error. The reason
+behind this is that many objects depend on runtime states (for instance C<DBI>
+handles need a socket, objects based on XS modules have an internal pointer as
+an integer), and even though the majority of objects are safe to serialize,
+even a small bit of unreported fragility is usually enough to create large,
+hard to debug problems.
+
+An exception to this rule is L<Moose> based objects, because they have
+sufficient meta information available through L<Moose>'s powerful reflection
+support in order to be safely serialized.
+
+Additionally, the standard backends provide a default typemap for common
+objects (L<DateTime>, L<Path::Class>, etc), which by default is merged with any
+custom typemap you pass to L<KiokuDB>.
+
+So, in order to actually get L<KiokuDB> to store things like L<Class::Accessor>
+based objects, you can do something like this:
+
+    my $dir = KiokuDB->new(
+        backend => $backend,
+        typemap => KiokuDB::TypeMap->new(
+            entries => {
+                "My::Object" => KiokuDB::TypeMap::Entry::Naive->new,
+            },
+        ),
+    );
+
+L<KiokuDB::TypeMap::Entry::Naive> is a type map entry that performs naive
+collapsing of the object, by simply walking it recursively.
+
+When the collapser encounters an object it will ask
+L<KiokuDB::TypeMap::Resolver> for a collapsing routine based on the class of
+the object.
+
+This lookup is typically performed by C<ref $object>, not using inheritence,
+because a typemap entry that is safe to use with a superclass isn't necessarily
+safe to use with a subclass. If you B<do> want inherited entries, specify
+C<isa_entries>:
+
+    KiokuDB::TypeMap->new(
+        isa_entries => {
+            "My::Object" => KiokuDB::TypeMap::Entry::Naive->new,
+        },
+    );
+
+If no normal (C<ref> keyed) entry is found for an object, the isa entries are
+searched for a superclass of that object. Subclass entries are tried before
+superclass entries. The result of this lookup is cached, so it only happens
+once per class.
+
+=head2 Typemap Entries
+
+If you want to do custom serialization hooks, you can specify hooks to collapse
+your object:
+
+    KiokuDB::TypeMap::Entry::Callback->new(
+        collapse => sub {
+            my $object = shift;
+
+            ...
+
+            return @some_args;
+        },
+        expand => sub {
+            my ( $class, @some_args ) = @_;
+
+            ...
+
+            return $object;
+        },
+    );
+
+These hooks are called as methods on the object to be collapsed.
+
+For instance the L<Path::Class> related typemap ISA entry is:
+
+    'Path::Class::Entity' => KiokuDB::TypeMap::Entry::Callback->new(
+        intrinsic => 1,
+        collapse  => "stringify",
+        expand    => "new",
+    );
+
+The C<intrinsic> flag is discussed in the next section.
+
+Another option for typemap entries is L<KiokuDB::TypeMap::Entry::Passthrough>,
+which is appropriate when you know the backend's serialization can handle that
+data type natively.
+
+For example, if your object has a L<Storable> hook which you know is
+appropriate (e.g. contains no sub objects that need to be collapsible) and your
+backend uses L<KiokuDB::Backend::Serialize::Storable>. L<DateTime> is an
+example of a class with such storable hopes:
+
+    'DateTime' => KiokuDB::Backend::Entry::Passthrough->new( intrinsic => 1 )
+
+=head2 Intrinsic vs. First Class
+
+In L<KiokuDB> every object is normally assigned an ID, and if the object is
+shared by several objects this relationship will be preserved.
+
+However, for some objects this is not the desired behavior. These are objects
+that represent values, like L<DateTime>, L<Path::Class> entries, L<URI>
+objects, etc.
+
+L<KiokuDB> can be asked to collapse such objects B<intrinsicly>, that is
+instead of creating a new L<KiokuDB::Entry> with its own ID for the object, the
+object gets collapsed directly into its parent's structures.
+
+This means that shared references that are collapsed intrinsically will be
+loaded back from the database as two distinct copies, so updates to one will
+not affect the other.
+
+For instance, when we run the following code:
+
+    use Path::Class;
+
+    my $path = file(qw(path to foo));
+
+    $obj_1->file($path);
+
+    $obj_2->file($path);
+
+    $dir->store( $obj_1, $obj_2 );
+
+Then
+
+    refaddr($obj_1->file) == refaddr($obj_2->file)
+
+holds true when inserting, but is no longer the case after C<$obj_1> and
+C<$obj_2> are reloaded from the database.
+
+This behavior is usually more appropriate for objects that aren't mutated, but
+are instead cloned and replaced, and for which creating a first class entry in
+the backend with its own ID is undesired.
+
+=head1 GETTING STARTED WITH BDB
+
+So far we've only made use of L<KiokuDB::Backend::Hash>, so while our objects
+were serialized, they were not actually stored on disk.
+
+The most mature backend for L<KiokuDB> is L<KiokuDB::Backend::BDB>. It performs
+very well, and supports many features, like L<Search::GIN> integration to
+provide customized indexing of your objects and transactions.
+
+=head2 Installing L<KiokuDB::Backend::BDB>
+
+L<KiokuDB::Backend::BDB> needs the L<BerkeleyDB> module, and a recent version
+of Berkeley DB itself, which can be found here:
+L<http://www.oracle.com/technology/software/products/berkeley-db/db/index.html>.
+
+BerkeleyDB (the library) normally installs into C</usr/local/BerkeleyDB.4.7>,
+while L<BerkeleyDB> (the module) looks for it in C</usr/local/BerkeleyDB>, so
+adding a symbolic link should make installation easy.
+
+Once you have L<BerkeleyDB> installed, L<KiokuDB::Backend::BDB> should install
+without problem and you can use it with L<KiokuDB>.
+
+=head2 Using L<KiokuDB::Backend::BDB>
+
+To use the BDB backend we must first create the storage. To do this the
+C<create> flag must be passed:
+
+    my $backend = KiokuDB::Backend::BDB->new(
+        manager => {
+            home   => Path::Class::Dir->new(qw(path to storage)),
+            create => 1,
+        },
+    );
+
+The BDB backend uses L<BerkeleyDB::Manager> to do a lot of the L<BerkeleyDB>
+gruntwork. The L<BerkeleyDB::Manager> object will be instantiated using the
+arguments provided in the C<manager> attribute.
+
+Now that the storage is created we can make use of this backend, much like before:
+
+    my $dir = KiokuDB->new( backend => $backend );
+
+Subsequent opens will not required the C<create> argument to be true, but it
+doesn't hurt.
+
+As a convenience feature, L<KiokuDB> provides the C<connect> method. The above
+code could be written more concisely as:
+
+    my $dir = KiokuDB->connect( "bdb:dir=path/to/storage", create => 1 );
+
+=head1 TRANSACTIONS
+
+Some backends (ones which do the L<KiokuDB::Backend::TXN> role) can be used
+with transactions.
+
+If you are familiar with L<DBIx::Class> this should be very familiar:
+
+    $dir->txn_do(sub {
+        $dir->store($obj);
+    });
+
+This will create a L<BerkeleyDB> level transaction, and all changes to the
+database are committed if the block was executed cleanly.
+
+If any error occurred the transaction will be rolled back, and the changes will
+not be visible to subsequent reads.
+
+Note that L<KiokuDB> does B<not> touch live instances, so if you do something like
+
+    $dir->txn_do(sub {
+        my $scope = $dir->new_scope;
+        $obj->name("Dancing Hippy");
+        $dir->store($obj);
+    });
+
+the C<name> attribute is B<not> rolled back, it is simply the C<store>
+operation that gets reverted.
+
+Transactions will nest properly, and with BDB they generally increase write
+performance.
+
+=head1 QUERIES
+
+L<KiokuDB:Backend::BDB::GIN> is a subclass of L<KiokuDB::Backend::BDB> that
+provides L<Search::GIN> integration.
+
+L<Search::GIN> is a framework to index and query objects, inspired by Postgres'
+internal GIN api. GIN stands for Generalized Inverted Indexes.
+
+Using L<Search::GIN> arbitrary search keys can be indexed for your objects, and
+these objects can then be looked up using queries.
+
+For instance, one of the pre canned searches L<Search::GIN> supports out of the
+box is class indexing. Let's use L<Search::GIN::Extract::Class> to do class
+lookups, as is commonly expected of OODBMSs:
+
+    my $dir = KiokuDB->new(
+        backend => KiokuDB::Backend::BDB::GIN->new(
+            extract => Search::GIN::Extract::Class->new,
+        ),
+    );
+
+    $dir->store( @random_objects );
+
+To look up the objects, we use the corresponding query:
+
+    my $query = Search::GIN::Query::Class->new(
+        isa => "Person", # find any object that ->isa("Person")
+    );
+
+    my $stream = $dir->search($query);
+
+The result is L<Data::Stream::Bulk> object that represents the search results.
+It can be iterated as follows:
+
+    while ( my $block = $stream->next ) {
+        foreach my $person ( @$block ) {
+            print "found a preson: ", $person->name;
+        }
+    }
+
+Or even more simply, if you don't mind loading the whole resultset into memory:
+
+    my @people = $stream->all;
+
+The way it works internally that L<Search::GIN::Extract::Class> introspects the
+objects as they are being inserted to the database, and extracts all the keys
+that L<Search::GIN::Query::Class> would need to later find these objects in the
+lookup. This process can be heavily customized and supports far more
+functionality than simple queries like the above. See L<Search::GIN> for more
+details.
+
