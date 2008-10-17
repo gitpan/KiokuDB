@@ -14,6 +14,9 @@ lib/KiokuDB/Backend/Query/Simple.pm
 lib/KiokuDB/Backend/Query/Simple/Linear.pm
 lib/KiokuDB/Backend/Scan.pm
 lib/KiokuDB/Backend/Serialize.pm
+lib/KiokuDB/Backend/Serialize/JSPON.pm
+lib/KiokuDB/Backend/Serialize/JSPON/Collapser.pm
+lib/KiokuDB/Backend/Serialize/JSPON/Expander.pm
 lib/KiokuDB/Backend/Serialize/Memory.pm
 lib/KiokuDB/Backend/Serialize/Null.pm
 lib/KiokuDB/Backend/Serialize/Storable.pm
@@ -70,7 +73,6 @@ lib/KiokuDB/TypeMap/Entry/Callback.pm
 lib/KiokuDB/TypeMap/Entry/MOP.pm
 lib/KiokuDB/TypeMap/Entry/Naive.pm
 lib/KiokuDB/TypeMap/Entry/Passthrough.pm
-lib/KiokuDB/TypeMap/Entry/Pixie.pm
 lib/KiokuDB/TypeMap/Entry/Set.pm
 lib/KiokuDB/TypeMap/Entry/Std.pm
 lib/KiokuDB/TypeMap/Resolver.pm

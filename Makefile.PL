@@ -12,6 +12,7 @@ WriteMakefile(
     INSTALLDIRS  => 'site',
     SIGN         => 1,
     PL_FILES     => { },
+    EXE_FILES    => [ grep { /\w$/ } glob("bin/*") ],
     PREREQ_PM    => {
         'Moose' => 0,
         'MooseX::AttributeHelpers' => 0,
@@ -34,18 +35,12 @@ WriteMakefile(
         # scanning and searching
         'Data::Stream::Bulk' => "0.03",
 
-        # JSPON backend
-        'JSON' => 0,
-        'File::NFSLock' => 0,
-        'IO::AtomicFile' => 0,
-        'Path::Class' => 0,
-        'MooseX::Types::Path::Class' => 0,
-
         # live objects
+        ( eval { require Variable::Magic } ? ( "Variable::Magic" => "0.24" ) : () ),
         'Hash::Util::FieldHash::Compat' => 0,
         'Scope::Guard' => 0,
 
-        'Set::Object' => 0,
+        'Set::Object' => '1.26',
 
         'Test::use::ok' => 0,
         'Test::Exception' => 0,
@@ -53,11 +48,11 @@ WriteMakefile(
         'Test::More' => 0,
         'Test::TempDir' => 0,
 
-		'Search::GIN' => 0,
-
         # used in testing... add skip logic?
         'Class::Accessor' => 0,
         'URI' => 0,
         'DateTime' => 0,
+
+        'Search::GIN' => 0,
     },
 );

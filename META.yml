@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                KiokuDB
-version:             0.01_01
+version:             0.01
 abstract:            ~
 license:             ~
 author:              ~
@@ -14,19 +14,15 @@ requires:
     Data::Visitor:                 0.20
     DateTime:                      0
     Devel::PartialDump:            0.06
-    File::NFSLock:                 0
     Hash::Util::FieldHash::Compat: 0
-    IO::AtomicFile:                0
-    JSON:                          0
     Moose:                         0
     MooseX::AttributeHelpers:      0
     MooseX::Types::Path::Class:    0
     namespace::clean:              0.08
-    Path::Class:                   0
     Scalar::Util:                  0
     Scope::Guard:                  0
     Search::GIN:                   0
-    Set::Object:                   0
+    Set::Object:                   1.26
     Test::Exception:               0
     Test::Memory::Cycle:           0
     Test::More:                    0
@@ -34,6 +30,7 @@ requires:
     Test::use::ok:                 0
     Tie::ToObject:                 0
     URI:                           0
+    Variable::Magic:               0.24
 meta-spec:
     url:     http://module-build.sourceforge.net/META-spec-v1.3.html
     version: 1.3
