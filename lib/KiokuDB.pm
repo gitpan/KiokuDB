@@ -3,7 +3,7 @@
 package KiokuDB;
 use Moose;
 
-our $VERSION = "0.01";
+our $VERSION = "0.02";
 
 use constant SERIAL_IDS => not not our $SERIAL_IDS;
 
@@ -645,6 +645,8 @@ utterly broken in the face of concurrency.
 These attributes are documented for completeness and should typically not be
 needed.
 
+=over 4
+
 =item collapser
 
 L<KiokuDB::Collapser>
@@ -674,9 +676,9 @@ The live object set keeps track of objects and entries for the linker and the
 resolver.
 
 It also creates scope objects that help ensure objects don't garbage collect
-too early (L<KiokuDB::LiveObjects/new_scope>, L<KiokuDB::LiveObjects::Scope),
+too early (L<KiokuDB::LiveObjects/new_scope>, L<KiokuDB::LiveObjects::Scope>),
 and transaction scope objects used by C<txn_do>
-(L<KiokuDB::LiveObjects::TXNScope).
+(L<KiokuDB::LiveObjects::TXNScope>).
 
 =item typemap_resolver
 
@@ -731,7 +733,8 @@ L<http://en.wikipedia.org/wiki/OQL>
 
 =head1 VERSION CONTROL
 
-L<http://code2.0beta.co.uk/moose/svn/>. Ask on #moose for commit bits.
+KiokuDB is maintained using Git. Information about the repository is available
+on L<http://www.iinteractive.com/kiokudb/>
 
 =head1 AUTHOR
 

@@ -32,7 +32,7 @@ has live_objects => (
     required => 1,
 );
 
-sub DEMOLISH {
+sub DESTROY {
     my $self = shift;
 
     # consider possibilities of optimizing live object set removal at this
@@ -63,14 +63,14 @@ __END__
 
 =head1 NAME
 
-KiokuDB::Scope - 
+KiokuDB::LiveObjects::Scope - Scope helper object
 
 =head1 SYNOPSIS
 
     {
         my $scope = $dir->new_scope;
 
-        ...
+        ... do work on $dir ...
     }
 
 =head1 DESCRIPTION

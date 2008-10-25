@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                KiokuDB
-version:             0.01
+version:             0.02
 abstract:            ~
 license:             ~
 author:              ~
@@ -17,6 +17,7 @@ requires:
     Hash::Util::FieldHash::Compat: 0
     Moose:                         0
     MooseX::AttributeHelpers:      0
+    MooseX::Getopt:                0
     MooseX::Types::Path::Class:    0
     namespace::clean:              0.08
     Scalar::Util:                  0

@@ -3,16 +3,23 @@
 package KiokuDB::TypeMap::Entry::MOP;
 use Moose;
 
+use KiokuDB::Thunk;
+
 no warnings 'recursion';
 
 use namespace::clean -except => 'meta';
 
-with qw(KiokuDB::TypeMap::Entry::Std);
+# not Std because of the ID role support needing to happen early
+has intrinsic => (
+    isa => "Bool",
+    is  => "ro",
+    default => 0,
+);
 
 # FIXME collapser and expaner should both be methods in Class::MOP::Class,
 # apart from the visit call
 
-sub compile_mappings {
+sub compile {
     my ( $self, $class ) = @_;
 
     my $meta = Class::MOP::get_metaclass_by_name($class);
@@ -27,39 +34,59 @@ sub compile_mappings {
 sub compile_collapser {
     my ( $self, $meta ) = @_;
 
-    my @attrs = $meta->compute_all_applicable_attributes;
+    my @attrs = grep {
+        !$_->does('MooseX::Storage::Meta::Attribute::Trait::DoNotSerialize')
+    } $meta->compute_all_applicable_attributes;
+
+    my $self_id = !$self->intrinsic && $meta->does_role("KiokuDB::Role::ID");
+
+    my $method = $self->intrinsic ? "collapse_intrinsic" : "collapse_first_class";
 
     return sub {
-        my ( $self, %args ) = @_;
+        my $self = shift;
 
-        my $object = $args{object};
-
-        my %collapsed;
-
-        foreach my $attr ( @attrs ) {
-            if ( $attr->has_value($object) ) {
-                my $value = $attr->get_value($object);
-                $collapsed{$attr->name} = ref($value) ? $self->visit($value) : $value;
-            }
+        if ( $self_id ) {
+            push @_, id => $_[0]->kiokudb_object_id;
         }
 
-        return \%collapsed;
+        $self->$method(sub {
+            my ( $self, %args ) = @_;
+
+            my %collapsed;
+
+            my $object = $args{object};
+
+            foreach my $attr ( @attrs ) {
+                if ( $attr->has_value($object) ) {
+                    my $value = $attr->get_value($object);
+                    $collapsed{$attr->name} = ref($value) ? $self->visit($value) : $value;
+                }
+            }
+
+            return \%collapsed;
+        }, @_);
     }
 }
 
 sub compile_expander {
     my ( $self, $meta ) = @_;
 
-    my %attrs;
+    my ( %attrs, %lazy );
 
-    foreach my $attr ( $meta->compute_all_applicable_attributes ) {
+    my @attrs = grep {
+        !$_->does('MooseX::Storage::Meta::Attribute::Trait::DoNotSerialize')
+    } $meta->compute_all_applicable_attributes;
+
+    foreach my $attr ( @attrs ) {
         $attrs{$attr->name} = $attr;
+        $lazy{$attr->name}  = $attr->does("KiokuDB::Meta::Attribute::Lazy");
     }
 
     return sub {
         my ( $self, $entry ) = @_;
 
-        my $instance = $meta->get_meta_instance->create_instance();
+        my $meta_instance = $meta->get_meta_instance;
+        my $instance = $meta_instance->create_instance();
 
         # note, this is registered *before* any other value expansion, to allow circular refs
         $self->register_object( $entry => $instance );
@@ -68,10 +95,15 @@ sub compile_expander {
 
         foreach my $name ( keys %$data ) {
             my $value = $data->{$name};
+            my $attr = $attrs{$name};
 
-            $self->inflate_data($value, \$value) if ref $value;
-
-            $attrs{$name}->set_value($instance, $value);
+            if ( $lazy{$name} and ref($value) eq 'KiokuDB::Reference' ) {
+                my $thunk = KiokuDB::Thunk->new( id => $value->id, linker => $self, attr => $attr );
+                $meta_instance->set_slot_value($instance, $attr->name, $thunk);
+            } else {
+                $self->inflate_data($value, \$value) if ref $value;
+                $attr->set_value($instance, $value);
+            }
         }
 
         return $instance;

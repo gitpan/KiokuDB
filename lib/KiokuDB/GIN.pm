@@ -49,11 +49,12 @@ KiokuDB::GIN - Gin assisted recollection
 
 =head1 SYNOPSIS
 
-	use KiokuDB::GIN;
+    use KiokuDB::GIN;
 
 =head1 DESCRIPTION
 
-
+This is a generic backend wrapping role that allows adding L<Search::GIN>
+queries to any backend.
 
 =cut
 
