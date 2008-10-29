@@ -1,22 +1,19 @@
 --- #YAML:1.0
 name:                KiokuDB
-version:             0.02
+version:             0.03
 abstract:            ~
 license:             ~
 author:              ~
 generated_by:        ExtUtils::MakeMaker version 6.44
 distribution_type:   module
 requires:     
-    Check::ISA:                    0
-    Class::Accessor:               0
-    Data::GUID:                    0
     Data::Stream::Bulk:            0.03
+    Data::UUID::LibUUID:           0
     Data::Visitor:                 0.20
     DateTime:                      0
-    Devel::PartialDump:            0.06
     Hash::Util::FieldHash::Compat: 0
-    Moose:                         0
-    MooseX::AttributeHelpers:      0
+    Module::Pluggable::Object:     0
+    Moose:                         0.60
     MooseX::Getopt:                0
     MooseX::Types::Path::Class:    0
     namespace::clean:              0.08
@@ -24,14 +21,12 @@ requires:
     Scope::Guard:                  0
     Search::GIN:                   0
     Set::Object:                   1.26
+    Task::Weaken:                  0
     Test::Exception:               0
-    Test::Memory::Cycle:           0
     Test::More:                    0
-    Test::TempDir:                 0
     Test::use::ok:                 0
     Tie::ToObject:                 0
     URI:                           0
-    Variable::Magic:               0.24
 meta-spec:
     url:     http://module-build.sourceforge.net/META-spec-v1.3.html
     version: 1.3
