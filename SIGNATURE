@@ -14,17 +14,17 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 0339bd99bb17cc07c4f177215ac6d71e0a24d20c Changes
+SHA1 56d76bd28d54c8eb043ceba546fbf7bcb13b93d8 Changes
 SHA1 51d24631611cc110821acfe37e5aaa65d033ec3c MANIFEST
 SHA1 190e9058eb9c6446a1a3f3ddf15b082f1ecde152 MANIFEST.SKIP
-SHA1 aa48bc4a431ad814447c52d2a9c1e0d120f441c3 META.yml
-SHA1 0325e2972d4f33f1410b3549ed0b5e62bd5c1a2f Makefile.PL
+SHA1 f5d912e457dd196cb5c46f698785ca514bce0203 META.yml
+SHA1 7077d6f78f22ae8a616a07a6bf1e6169b85734c7 Makefile.PL
 SHA1 f564ac7ccf64276c790ee1a1cf6deadd5fd91da1 TODO
 SHA1 e83eff8b32826957ea4134a1f0648cd7d07c4449 bench/shootout.pl
 SHA1 839e06129b9fa801212fb298365ce84e92b762f1 bench/small.pl
 SHA1 d722d8b8a19e13cf1a99e0826307087490b5a256 bin/kiokudump
 SHA1 50c7e1c750bcc32abc8d6f71283805e15bc1e6ca bin/kiokuload
-SHA1 917e5dfc1cdc4140f83c2834574d6dec49b7f73e lib/KiokuDB.pm
+SHA1 883f438ed6b3b22be6f61d70697601efc9012876 lib/KiokuDB.pm
 SHA1 eca5ed6334ec49420e630fb06e73c3593a5646b5 lib/KiokuDB/Backend.pm
 SHA1 65de2f0923f512324430849f1aa8a9402ade1432 lib/KiokuDB/Backend/BinarySafe.pm
 SHA1 32725ead2a9a7c001a7eb8382ff1f6c0aa7b6606 lib/KiokuDB/Backend/Clear.pm
@@ -37,8 +37,8 @@ SHA1 abb6eccd8d8a5bc6e3532300b67722773df3c2e4 lib/KiokuDB/Backend/Query/Simple/L
 SHA1 338970b7646788a1b460b980a28c20331b4c7787 lib/KiokuDB/Backend/Scan.pm
 SHA1 8ba656e731349e8b6f947f2e1ce4589f02a03936 lib/KiokuDB/Backend/Serialize.pm
 SHA1 7ec806b2fab44c7a0829688cf2a4083f299dbace lib/KiokuDB/Backend/Serialize/JSPON.pm
-SHA1 044d125df987bd5a77ca5394d4957f9f78c01da6 lib/KiokuDB/Backend/Serialize/JSPON/Collapser.pm
-SHA1 598dd21a867257cc8ecc14d15529396e08a3b631 lib/KiokuDB/Backend/Serialize/JSPON/Expander.pm
+SHA1 93dd9b5b6ebac6e9c54d1d04623f3a2722e19af7 lib/KiokuDB/Backend/Serialize/JSPON/Collapser.pm
+SHA1 85e8c0466efcb4c6bca1f2dc8956e225aa58431d lib/KiokuDB/Backend/Serialize/JSPON/Expander.pm
 SHA1 b64d1daf228426be97ae737377f2cb86389f7769 lib/KiokuDB/Backend/Serialize/Memory.pm
 SHA1 6caec5ac62d86454eb533eb25a8bf0a4c10a450d lib/KiokuDB/Backend/Serialize/Null.pm
 SHA1 7a93fab708eee171ec605bedb3047001bad7030e lib/KiokuDB/Backend/Serialize/Storable.pm
@@ -100,7 +100,7 @@ SHA1 c2be552eba72d7b8bb9ece3f42e0d2756643fb28 lib/KiokuDB/Thunk.pm
 SHA1 75cbd6896138a080fab9a0774fa1e9652e3a2dd2 lib/KiokuDB/Tutorial.pod
 SHA1 9f2c1f1031eaa1499f7ce583ca9a0005fdcfc755 lib/KiokuDB/TypeMap.pm
 SHA1 ac1206e3fe42d76183ae6a11860d0b9f941f035d lib/KiokuDB/TypeMap/Default.pm
-SHA1 e8334c9659aa8c265018d62c152a82e604b89da8 lib/KiokuDB/TypeMap/Default/Canonical.pm
+SHA1 eb3a4dfa6b193f8e021e8622213c926ffac83516 lib/KiokuDB/TypeMap/Default/Canonical.pm
 SHA1 b8ab8463b990f132ef4123f950eb2aae2cb23d0a lib/KiokuDB/TypeMap/Default/JSON.pm
 SHA1 3433676a1dbab496d701c633d3fc2bfa51915e27 lib/KiokuDB/TypeMap/Default/Passthrough.pm
 SHA1 32e3e805dd95717539a472193f9a40f7ccf37f8b lib/KiokuDB/TypeMap/Default/Storable.pm
@@ -144,7 +144,7 @@ SHA1 c368f702da96c6b25c7a208c57547ec8fd12101f t/uuid.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.7 (Darwin)
 
-iD8DBQFJCtTKVCwRwOvSdBgRAveLAJwLUULFxfPu9cwDvwxMQuuKxyUW/wCgqlxn
-om99koTDmlRmyQ97WINaTGU=
-=8g7H
+iD8DBQFJCtzWVCwRwOvSdBgRAmbhAKCiL1jBRaOerWWpvoUq6VYFYxZnjACggFr9
+aG/EELmSN5+ASXNsfa/cZuU=
+=Crcg
 -----END PGP SIGNATURE-----
