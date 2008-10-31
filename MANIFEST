@@ -15,10 +15,16 @@ lib/KiokuDB/Backend/Query/Simple.pm
 lib/KiokuDB/Backend/Query/Simple/Linear.pm
 lib/KiokuDB/Backend/Scan.pm
 lib/KiokuDB/Backend/Serialize.pm
+lib/KiokuDB/Backend/Serialize/JSPON.pm
+lib/KiokuDB/Backend/Serialize/JSPON/Collapser.pm
+lib/KiokuDB/Backend/Serialize/JSPON/Expander.pm
 lib/KiokuDB/Backend/Serialize/Memory.pm
 lib/KiokuDB/Backend/Serialize/Null.pm
 lib/KiokuDB/Backend/Serialize/Storable.pm
 lib/KiokuDB/Backend/TXN.pm
+lib/KiokuDB/Backend/TypeMap/Default.pm
+lib/KiokuDB/Backend/TypeMap/Default/JSON.pm
+lib/KiokuDB/Backend/TypeMap/Default/Storable.pm
 lib/KiokuDB/Backend/UnicodeSafe.pm
 lib/KiokuDB/Class.pm
 lib/KiokuDB/Cmd/Dump.pm
@@ -35,6 +41,7 @@ lib/KiokuDB/Meta/Instance.pm
 lib/KiokuDB/Reference.pm
 lib/KiokuDB/Resolver.pm
 lib/KiokuDB/Role/ID.pm
+lib/KiokuDB/Role/TypeMap.pm
 lib/KiokuDB/Role/UUIDs.pm
 lib/KiokuDB/Role/UUIDs/Abstract.pm
 lib/KiokuDB/Role/UUIDs/Bin.pm
@@ -65,11 +72,17 @@ lib/KiokuDB/Test/Fixture/Scan.pm
 lib/KiokuDB/Test/Fixture/SimpleSearch.pm
 lib/KiokuDB/Test/Fixture/Small.pm
 lib/KiokuDB/Test/Fixture/TXN.pm
+lib/KiokuDB/Test/Fixture/TypeMap/Default.pm
 lib/KiokuDB/Test/Fixture/Unicode.pm
 lib/KiokuDB/Test/Person.pm
 lib/KiokuDB/Thunk.pm
 lib/KiokuDB/Tutorial.pod
 lib/KiokuDB/TypeMap.pm
+lib/KiokuDB/TypeMap/Default.pm
+lib/KiokuDB/TypeMap/Default/Canonical.pm
+lib/KiokuDB/TypeMap/Default/JSON.pm
+lib/KiokuDB/TypeMap/Default/Passthrough.pm
+lib/KiokuDB/TypeMap/Default/Storable.pm
 lib/KiokuDB/TypeMap/Entry.pm
 lib/KiokuDB/TypeMap/Entry/Alias.pm
 lib/KiokuDB/TypeMap/Entry/Callback.pm
@@ -79,6 +92,7 @@ lib/KiokuDB/TypeMap/Entry/Passthrough.pm
 lib/KiokuDB/TypeMap/Entry/Set.pm
 lib/KiokuDB/TypeMap/Entry/Std.pm
 lib/KiokuDB/TypeMap/Resolver.pm
+lib/KiokuDB/TypeMap/Shadow.pm
 lib/KiokuDB/Util.pm
 lib/Moose/Meta/Attribute/Custom/Trait/KiokuDB/Lazy.pm
 Makefile.PL
@@ -92,6 +106,7 @@ t/entry.t
 t/gin.t
 t/hash.t
 t/hash_backend.t
+t/jspon_serialization.t.t
 t/lazy.t
 t/live_objs.t
 t/ref.t
@@ -99,6 +114,8 @@ t/resolver.t
 t/set.t
 t/tied.t
 t/typemap.t
+t/typemap_default_json.t
+t/typemap_default_storable.t
 t/typemap_entry_callback.t
 t/typemap_entry_mop.t
 t/typemap_entry_naive.t
