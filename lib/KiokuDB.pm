@@ -3,7 +3,7 @@
 package KiokuDB;
 use Moose;
 
-our $VERSION = "0.06";
+our $VERSION = "0.07";
 
 use constant SERIAL_IDS => not not our $SERIAL_IDS;
 
@@ -613,7 +613,7 @@ referred to by another object, because that link will be broken.
 Executes $code within the scope of a transaction.
 
 This requires that the backend supports transactions
-(L<KiokuDB::Backend::TXN>).
+(L<KiokuDB::Backend::Role::TXN>).
 
 Transactions may be nested.
 
