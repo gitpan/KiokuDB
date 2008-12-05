@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use KiokuDB::Cmd::Dump;
+warn "'kiokudump' has been deprecated in favor of 'kioku dump'\n";
 
-KiokuDB::Cmd::Dump->new_with_options->run;
+exec(qw(kioku dump), @ARGV);
 

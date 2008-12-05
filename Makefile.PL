@@ -20,6 +20,8 @@ WriteMakefile(
 
         # Command line utilities
         'MooseX::Getopt' => 0,
+        'App::Cmd' => 0.202,
+        'MooseX::App::Cmd' => 0,
 
         # misc dev shit
         'Scalar::Util' => 0,
@@ -57,6 +59,6 @@ WriteMakefile(
 
         'Search::GIN' => 0.03,
 
-        'JSON' => 0,
+        'JSON' => 2.12,
     },
 );

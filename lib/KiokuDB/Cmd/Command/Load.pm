@@ -1,94 +1,20 @@
 #!/usr/bin/perl
 
-package KiokuDB::Cmd::Load;
+package KiokuDB::Cmd::Command::Load;
 use Moose;
-
-use Carp qw(croak);
-
-use MooseX::Types::Path::Class qw(File);
-
-use Moose::Util::TypeConstraints;
 
 use KiokuDB::Entry;
 use KiokuDB::Reference;
 
 use namespace::clean -except => 'meta';
 
-with qw(MooseX::Getopt);
+extends qw(KiokuDB::Cmd::Base);
 
-has clear => (
-    isa => "Bool",
-    is  => "ro",
+with qw(
+    KiokuDB::Cmd::WithDSN::Create
+    KiokuDB::Cmd::DumpFormatter
+    KiokuDB::Cmd::InputHandle
 );
-
-has dsn => (
-    isa => "Str",
-    is  => "ro",
-);
-
-has _txn => (
-    traits => [qw(NoGetopt)],
-    is => "rw",
-);
-
-has backend => (
-    traits => [qw(NoGetopt)],
-    does => "KiokuDB::Backend",
-    is   => "ro",
-    lazy_build => 1,
-);
-
-sub _build_backend {
-    my $self = shift;
-
-    my $dsn = $self->dsn || croak("'dsn' or 'backend' is required");
-
-    $self->v("Connecting to DSN $dsn...");
-
-    require KiokuDB::Util;
-    my $b = KiokuDB::Util::dsn_to_backend( $dsn, create => 1 );
-
-    $self->v(" $b\n");
-
-    if ( $b->does("KiokuDB::Backend::Role::TXN") ) {
-        $self->v("starting transaction\n");
-        $self->_txn( $b->txn_begin );
-    }
-
-    if ( $self->clear ) {
-        unless ( $b->does("KiokuDB::Backend::Role::Clear") ) {
-            croak "--clear specified but $b does not support clearing";
-
-        }
-        $self->v("clearing database....");
-
-        $b->clear;
-
-        $self->v(" done\n");
-
-    }
-
-    $b;
-}
-
-has format => (
-    isa => enum([qw(yaml json storable)]),
-    is  => "ro",
-    default => "yaml",
-);
-
-has formatter => (
-    traits => [qw(NoGetopt)],
-    isa => "CodeRef",
-    is  => "ro",
-    lazy_build => 1,
-);
-
-sub _build_formatter {
-    my $self = shift;
-    my $builder = "_build_formatter_" . $self->format;
-    $self->$builder;
-}
 
 sub _build_formatter_yaml {
     require YAML::XS;
@@ -133,56 +59,8 @@ sub _build_formatter_storable {
     }
 }
 
-has file => (
-    isa => File,
-    is  => "ro",
-    coerce => 1,
-    predicate => "has_file",
-);
-
-has input_handle => (
-    traits => [qw(NoGetopt)],
-    isa => "FileHandle",
-    is  => "ro",
-    lazy_build => 1,
-);
-
-sub _build_input_handle {
+augment run => sub {
     my $self = shift;
-
-    if ( $self->has_file ) {
-        $self->file->openr;
-    } else {
-        \*STDIN;
-    }
-}
-
-has verbose => (
-    isa => "Bool",
-    is  => "ro",
-);
-
-sub v {
-    my $self = shift;
-    return unless $self->verbose;
-
-    STDERR->autoflush(1);
-    STDERR->print(@_);
-}
-
-sub BUILD {
-    my $self = shift;
-
-    $self->backend;
-    $self->formatter;
-    $self->input_handle;
-}
-
-sub run {
-    my $self = shift;
-
-    my $t = -time();
-    my $tc = -times();
 
     my $b = $self->backend;
 
@@ -207,19 +85,8 @@ sub run {
 
     $self->v("\rloaded $i entries      \n");
 
-    if ( my $txn = $self->_txn ) {
-        $self->v("comitting transaction...");
-        $b->txn_commit($txn);
-        $self->_txn(undef);
-        $self->v(" done\n");
-    }
-
-    $t += time;
-    $tc += times;
-
-    $self->v(sprintf "load finished in %.2fs (%.2fs cpu)\n", $t, $tc);
-}
-
+    $self->try_txn_commit($b);
+};
 
 __PACKAGE__->meta->make_immutable;
 
@@ -231,7 +98,7 @@ __END__
 
 =head1 NAME
 
-KiokuDB::Cmd::Load - Load database dumps
+KiokuDB::Cmd::Command::Load - Load database dumps
 
 =head1 SYNOPSIS
 
@@ -243,9 +110,9 @@ KiokuDB::Cmd::Load - Load database dumps
 
     # programmatic API
 
-    use KiokuDB::Cmd::Load;
+    use KiokuDB::Cmd::Command::Load;
 
-    my $loader = KiokuDB::Cmd::Load->new(
+    my $loader = KiokuDB::Cmd::Command::Load->new(
         backend => $backend,
         formatter => sub { ... },
         input_handle => $fh,
@@ -256,7 +123,7 @@ KiokuDB::Cmd::Load - Load database dumps
 
 =head1 DESCRIPTION
 
-This class loads dumps created by L<KiokuDB::Cmd::Dump>.
+This class loads dumps created by L<KiokuDB::Cmd::Command::Dump>.
 
 Entries will be read sequentially from C<input_handle>, deserialized, and
 inserted into the database.
