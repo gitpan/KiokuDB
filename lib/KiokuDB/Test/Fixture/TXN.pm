@@ -47,6 +47,8 @@ sub verify {
         is( $updated_entry->prev, $entry, "parent of updated is orig" );
 
         is( $joe->name, "HALLO", "name attr" );
+
+        undef $joe;
     }
 
     $self->no_live_objects;
@@ -80,7 +82,11 @@ sub verify {
             is( $updated_entry, $entry, "entry rolled back" );
 
             is( $joe->name, "YASE", "name not rolled back in live object" );
+
+            undef $joe;
         }
+
+        $self->no_live_objects;
 
         {
             my $s = $self->new_scope;
@@ -88,10 +94,13 @@ sub verify {
             my $joe = $self->lookup_ok( $self->joe );
             
             is( $joe->name, "HALLO", "name rolled back in DB" );
-        }
-    }
 
-    $self->no_live_objects;
+            undef $joe;
+        }
+
+        $self->no_live_objects;
+
+    }
 
     {
         {
@@ -128,7 +137,11 @@ sub verify {
             is( $updated_entry, $entry, "entry rolled back" );
 
             is( $joe->name, "oi", "name attr of object" );
+
+            undef $joe;
         }
+
+        $self->no_live_objects;
 
         {
             my $s = $self->new_scope;
@@ -136,10 +149,12 @@ sub verify {
             my $joe = $self->lookup_ok( $self->joe );
 
             is( $joe->name, "HALLO", "name rolled back in DB" );
-        }
-    }
 
-    $self->no_live_objects;
+            undef $joe;
+        }
+
+        $self->no_live_objects;
+    }
 }
 
 __PACKAGE__->meta->make_immutable;

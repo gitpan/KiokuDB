@@ -55,7 +55,6 @@ lib/KiokuDB/LiveObjects/TXNScope.pm
 lib/KiokuDB/Meta/Attribute/Lazy.pm
 lib/KiokuDB/Meta/Instance.pm
 lib/KiokuDB/Reference.pm
-lib/KiokuDB/Resolver.pm
 lib/KiokuDB/Role/ID.pm
 lib/KiokuDB/Role/TypeMap.pm
 lib/KiokuDB/Role/UUIDs.pm
@@ -128,7 +127,6 @@ t/link_checker.t
 t/link_checker_real.t
 t/live_objs.t
 t/ref.t
-t/resolver.t
 t/set.t
 t/tied.t
 t/typemap.t

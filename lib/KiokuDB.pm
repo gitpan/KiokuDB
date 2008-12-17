@@ -3,12 +3,11 @@
 package KiokuDB;
 use Moose;
 
-our $VERSION = "0.08";
+our $VERSION = "0.09";
 
 use constant SERIAL_IDS => not not our $SERIAL_IDS;
 
 use KiokuDB::Backend;
-use KiokuDB::Resolver;
 use KiokuDB::Collapser;
 use KiokuDB::Linker;
 use KiokuDB::LiveObjects;
@@ -23,8 +22,28 @@ use namespace::clean -except => [qw(meta SERIAL_IDS)];
 
 sub connect {
     my ( $class, $dsn, @args ) = @_;
+
+    if ( -d $dsn ) {
+        return $class->configure($dsn, @args);
+    } else {
+        require KiokuDB::Util;
+        return $class->new( backend => KiokuDB::Util::dsn_to_backend($dsn, @args), @args );
+    }
+}
+
+sub configure {
+    my ( $class, $base, @args ) = @_;
+
+    require Path::Class;
+    $base = Path::Class::dir($base) unless blessed $base;
+
     require KiokuDB::Util;
-    $class->new( backend => KiokuDB::Util::dsn_to_backend($dsn, @args), @args );
+    my $config = KiokuDB::Util::load_config($base);
+
+    my $backend = KiokuDB::Util::config_to_backend( $config, base => $base, @args );
+
+    # FIXME gin extractor, typemap, etc
+    $class->new( %$config, @args, backend => $backend );
 }
 
 has typemap => (
@@ -87,20 +106,6 @@ has live_objects => (
 
 sub _build_live_objects { KiokuDB::LiveObjects->new }
 
-has resolver => (
-    isa => "KiokuDB::Resolver",
-    is  => "ro",
-    lazy_build => 1,
-);
-
-sub _build_resolver {
-    my $self = shift;
-
-    KiokuDB::Resolver->new(
-        live_objects => $self->live_objects,
-    );
-}
-
 has collapser => (
     isa => "KiokuDB::Collapser",
     is  => "ro",
@@ -111,7 +116,7 @@ sub _build_collapser {
     my $self = shift;
 
     KiokuDB::Collapser->new(
-        resolver => $self->resolver,
+        live_objects => $self->live_objects,
         typemap_resolver => $self->typemap_resolver,
     );
 }
@@ -448,7 +453,8 @@ L<KiokuDB> is meant to solve two related persistence problems:
 =item Transparent persistence
 
 Store arbitrary objects without changing their class definitions or worrying
-about schema details.
+about schema details, and without needing to conform to the limitations of
+a relational model.
 
 =item Interoperability
 
@@ -472,13 +478,16 @@ limitations.
 
 =head2 Collapsing
 
-When an object is introduced to L<KiokuDB> it's collapsed into an
+When an object is stored using L<KiokuDB> it's collapsed into an
 L<KiokDB::Entry|Entry>.
 
 An entry is a simplified representation of the object, allowing the data to be
-saved independently of other objects in formats as simple as JSON.
+saved in formats as simple as JSON.
 
-References to other objects are converted to symbolic references in the entry.
+References to other objects are converted to symbolic references in the entry,
+so objects can be saved independently of each other.
+
+The entries are given to the L<KiokuDB::Backend|Backend> for actual storage.
 
 Collapsing is explained in detail in L<KiokuDB::Collapser>. The way an entry is
 created varies with the object's class.
@@ -683,13 +692,6 @@ L<KiokuDB::Linker>
 
 The linker links entries into functioning instances, loading necessary
 dependencies from the backend.
-
-=item resolver
-
-L<KiokuDB::Resolver>
-
-The resolver swizzles reference addresses to UIDs and back, and handles ID
-creation and assignment.
 
 =item live_objects
 

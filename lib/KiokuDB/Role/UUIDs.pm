@@ -3,11 +3,9 @@
 package KiokuDB::Role::UUIDs;
 use Moose::Role;
 
-use KiokuDB ();
-
 use namespace::clean -except => 'meta';
 
-if ( KiokuDB::SERIAL_IDS() ) {
+if ( defined &KiokuDB::SERIAL_IDS and KiokuDB::SERIAL_IDS() ) {
     with qw(KiokuDB::Role::UUIDs::SerialIDs);
 } else {
     my $have_libuuid = do { local $@; eval { require Data::UUID::LibUUID; 1 } };
@@ -38,8 +36,6 @@ This role provides UUID assignment.
 Depending on the C<$SERIAL_IDS> variable being true at compile time, and
 availability of UUID generation module (L<Data::UUID::LibUUID> falling back to
 L<Data::UUID>) an implementation role is selected.
-
-This is used by L<KiokuDB::Resolver>.
 
 =head1 METHODS
 
