@@ -3,7 +3,7 @@
 package KiokuDB;
 use Moose;
 
-our $VERSION = "0.09";
+our $VERSION = "0.10";
 
 use constant SERIAL_IDS => not not our $SERIAL_IDS;
 
@@ -385,12 +385,18 @@ sub delete {
 sub txn_do {
     my ( $self, $code, %args ) = @_;
 
-    my $scope = $self->live_objects->new_txn;
+    my $backend = $self->backend;
 
-    my $rollback = $args{rollback};
-    $args{rollback} = sub { $scope->rollback; $rollback && $rollback->() };
+    if ( $backend->can("txn_do") ) {
+        my $scope = $self->live_objects->new_txn;
 
-    $self->backend->txn_do( $code, %args );
+        my $rollback = $args{rollback};
+        $args{rollback} = sub { $scope->rollback; $rollback && $rollback->() };
+
+        $backend->txn_do( $code, %args );
+    } else {
+        return $code->();
+    }
 }
 
 __PACKAGE__->meta->make_immutable;

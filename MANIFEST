@@ -16,8 +16,10 @@ lib/KiokuDB/Backend/Role/Query/Simple.pm
 lib/KiokuDB/Backend/Role/Query/Simple/Linear.pm
 lib/KiokuDB/Backend/Role/Scan.pm
 lib/KiokuDB/Backend/Role/TXN.pm
+lib/KiokuDB/Backend/Role/TXN/Nested.pm
 lib/KiokuDB/Backend/Role/UnicodeSafe.pm
 lib/KiokuDB/Backend/Serialize.pm
+lib/KiokuDB/Backend/Serialize/JSON.pm
 lib/KiokuDB/Backend/Serialize/JSPON.pm
 lib/KiokuDB/Backend/Serialize/JSPON/Collapser.pm
 lib/KiokuDB/Backend/Serialize/JSPON/Expander.pm
@@ -87,6 +89,7 @@ lib/KiokuDB/Test/Fixture/Scan.pm
 lib/KiokuDB/Test/Fixture/SimpleSearch.pm
 lib/KiokuDB/Test/Fixture/Small.pm
 lib/KiokuDB/Test/Fixture/TXN.pm
+lib/KiokuDB/Test/Fixture/TXN/Nested.pm
 lib/KiokuDB/Test/Fixture/TypeMap/Default.pm
 lib/KiokuDB/Test/Fixture/Unicode.pm
 lib/KiokuDB/Test/Person.pm
