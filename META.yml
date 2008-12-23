@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               KiokuDB
-version:            0.10
+version:            0.11
 abstract:           ~
 author:  []
 license:            unknown
@@ -27,6 +27,7 @@ requires:
     Scope::Guard:         0
     Search::GIN:          0.03
     Set::Object:          1.26
+    Storable:             0
     Task::Weaken:         0
     Test::Exception:      0
     Test::More:           0

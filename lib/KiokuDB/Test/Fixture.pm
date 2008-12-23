@@ -69,10 +69,11 @@ sub precheck {
 
     my @missing;
 
-    foreach my $role ( $self->required_backend_roles ) {
-        push @missing, $role unless $backend->does($role)
-            or $backend->does("KiokuDB::Backend::Role::$role")
-            or $backend->does("KiokuDB::Backend::$role");
+    role: foreach my $role ( $self->required_backend_roles ) {
+        foreach my $role_fmt ( $role, "KiokuDB::Backend::Role::$role", "KiokuDB::Backend::$role" ) {
+            next role if $backend->does($role_fmt) or $backend->can("serializer") and $backend->serializer->does($role_fmt);
+        }
+        push @missing, $role;
     }
 
     if ( @missing ) {
@@ -221,6 +222,7 @@ sub no_live_objects {
     unless ( is( scalar(()=$self->live_objects), 0, "no live objects" ) ){
         my @l = $self->live_objects;
         diag "live objects: " . join ", ", map { $self->object_to_id($_) . " ($_)" } @l;
+        require Data::Dumper;
         diag Data::Dumper::Dumper(@l);
 
         #use Scalar::Util qw(weaken);

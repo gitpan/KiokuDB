@@ -3,7 +3,7 @@
 package KiokuDB;
 use Moose;
 
-our $VERSION = "0.10";
+our $VERSION = "0.11";
 
 use constant SERIAL_IDS => not not our $SERIAL_IDS;
 
@@ -62,14 +62,28 @@ has merged_typemap => (
     lazy_build => 1,
 );
 
+sub _find_default_typemap {
+    my $self = shift;
+
+    my $b = $self->backend;
+
+    if ( $b->can("default_typemap") ) {
+        return $b->default_typemap;
+    } elsif( $b->can("serializer") and $b->serializer->can("default_typemap") ) {
+        return $b->serializer->default_typemap;
+    }
+
+    return;
+}
+
 sub _build_merged_typemap {
     my $self = shift;
 
-    if ( $self->backend->can("default_typemap") ) {
+    if ( my $default_typemap = $self->_find_default_typemap ) {
         return KiokuDB::TypeMap::Shadow->new(
             typemaps => [
                 $self->typemap,
-                $self->backend->default_typemap,
+                $default_typemap,
             ],
         );
     } else {
@@ -415,11 +429,17 @@ KiokuDB - Object Graph storage engine
 
     use KiokuDB;
 
+    # use a DSN
+    my $d = KiokuDB->connect( $dsn, %args );
+
+    # or manually instantiate a backend
     my $d = KiokuDB->new(
-        backend => KiokuDB::Backend::JSPON->new(
-            dir => "/tmp/foo",
+        backend => KiokuDB::Backend::Files->new(
+            dir        => "/tmp/foo",
+            serializer => "yaml",
         ),
     );
+
 
     # takes a snapshot of $some_object
     my $uuid = $d->store($some_object);
@@ -427,8 +447,18 @@ KiokuDB - Object Graph storage engine
     # or with a custom ID:
     $d->store( $id => $some_object ); # $id can be any string
 
+
     # retrieve by ID
     my $some_object = $d->lookup($uuid);
+
+
+
+    # some backends (like DBI) support simple searchs
+    $d->search({ name => "foo" });
+
+
+    # others use GIN queries (DBI supports both)
+    $d->search($gin_query);
 
 =head1 ALPHA WARNING
 
