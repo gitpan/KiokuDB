@@ -21,6 +21,9 @@ use ok 'KiokuDB::Reference';
 my $entry = KiokuDB::Entry->new(
     id => "foo",
     class => "Hello",
+    class_meta => {
+        roles => [qw(Greeting)],
+    },
     root => 1,
     data => {
         id => "id_attribute",
@@ -31,7 +34,7 @@ my $entry = KiokuDB::Entry->new(
 );
 
 my $tied = KiokuDB::Entry->new(
-    tied => "HASH",
+    tied => "H",
     data => KiokuDB::Entry->new(
         id => "bar",
         data => {
@@ -59,6 +62,7 @@ my $tied = KiokuDB::Entry->new(
         $jspon,
         {
             __CLASS__ => "Hello",
+            __META__  => { roles => [qw(Greeting)] },
             id        => "foo",
             data      => {
                 "public::id"            => "id_attribute",
@@ -104,6 +108,7 @@ my $tied = KiokuDB::Entry->new(
         $jspon,
         {
             class                   => "Hello",
+            __META__                => { roles => [qw(Greeting)] },
             _id                     => "foo",
             root                    => JSON::true,
             id                      => "id_attribute",
@@ -134,7 +139,7 @@ my $tied = KiokuDB::Entry->new(
     is_deeply(
         $jspon,
         {
-            tied => "HASH",
+            tied => "H",
             data => {
                 id => "bar",
                 data => { foo => "bar" },
@@ -154,5 +159,13 @@ my $tied = KiokuDB::Entry->new(
 
     ok( !$obj->deleted, "not deleted" );
     ok( !$obj->root, "not root" );
+
+    is( $obj->tied, "H", "'tied' field" );
+
+    $jspon->{tied} = "HASH";
+
+    my $legacy = $x->expand_jspon($jspon);
+
+    is( $legacy->tied, "H", "legacy 'tied' field upgraded" );
 
 }

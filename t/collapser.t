@@ -433,6 +433,7 @@ use Tie::RefHash;
                 bar => KiokuDB::Entry->new(
                     class => "Bar",
                     data  => { blah => "two" },
+                    object => $obj->bar,
                 ),
             },
             "intrinsic entry data",
@@ -482,7 +483,7 @@ use Tie::RefHash;
                 class => "Foo",
                 data  => {
                     bar => KiokuDB::Entry->new(
-                        tied => "HASH",
+                        tied => "H",
                         data => KiokuDB::Entry->new(
                             class => "Tie::RefHash",
                             data  => [ $t->STORABLE_freeze ],
@@ -534,7 +535,7 @@ use Tie::RefHash;
                 class => "Foo",
                 data  => {
                     bar => KiokuDB::Entry->new(
-                        tied => "HASH",
+                        tied => "H",
                         data => KiokuDB::Reference->new( id => $tie->id ),
                     ),
                 },
