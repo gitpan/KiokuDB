@@ -14,10 +14,10 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 e555aea574a81b3aba97002829cec5573b415338 Changes
+SHA1 c51682487046e8a3761df4e7285b1810d88edb4e Changes
 SHA1 df36ea7d1f60a2818cfc0c78f0d1cb6604bacbb3 MANIFEST
 SHA1 190e9058eb9c6446a1a3f3ddf15b082f1ecde152 MANIFEST.SKIP
-SHA1 d431bf9de042fe30bc6e2c91ec9753271e8bb212 META.yml
+SHA1 a594b6e3cbdd367157e85bc4b3f069170708c757 META.yml
 SHA1 3c3fad518f7854142670a850fe49e5da56396044 Makefile.PL
 SHA1 6e98b96a7b9a0c79ae316156356db8d2ec47d4d4 TODO
 SHA1 d7b4b2cbdbd664b9a1c183408ebf7424fc6b1e4f bench/shootout.pl
@@ -25,7 +25,7 @@ SHA1 839e06129b9fa801212fb298365ce84e92b762f1 bench/small.pl
 SHA1 2623cebc5fef1140e5bad4345f225fd6596dce10 bin/kioku
 SHA1 b05d41b4a28cba506ba5296df9e631f1e1460b0f bin/kiokudump
 SHA1 ffc7eb1006ebe3362440448f7975e234c3ec049d bin/kiokuload
-SHA1 68ea6fdb87b613a97886fc5cf4977f2b2d969a05 lib/KiokuDB.pm
+SHA1 4b7b9f0b1839fb35bd483a12e6e69d90040913fe lib/KiokuDB.pm
 SHA1 afc64e03cc0d158cf9162f8fe648b8933cda01e6 lib/KiokuDB/Backend.pm
 SHA1 24397e83af57a240880ad117dbf3fd949841660a lib/KiokuDB/Backend/Hash.pm
 SHA1 e5d62d28bb49fbb91fd9d9dd28f0846faaecfbe3 lib/KiokuDB/Backend/Null.pm
@@ -112,7 +112,7 @@ SHA1 cce1bbfc3db4848eabc14235b45ba6a79b90ff5f lib/KiokuDB/Test/Employee.pm
 SHA1 f0a79369fddd9212d7b6c9ef61427fced722847c lib/KiokuDB/Test/Fixture.pm
 SHA1 274d63b44d2d5d274ea8fea19836d89e10100411 lib/KiokuDB/Test/Fixture/Binary.pm
 SHA1 35df80d9c9c8be37210ae556b346c84f9d86cff2 lib/KiokuDB/Test/Fixture/Clear.pm
-SHA1 45f937223c97f6d38865f0bf1c7b083c7a4c25ef lib/KiokuDB/Test/Fixture/GIN/Class.pm
+SHA1 0f3e50ef0f161f447b542da5dbe8eaa9954faa0f lib/KiokuDB/Test/Fixture/GIN/Class.pm
 SHA1 e54d896e899c1d0c8163c17fd70b3f49bfb4eea9 lib/KiokuDB/Test/Fixture/ObjectGraph.pm
 SHA1 c51d0a9f8107815c60153cf357bcf919d9fc5010 lib/KiokuDB/Test/Fixture/Scan.pm
 SHA1 9ee12b638ba2b744467180eeada41ea9a62e1848 lib/KiokuDB/Test/Fixture/SimpleSearch.pm
@@ -172,7 +172,7 @@ SHA1 37f85e47e6c58002483a61a57e7f66b498580c55 t/uuid.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.7 (Darwin)
 
-iD8DBQFJVtjnVCwRwOvSdBgRAnmGAJ9D/FW9jwEsO6SPjmOEq6o5HCjGcACgg2Ul
-ahHNZRIIBodI0n1ub8nXsv8=
-=7L/M
+iD8DBQFJVt6RVCwRwOvSdBgRAsi6AJ9aMQ798WTGqaRYJ+8olBFYVAFyqQCeKlne
+6FBeaGMIfpcq41txnMAnfRQ=
+=sm6O
 -----END PGP SIGNATURE-----
