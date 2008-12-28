@@ -41,7 +41,7 @@ sub bench {
     my $mxsd_mysql = eval { KiokuDB->connect("dbi:mysql:test", serializer => "storable") }; warn $@ if $@;
     $mxsd_mysql && $mxsd_mysql->backend->deploy({ add_drop_table => 1, producer_args => { mysql_version => 5 } });
 
-    my $mxsd_pg = eval { KiokuDB->connect("dbi:Pg:dbname=test", user => "postgres", password => "290685kj", serializer => "storable") }; warn $@ if $@;
+    my $mxsd_pg = eval { KiokuDB->connect("dbi:Pg:dbname=test", serializer => "storable") }; warn $@ if $@;
     $mxsd_pg && $mxsd_pg->backend->deploy({ add_drop_table => 1 });
 
     $dir->subdir("mxsd_bdb_dumb")->mkpath;
@@ -102,7 +102,7 @@ sub bench {
     my @bdb_d_ids = do { my @objs = construct(); my $s = $mxsd_bdb_dumb->new_scope; $mxsd_bdb_dumb->store(grep { blessed($_) } @objs) };
     my @bdb_t_ids = do { my @objs = construct(); my $s = $mxsd_bdb_txn->new_scope; $mxsd_bdb_txn->backend->txn_do(sub { $mxsd_bdb_txn->store(grep { blessed($_) } @objs) }); };
     my @sqlite_t_ids = do { my @objs = construct(); my $s = $mxsd_sqlite->new_scope; $mxsd_sqlite->backend->txn_do(sub { $mxsd_sqlite->store(grep { blessed($_) } @objs) }); };
-    my @mysql_t_ids = $mxsd_mysql ? do { my @objs = construct(); my $s = $mxsd_mysql->new_scope; $mxsd_mysql->backend->txn_do(sub { $mxsd_mysql->store(grep { blessed($_) } @objs) }); } : (); 
+    my @mysql_t_ids = $mxsd_mysql ? do { my @objs = construct(); my $s = $mxsd_mysql->new_scope; $mxsd_mysql->backend->txn_do(sub { $mxsd_mysql->store(grep { blessed($_) } @objs) }); } : ();
     my @pg_t_ids = $mxsd_pg ? do { my @objs = construct(); my $s = $mxsd_pg->new_scope; $mxsd_pg->backend->txn_do(sub { $mxsd_pg->store(grep { blessed($_) } @objs) }); } : ();
     my @couch_ids = $mxsd_couch ? do { my @objs = construct(); my $s = $mxsd_couch->new_scope; $mxsd_couch->store(grep { blessed($_) } @objs) } : ();
 

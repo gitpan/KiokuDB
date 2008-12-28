@@ -64,16 +64,9 @@ lib/KiokuDB/Reference.pm
 lib/KiokuDB/Role/ID.pm
 lib/KiokuDB/Role/TypeMap.pm
 lib/KiokuDB/Role/UUIDs.pm
-lib/KiokuDB/Role/UUIDs/Abstract.pm
-lib/KiokuDB/Role/UUIDs/Bin.pm
 lib/KiokuDB/Role/UUIDs/DataUUID.pm
-lib/KiokuDB/Role/UUIDs/DataUUID/Bin.pm
-lib/KiokuDB/Role/UUIDs/DataUUID/Str.pm
 lib/KiokuDB/Role/UUIDs/LibUUID.pm
-lib/KiokuDB/Role/UUIDs/LibUUID/Bin.pm
-lib/KiokuDB/Role/UUIDs/LibUUID/Str.pm
 lib/KiokuDB/Role/UUIDs/SerialIDs.pm
-lib/KiokuDB/Role/UUIDs/Str.pm
 lib/KiokuDB/Serializer.pm
 lib/KiokuDB/Serializer/JSON.pm
 lib/KiokuDB/Serializer/Storable.pm

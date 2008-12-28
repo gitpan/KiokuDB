@@ -3,7 +3,7 @@
 package KiokuDB;
 use Moose;
 
-our $VERSION = "0.15";
+our $VERSION = "0.16";
 
 use constant SERIAL_IDS => not not our $SERIAL_IDS;
 
@@ -771,26 +771,6 @@ Polymorphic retrieval is possible with L<DBIx::Class::DynamicSubclass>
 =item L<MooseX::Storage>
 
 =back
-
-=head2 Links
-
-L<http://en.wikipedia.org/wiki/Navigational_database>
-
-L<http://www.postgresql.org/docs/8.2/static/gin-extensibility.html>
-
-L<http://www.zope.org/Documentation/How-To/ZCatalogTutorial>
-
-L<http://www.couchdb.org>
-
-L<http://sitepen.com/labs/persevere.php>, L<http://code.google.com/p/persevere-framework/>
-
-L<http://www.jspon.org/>
-
-L<http://www.zope.org/Products/StandaloneZODB>
-
-L<http://en.wikipedia.org/wiki/Language_Integrated_Query>
-
-L<http://en.wikipedia.org/wiki/OQL>
 
 =head1 VERSION CONTROL
 
