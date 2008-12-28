@@ -14,18 +14,18 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 97476b31e3878ecb685d30d406a4f629294acbea Changes
+SHA1 e555aea574a81b3aba97002829cec5573b415338 Changes
 SHA1 df36ea7d1f60a2818cfc0c78f0d1cb6604bacbb3 MANIFEST
 SHA1 190e9058eb9c6446a1a3f3ddf15b082f1ecde152 MANIFEST.SKIP
-SHA1 bc8da92bce95ff9ced1a166e1bf6759d0cc2f065 META.yml
-SHA1 0368362ecb5c7cd7042e8b9b476b705230b9ee7f Makefile.PL
+SHA1 d431bf9de042fe30bc6e2c91ec9753271e8bb212 META.yml
+SHA1 3c3fad518f7854142670a850fe49e5da56396044 Makefile.PL
 SHA1 6e98b96a7b9a0c79ae316156356db8d2ec47d4d4 TODO
 SHA1 d7b4b2cbdbd664b9a1c183408ebf7424fc6b1e4f bench/shootout.pl
 SHA1 839e06129b9fa801212fb298365ce84e92b762f1 bench/small.pl
 SHA1 2623cebc5fef1140e5bad4345f225fd6596dce10 bin/kioku
 SHA1 b05d41b4a28cba506ba5296df9e631f1e1460b0f bin/kiokudump
 SHA1 ffc7eb1006ebe3362440448f7975e234c3ec049d bin/kiokuload
-SHA1 13d2add08a81edd6799a5e5398e675fcb35ea78c lib/KiokuDB.pm
+SHA1 68ea6fdb87b613a97886fc5cf4977f2b2d969a05 lib/KiokuDB.pm
 SHA1 afc64e03cc0d158cf9162f8fe648b8933cda01e6 lib/KiokuDB/Backend.pm
 SHA1 24397e83af57a240880ad117dbf3fd949841660a lib/KiokuDB/Backend/Hash.pm
 SHA1 e5d62d28bb49fbb91fd9d9dd28f0846faaecfbe3 lib/KiokuDB/Backend/Null.pm
@@ -42,7 +42,7 @@ SHA1 b1403dfd02ce58fdd0bf4d479fea84f270694292 lib/KiokuDB/Backend/Role/TXN/Neste
 SHA1 392dd49194637c559ff1236af0c474fa9f6f5711 lib/KiokuDB/Backend/Role/UnicodeSafe.pm
 SHA1 8ba656e731349e8b6f947f2e1ce4589f02a03936 lib/KiokuDB/Backend/Serialize.pm
 SHA1 79a9d124dd70e6ca7fb75f06354ed2024a3f5a56 lib/KiokuDB/Backend/Serialize/Delegate.pm
-SHA1 45871d1545e6a2883cc9bb772045b4b4cb754c28 lib/KiokuDB/Backend/Serialize/JSON.pm
+SHA1 c38f59fb38e655f6db1710ff85c3d5a29aa45f72 lib/KiokuDB/Backend/Serialize/JSON.pm
 SHA1 571a00f90d40061913feac50224f838bd83a2908 lib/KiokuDB/Backend/Serialize/JSPON.pm
 SHA1 dc5100d5423de1dc40ffdfc3afd3ba6385ee4462 lib/KiokuDB/Backend/Serialize/JSPON/Collapser.pm
 SHA1 080102346d29067259380bc24bf2f2ffda5dd022 lib/KiokuDB/Backend/Serialize/JSPON/Converter.pm
@@ -50,7 +50,7 @@ SHA1 c73dc0363bbb9f1a9f3c8641706884c91b9199e9 lib/KiokuDB/Backend/Serialize/JSPO
 SHA1 5978c7de0e5ddc09d75c3a331e0d9a8dc276b97e lib/KiokuDB/Backend/Serialize/Memory.pm
 SHA1 e97fcf2b723ba97996fda175ef07dd8962700416 lib/KiokuDB/Backend/Serialize/Null.pm
 SHA1 4a01fe8d63c3886d4f5cadedc58805b0c3c65000 lib/KiokuDB/Backend/Serialize/Storable.pm
-SHA1 9a02076085122464aeb07e0df62bde084959d209 lib/KiokuDB/Backend/Serialize/YAML.pm
+SHA1 2f56dafbfc1416efcc0434628371d75dd717257a lib/KiokuDB/Backend/Serialize/YAML.pm
 SHA1 e5989e87cc3dcf713153ba03023253ac7c7cd9fa lib/KiokuDB/Backend/TypeMap/Default.pm
 SHA1 827ffdc2cde81839afeb983287bec0f638ea8274 lib/KiokuDB/Backend/TypeMap/Default/JSON.pm
 SHA1 d41a7ab62de3d46575d59cfc2f05271ea30bf444 lib/KiokuDB/Backend/TypeMap/Default/Storable.pm
@@ -112,7 +112,7 @@ SHA1 cce1bbfc3db4848eabc14235b45ba6a79b90ff5f lib/KiokuDB/Test/Employee.pm
 SHA1 f0a79369fddd9212d7b6c9ef61427fced722847c lib/KiokuDB/Test/Fixture.pm
 SHA1 274d63b44d2d5d274ea8fea19836d89e10100411 lib/KiokuDB/Test/Fixture/Binary.pm
 SHA1 35df80d9c9c8be37210ae556b346c84f9d86cff2 lib/KiokuDB/Test/Fixture/Clear.pm
-SHA1 0f3e50ef0f161f447b542da5dbe8eaa9954faa0f lib/KiokuDB/Test/Fixture/GIN/Class.pm
+SHA1 45f937223c97f6d38865f0bf1c7b083c7a4c25ef lib/KiokuDB/Test/Fixture/GIN/Class.pm
 SHA1 e54d896e899c1d0c8163c17fd70b3f49bfb4eea9 lib/KiokuDB/Test/Fixture/ObjectGraph.pm
 SHA1 c51d0a9f8107815c60153cf357bcf919d9fc5010 lib/KiokuDB/Test/Fixture/Scan.pm
 SHA1 9ee12b638ba2b744467180eeada41ea9a62e1848 lib/KiokuDB/Test/Fixture/SimpleSearch.pm
@@ -145,7 +145,7 @@ SHA1 8900d943871052a83bab6a749bffa71fc4ba24dd lib/Moose/Meta/Attribute/Custom/Tr
 SHA1 45f06a1cebbf2a9c36dfbc83137c4dd57c9a37db notes/std_layout.txt
 SHA1 bc65ebf2626d0d19678e55aadfd0e468ee38af25 t/collapser.t
 SHA1 aaef00fc59fbf426971799ebe779ba50c06bbcf7 t/directory.t
-SHA1 ebcbc95da4f037eee1c938f8e287d455a033eeef t/dump.t
+SHA1 ccb04e03aa1d6bde0cd668de3573ce813507fce6 t/dump.t
 SHA1 9d7ccd11afa931b75cd4fe4a06d685e2b6b9a6fd t/entry.t
 SHA1 68936d542e1ed77a5c8e07c1be3912cc35744ebf t/gin.t
 SHA1 cf66115823f1b6a0950507a0a9608c5cbbb519f4 t/hash.t
@@ -172,7 +172,7 @@ SHA1 37f85e47e6c58002483a61a57e7f66b498580c55 t/uuid.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.7 (Darwin)
 
-iD8DBQFJU9WJVCwRwOvSdBgRAtqYAJ94VbIpBZXzkWnv3bqd3ZVxw72cxQCfXl81
-KrVMaZYqCHgW0/DcRP6B11g=
-=FpXR
+iD8DBQFJVtjnVCwRwOvSdBgRAnmGAJ9D/FW9jwEsO6SPjmOEq6o5HCjGcACgg2Ul
+ahHNZRIIBodI0n1ub8nXsv8=
+=7L/M
 -----END PGP SIGNATURE-----
