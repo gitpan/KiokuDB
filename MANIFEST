@@ -1,13 +1,10 @@
 bench/shootout.pl
 bench/small.pl
 bin/kioku
-bin/kiokudump
-bin/kiokuload
 Changes
 lib/KiokuDB.pm
 lib/KiokuDB/Backend.pm
 lib/KiokuDB/Backend/Hash.pm
-lib/KiokuDB/Backend/Null.pm
 lib/KiokuDB/Backend/Role/BinarySafe.pm
 lib/KiokuDB/Backend/Role/Clear.pm
 lib/KiokuDB/Backend/Role/Prefetch.pm
