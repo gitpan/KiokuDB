@@ -5,6 +5,8 @@ use Moose;
 
 use Data::Stream::Bulk::Util qw(bulk);
 
+use Carp qw(croak);
+
 use namespace::clean -except => 'meta';
 
 #KiokuDB::Backend::Serialize::Memory
@@ -32,7 +34,11 @@ sub clear {
 sub get {
     my ( $self, @uids ) = @_;
 
-    my @objs = map { $self->deserialize($_) } @{ $self->storage }{@uids};
+    my $s = $self->storage;
+
+    return if grep { not exists $s->{$_} } @uids;
+
+    my @objs = map { $self->deserialize($_) } @{ $s }{@uids};
 
     if ( @objs == 1 ) {
         return $objs[0];
@@ -44,7 +50,15 @@ sub get {
 sub insert {
     my ( $self, @entries ) = @_;
 
-    @{ $self->storage }{ map { $_->id } @entries } = map { $self->serialize($_) } @entries;
+    my $s = $self->storage;
+
+    foreach my $entry ( @entries ) {
+        next if $entry->has_prev;
+        my $id = $entry->id;
+        croak "Entry $id already exists in the database" if exists $s->{$id};
+    }
+
+    @{ $s }{ map { $_->id } @entries } = map { $self->serialize($_) } @entries;
 }
 
 sub delete {

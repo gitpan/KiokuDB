@@ -83,6 +83,7 @@ lib/KiokuDB/Test/Fixture/Binary.pm
 lib/KiokuDB/Test/Fixture/Clear.pm
 lib/KiokuDB/Test/Fixture/GIN/Class.pm
 lib/KiokuDB/Test/Fixture/ObjectGraph.pm
+lib/KiokuDB/Test/Fixture/Overwrite.pm
 lib/KiokuDB/Test/Fixture/Scan.pm
 lib/KiokuDB/Test/Fixture/SimpleSearch.pm
 lib/KiokuDB/Test/Fixture/Small.pm
