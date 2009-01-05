@@ -1,4 +1,5 @@
 bench/shootout.pl
+bench/size.pl
 bench/small.pl
 bin/kioku
 Changes
@@ -75,6 +76,7 @@ lib/KiokuDB/Set/Loaded.pm
 lib/KiokuDB/Set/Storage.pm
 lib/KiokuDB/Set/Stored.pm
 lib/KiokuDB/Set/Transient.pm
+lib/KiokuDB/Stream/Objects.pm
 lib/KiokuDB/Test.pm
 lib/KiokuDB/Test/Company.pm
 lib/KiokuDB/Test/Employee.pm
@@ -129,6 +131,7 @@ t/link_checker.t
 t/link_checker_real.t
 t/live_objs.t
 t/ref.t
+t/scaling.t
 t/serializer.t
 t/set.t
 t/tied.t

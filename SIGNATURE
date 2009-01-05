@@ -14,16 +14,17 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 bdfccf551ec1cc32d30a979ab573d056ab05ebe4 Changes
-SHA1 d59ffe5ca2638b1e0ad60b4844ad4f37ddb37a11 MANIFEST
+SHA1 db6e173a2edec46a24abee7c0890b2a16cd3b7a5 Changes
+SHA1 97b462ec5cf135f039a97f32cf1b660fc3f12afe MANIFEST
 SHA1 190e9058eb9c6446a1a3f3ddf15b082f1ecde152 MANIFEST.SKIP
-SHA1 6459ac9f8f6e15b7ac2423a3fde54086ec64f233 META.yml
+SHA1 e3fba20fc86d1edd4f234a2b8144a2cbe4f7dc49 META.yml
 SHA1 3c3fad518f7854142670a850fe49e5da56396044 Makefile.PL
 SHA1 6e98b96a7b9a0c79ae316156356db8d2ec47d4d4 TODO
 SHA1 3e5fc3d4b241d5f405b96a656e75cf88796f2037 bench/shootout.pl
+SHA1 b617e178b94ee62a476f7722bcc06a8a27b50b8c bench/size.pl
 SHA1 839e06129b9fa801212fb298365ce84e92b762f1 bench/small.pl
 SHA1 2623cebc5fef1140e5bad4345f225fd6596dce10 bin/kioku
-SHA1 8543bc2cc71480dbfaaa1a5c2720191fdf126d56 lib/KiokuDB.pm
+SHA1 d5442fcb817aeb59a6c88b122a431ba30c67934e lib/KiokuDB.pm
 SHA1 eea75b59a26cbd646d6729fdc02ce033dce6c9a7 lib/KiokuDB/Backend.pm
 SHA1 8f05f491e4036e3a52d7db286008ad5da3d405fb lib/KiokuDB/Backend/Hash.pm
 SHA1 26fbacd2dd12f060a15e4e95b8baf3b569581873 lib/KiokuDB/Backend/Role/BinarySafe.pm
@@ -96,6 +97,7 @@ SHA1 c2abac2743817305915d13a84e8abfb21316f61e lib/KiokuDB/Set/Loaded.pm
 SHA1 b32f59c4ddabea637cb069a5a8037d520cb3afe8 lib/KiokuDB/Set/Storage.pm
 SHA1 37125f39a95fb3255976dbc815c62c40a89e3381 lib/KiokuDB/Set/Stored.pm
 SHA1 e32a7a4d851705d26b066440ada9873cce7546ed lib/KiokuDB/Set/Transient.pm
+SHA1 1849b619a3df844531c1842795b576d3b5a8782d lib/KiokuDB/Stream/Objects.pm
 SHA1 8e488c63410c828c0ca048a88c059a8fe634b30b lib/KiokuDB/Test.pm
 SHA1 ff7b3f2642e74908d5afd3a8334ea798ba816317 lib/KiokuDB/Test/Company.pm
 SHA1 cce1bbfc3db4848eabc14235b45ba6a79b90ff5f lib/KiokuDB/Test/Employee.pm
@@ -147,6 +149,7 @@ SHA1 71b4aecadf2dfe168fa8db4e5f863e88f0aa8453 t/link_checker.t
 SHA1 448a59fe3743d83ebdf032e083f1d3a127588a95 t/link_checker_real.t
 SHA1 69c468e6458daa410368d4cda3c6b47e0dcea4c6 t/live_objs.t
 SHA1 58864975782267e673c2bae82a3cda31c2506aad t/ref.t
+SHA1 ecf76385944437ab11627b018fb7eef188b31159 t/scaling.t
 SHA1 246da471058ea2a2197d6a2150d7df7a8a1306be t/serializer.t
 SHA1 b06f7c018a164b849671f4019b0ee2d477517aea t/set.t
 SHA1 d530419b49da2317cd4120e1c905d77045a8b01f t/tied.t
@@ -163,7 +166,7 @@ SHA1 bdd1d89ed9f804c81fe06075fde3cb3729a686bc t/uuid.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.7 (Darwin)
 
-iD8DBQFJX/xPVCwRwOvSdBgRAmZjAJ9Cyxszsc7Zv061bPer2M2dLvT7CACgsKBz
-ss+gyB/gsu/JXTC2rN2v5xw=
-=k1ZA
+iD8DBQFJYV27VCwRwOvSdBgRAqCdAKCTrKe0mTAE8S/6MNFDkBFL73zhRwCgl31q
+olqOXdBxSumyCcEgbWAbN+k=
+=GoV9
 -----END PGP SIGNATURE-----
