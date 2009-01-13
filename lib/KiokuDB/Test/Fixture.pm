@@ -88,9 +88,6 @@ sub run {
     SKIP: {
         local $Test::Builder::Level = $Test::Builder::Level + 1;
 
-        # disable txn wrapping for TXN related fixtures
-        my $txn = ref($self) =~ /TXN/ ? sub { shift->() } : sub { $self->directory->txn_do(@_) };
-
         $self->precheck;
 
         $self->clear_live_objects;
@@ -98,12 +95,12 @@ sub run {
         is_deeply( [ $self->live_objects ], [ ], "no live objects at start of " . $self->name . " fixture" );
 
         lives_ok {
-            $txn->(sub {
+            local $Test::Builder::Level = $Test::Builder::Level - 1;
+            $self->txn_do(sub {
                 my $s = $self->new_scope;
-                local $Test::Builder::Level = $Test::Builder::Level - 1;
-                $txn->(sub { $self->populate });
-                $txn->(sub { $self->verify });
+                $self->populate;
             });
+            $self->verify;
         } "no error in fixture";
 
         is_deeply( [ $self->live_objects ], [ ], "no live objects at end of " . $self->name . " fixture" );
@@ -129,6 +126,10 @@ has directory => (
         search
         simple_search
         backend_search
+
+        is_root
+        set_root
+        unset_root
 
         root_set
         scan
@@ -191,7 +192,23 @@ sub exists_ok {
 
     local $Test::Builder::Level = $Test::Builder::Level + 1;
 
-    is( scalar(grep { defined } $self->exists(@ids)), scalar(@ids), "@ids exist in DB" );
+    is( scalar(grep { $_ } $self->exists(@ids)), scalar(@ids), "[@ids] exist in DB" );
+}
+
+sub root_ok {
+    my ( $self, @objects ) = @_;
+
+    local $Test::Builder::Level = $Test::Builder::Level + 1;
+
+    is( scalar(grep { $_ } $self->is_root(@objects)), scalar(@objects), "[@{[ $self->objects_to_ids(@objects) ]}] are in the root set" );
+}
+
+sub not_root_ok {
+    my ( $self, @objects ) = @_;
+
+    local $Test::Builder::Level = $Test::Builder::Level + 1;
+
+    is( scalar(grep { not $_ } $self->is_root(@objects)), scalar(@objects), "[@{[ $self->objects_to_ids(@objects) ]}] aren't in the root set" );
 }
 
 sub deleted_ok {
@@ -219,7 +236,12 @@ sub no_live_objects {
 
     local $Test::Builder::Level = $Test::Builder::Level + 1;
 
-    unless ( is( scalar(()=$self->live_objects), 0, "no live objects" ) ){
+    my $fail;
+
+    $fail++ unless is( scalar(()=$self->live_objects), 0, "no live objects" );
+    #$fail++ unless is( scalar($self->directory->live_objects->live_entries), 0, "no live entries" );
+
+    if ( $fail ) {
         my @l = $self->live_objects;
         diag "live objects: " . join ", ", map { $self->object_to_id($_) . " ($_)" } @l;
         require Data::Dumper;
@@ -228,7 +250,7 @@ sub no_live_objects {
         #use Scalar::Util qw(weaken);
         #weaken($_) for @l;
 
-        #$self->directory->live_objects->clear;
+        $self->directory->live_objects->clear;
 
         #use Devel::FindRef;
         #my $track = Devel::FindRef::track(@l);
@@ -244,6 +266,17 @@ sub live_objects_are {
     local $Test::Builder::Level = $Test::Builder::Level + 1;
 
     is_deeply( [ sort $self->live_objects ], [ sort @objects ], "correct live objects" );
+}
+
+sub txn_lives {
+    my ( $self, $code, @args ) = @_;
+
+    lives_ok {
+        $self->txn_do(sub {
+            my $s = $self->new_scope;
+            $code->(@_);
+        }, @args);
+    } "transaction finished without errors";
 }
 
 __PACKAGE__

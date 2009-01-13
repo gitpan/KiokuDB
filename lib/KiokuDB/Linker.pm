@@ -36,6 +36,12 @@ has typemap_resolver => (
     required => 1,
 );
 
+has queue => (
+    isa => "Bool",
+    is  => "ro",
+    default => 1,
+);
+
 has _queue => (
     isa => "ArrayRef",
     is  => "ro",
@@ -97,17 +103,41 @@ sub _expand_object {
 sub queue_ref {
     my ( $self, $ref, $into ) = @_;
 
-    my $b = $self->backend;
+    if ( $self->queue ) {
 
-    if ( $b->can("prefetch") ) {
-        $b->prefetch($ref->id);
+        #my $b = $self->backend;
+
+        #if ( $b->can("prefetch") ) {
+        #    $b->prefetch($ref->id);
+        #}
+
+        push @{ $self->_queue }, [ $ref, $into ];
+    } else {
+        if ( ref $ref ) {
+            $$into = $self->get_or_load_object($ref->id);
+            weaken($$into) if $ref->is_weak;
+        } else {
+            $$into = $self->get_or_load_object($ref);
+        }
     }
+}
 
-    push @{ $self->_queue }, [ $ref, $into ];
+sub queue_finalizer {
+    my ( $self, @hooks ) = @_;
+
+    if ( $self->queue ) {
+        push @{ $self->_deferred }, @hooks;
+    } else {
+        foreach my $hook ( @hooks ) {
+            $self->$hook();
+        }
+    }
 }
 
 sub load_queue {
     my $self = shift;
+
+    return unless $self->queue;
 
     my $queue = $self->_queue;
     my $deferred = $self->_deferred;
@@ -119,7 +149,13 @@ sub load_queue {
     @$deferred = ();
 
     if ( @queue ) {
-        my @ids = map { $_->[0]->id } @queue;
+        my @ids;
+
+        foreach my $entry ( @queue ) {
+            my $ref = $entry->[0];
+            push @ids, ref($ref) ? $ref->id : $ref;
+        }
+
         my @objects = $self->get_or_load_objects(@ids);
 
         foreach my $item ( @queue ) {
@@ -128,7 +164,7 @@ sub load_queue {
 
             $$into = $obj;
 
-            weaken $$into if $data->is_weak;
+            weaken $$into if ref $data and $data->is_weak;
         }
     }
 
@@ -330,5 +366,4 @@ object, until it is destroyed itself. This ensures that weak references are not
 destroyed prematurely, but allows their use in order to avoid memory leaks.
 
 =cut
-
 

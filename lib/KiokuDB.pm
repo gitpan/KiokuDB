@@ -3,7 +3,7 @@
 package KiokuDB;
 use Moose;
 
-our $VERSION = "0.19";
+our $VERSION = "0.20";
 
 use constant SERIAL_IDS => not not our $SERIAL_IDS;
 
@@ -50,12 +50,17 @@ sub configure {
 has typemap => (
     does => "KiokuDB::Role::TypeMap",
     is   => "ro",
-    lazy_build => 1,
 );
 
-sub _build_typemap {
-    KiokuDB::TypeMap->new;
-}
+has allow_class_builders => (
+    isa => "Bool|HashRef",
+    is  => "ro",
+);
+
+has [qw(allow_classes allow_bases)] => (
+    isa => "ArrayRef[Str]",
+    is  => "ro",
+);
 
 has merged_typemap => (
     does => "KiokuDB::Role::TypeMap",
@@ -70,7 +75,7 @@ sub _find_default_typemap {
 
     if ( $b->can("default_typemap") ) {
         return $b->default_typemap;
-    } elsif( $b->can("serializer") and $b->serializer->can("default_typemap") ) {
+    } elsif ( $b->can("serializer") and $b->serializer->can("default_typemap") ) {
         return $b->serializer->default_typemap;
     }
 
@@ -80,15 +85,43 @@ sub _find_default_typemap {
 sub _build_merged_typemap {
     my $self = shift;
 
-    if ( my $default_typemap = $self->_find_default_typemap ) {
-        return KiokuDB::TypeMap::Shadow->new(
-            typemaps => [
-                $self->typemap,
-                $default_typemap,
-            ],
+    my @typemaps;
+
+    if ( my $typemap = $self->typemap ) {
+        push @typemaps, $typemap;
+    }
+
+    if ( my $classes = $self->allow_classes ) {
+        require KiokuDB::TypeMap::Entry::Naive;
+
+        push @typemaps, KiokuDB::TypeMap->new(
+            entries => { map { $_ => KiokuDB::TypeMap::Entry::Naive->new } @$classes },
         );
+    }
+
+    if ( my $classes = $self->allow_bases ) {
+        require KiokuDB::TypeMap::Entry::Naive;
+
+        push @typemaps, KiokuDB::TypeMap->new(
+            isa_entries => { map { $_ => KiokuDB::TypeMap::Entry::Naive->new } @$classes },
+        );
+    }
+
+    if ( my $opts = $self->allow_class_builders ) {
+        require KiokuDB::TypeMap::ClassBuilders;
+        push @typemaps, KiokuDB::TypeMap::ClassBuilders->new( ref $opts ? %$opts : () );
+    }
+
+    if ( my $default_typemap = $self->_find_default_typemap ) {
+        push @typemaps, $default_typemap;
+    }
+
+    if ( not @typemaps ) {
+        return KiokuDB::TypeMap->new;
+    } elsif ( @typemaps == 1 ) {
+        return $typemaps[0];
     } else {
-        return $self->typemap;
+        return KiokuDB::TypeMap::Shadow->new( typemaps => \@typemaps );
     }
 }
 
@@ -115,7 +148,7 @@ has live_objects => (
         clear_live_objects => "clear",
         new_scope          => "new_scope",
         object_to_id       => "object_to_id",
-        "objects_to_ids"   => "objects_to_ids"
+        objects_to_ids     => "objects_to_ids"
     },
 );
 
@@ -131,6 +164,7 @@ sub _build_collapser {
     my $self = shift;
 
     KiokuDB::Collapser->new(
+        backend => $self->backend,
         live_objects => $self->live_objects,
         typemap_resolver => $self->typemap_resolver,
     );
@@ -141,7 +175,12 @@ has backend => (
     is   => "ro",
     required => 1,
     coerce   => 1,
-    handles  => [qw(exists)],
+);
+
+has linker_queue => (
+    isa => "Bool",
+    is  => "ro",
+    default => 1,
 );
 
 has linker => (
@@ -157,7 +196,16 @@ sub _build_linker {
         backend => $self->backend,
         live_objects => $self->live_objects,
         typemap_resolver => $self->typemap_resolver,
+        queue => $self->linker_queue,
     );
+}
+
+sub exists {
+    my ( $self, @ids ) = @_;
+
+    my @res = $self->backend->exists(@ids);
+
+    return @ids == 1 ? $res[0] : @res;
 }
 
 sub lookup {
@@ -340,6 +388,46 @@ sub update {
     $self->store_objects( shallow => 1, only_known => 1, objects => \@objects );
 }
 
+sub deep_update {
+    my ( $self, @args ) = @_;
+
+    my @objects = $self->_register(@args);
+
+    my $l = $self->live_objects;
+
+    croak "Object not in storage"
+        if grep { not defined } $l->objects_to_entries(@objects);
+
+    $self->store_objects( only_known => 1, objects => \@objects );
+}
+
+sub _imply_root {
+    my ( $self, @entries ) = @_;
+
+    foreach my $entry ( @entries ) {
+        next if $entry->has_root; # set by typemap
+        $entry->root(1);
+    }
+}
+
+sub set_root {
+    my ( $self, @objects ) = @_;
+    $_->root(1) for $self->live_objects->objects_to_entries(@objects);
+}
+
+sub unset_root {
+    my ( $self, @objects ) = @_;
+    $_->root(0) for $self->live_objects->objects_to_entries(@objects);
+}
+
+sub is_root {
+    my ( $self, @objects ) = @_;
+
+    my @is_root = map { $_->root } $self->live_objects->objects_to_entries(@objects);
+
+    return @objects == 1 ? $is_root[0] : @is_root;
+}
+
 sub store_objects {
     my ( $self, %args ) = @_;
 
@@ -348,12 +436,14 @@ sub store_objects {
     my ( $entries, @ids ) = $self->collapser->collapse(%args);
 
     if ( $args{root_set} ) {
-        $_->root(1) for grep { defined } @{$entries}{@ids};
+        $self->_imply_root(@{$entries}{@ids});
     }
 
-    $self->backend->insert(values %$entries);
+    my @insert = grep { ref($_) ne 'KiokuDB::Entry::Skip' } values %$entries;
 
-    $self->live_objects->update_entries(values %$entries);
+    $self->backend->insert(@insert);
+
+    $self->live_objects->update_entries(@insert);
 
     if ( @$objects == 1 ) {
         return $ids[0];
@@ -461,16 +551,15 @@ nevertheless backwards compatibility is not yet guaranteed.
 
 =head1 DESCRIPTION
 
-Kioku is a Moose based frontend to various databases, somewhere in between
-L<Tangram> and L<Pixie>. It builds on L<Class::MOP>'s solid foundation.
+L<KiokuDB> is a Moose based frontend to various data stores, somewhere in
+between L<Tangram> and L<Pixie>.
 
 Its purpose is to provide persistence for "regular" objects with as little
 effort as possible, without sacrificing control over how persistence is
-actually done.
+actually done, especially for harder to serialize objects.
 
-Kioku is also non-invasive: it does not use ties, AUTOLOAD, proxy objects,
-C<sv_magic> or any other type of trickery to get its job done, to avoid
-unwanted surprises.
+L<KiokuDB> is also non-invasive: it does not use ties, `AUTOLOAD`, proxy objects,
+C<sv_magic> or any other type of trickery.
 
 Many features important for proper Perl space semantics are supported,
 including shared data, circular structures, weak references, tied structures,
@@ -534,6 +623,25 @@ stored or loaded.
 
 This process is explained in detail in L<KiokuDB::Linker>.
 
+=head1 ROOT SET MEMBERSHIP
+
+Any object that is passed to C<store> or C<insert> directly is implicitly
+considered a member of the root set.
+
+This flag implies that the object is an identified resource and should not be
+garbage collected with any of the proposed garbage collection schemes.
+
+The root flag may be modified explicitly:
+
+    $kiokudb->set_root(@objects); # or unset_root
+
+    $kiokudb->update(@objects);
+
+Lastly, root set membership may also be specified explicitly by the typemap.
+
+A root set member must be explicitly using C<delete> or removed from the root
+set before it will be purged with any garbage collection scheme.
+
 =head1 ATTRIBUTES
 
 L<KiokuDB> uses a number of delegates which do the actual work.
@@ -559,6 +667,27 @@ This is an instance L<KiokuDB::TypeMap>.
 
 The typemap contains entries which control how L<KiokuDB::Collapser> and
 L<KiokuDB::Linker> handle different types of objects.
+
+=item allow_classes
+
+An array references of extra classes to allow.
+
+Objects blessed into these classes will be collapsed using
+L<KiokuDB::TypeMap::Entry:Naive>.
+
+=item allow_bases
+
+An array references of extra base classes to allow.
+
+Objects derived from these classes will be collapsed using
+L<KiokuDB::TypeMap::Entry:Naive>.
+
+=item allow_class_builders
+
+If true adds L<KiokuDB::TypeMap::ClassBuilders> to the merged typemap.
+
+It's possible to provide a hash reference of options to give to
+L<KiokuDB::TypeMap::ClassBuilders/new>.
 
 =back
 
@@ -626,16 +755,20 @@ snapshotting everything.
 
 =item update @objects
 
-Performs a shallow update of @objects.
+Performs a shallow update of @objects (referants are not updated).
 
 It is an error to update an object not in the database.
+
+=item deep_update @objects
+
+Update @objects and all of the objects they reference.
 
 =item insert @objects
 
 Inserts objects to the database.
 
 It is an error to insert objects that are already in the database, all elements
-of C<@objects> must be new.
+of C<@objects> must be new, but their referants don't have to be.
 
 C<@objects> will be collapsed recursively, but the collapsing stops at known
 objects, which will not be updated.
@@ -646,6 +779,14 @@ Deletes the specified objects from the store.
 
 Note that this can cause lookup errors if the object you are deleting is
 referred to by another object, because that link will be broken.
+
+=item set_root @objects
+
+=item unset_root @objects
+
+Modify the C<root> flag on the associated entries.
+
+C<update> must be called for the change to take effect.
 
 =item txn_do $code, %args
 

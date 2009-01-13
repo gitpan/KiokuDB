@@ -9,11 +9,8 @@ use Carp qw(croak);
 
 use namespace::clean -except => 'meta';
 
-#KiokuDB::Backend::Serialize::Memory
-#KiokuDB::Backend::Serialize::Storable
-#KiokuDB::Backend::Serialize::Null
 with qw(
-    KiokuDB::Backend::Serialize::Memory
+    KiokuDB::Backend::Serialize::Delegate
     KiokuDB::Backend
     KiokuDB::Backend::Role::Query::Simple::Linear
     KiokuDB::Backend::Role::Scan
@@ -78,6 +75,11 @@ sub exists {
 sub all_entries {
     my $self = shift;
     return bulk(map { $self->deserialize($_) } values %{ $self->storage });
+}
+
+sub all_entry_ids {
+    my $self = shift;
+    return bulk(keys %{ $self->storage });
 }
 
 __PACKAGE__->meta->make_immutable;

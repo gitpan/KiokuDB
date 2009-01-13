@@ -3,8 +3,6 @@
 package KiokuDB::Cmd::Command::FSCK;
 use Moose;
 
-use KiokuDB::LinkChecker;
-
 use namespace::clean -except => 'meta';
 
 extends qw(KiokuDB::Cmd::Base);
@@ -17,14 +15,18 @@ with qw(
 has '+verbose' => ( default => 1 );
 
 has print => (
+    traits => [qw(Getopt)],
     isa => "Bool",
     is  => "ro",
     default => 1,
+    cmd_aliases => "p",
     documentation => "print broken entries to STDOUT at end",
 );
 
 augment run => sub {
     my $self = shift;
+
+    require KiokuDB::LinkChecker;
 
     my $l = KiokuDB::LinkChecker->new(
         backend => $self->backend,
@@ -33,13 +35,17 @@ augment run => sub {
     );
 
     if ( $l->missing->size == 0 ) {
-        $self->v("No missing entries, everything is OK\n");
+        $self->v("no missing entries, everything is OK\n");
 
-        #my $purge = $l->unreferenced->difference($l->root);
+        if ( $l->root->size ) {
+            my $purge = $l->unreferenced->difference($l->root);
 
-        #if ( my $count = $purge->size ) {
-        #    $self->v( "$count unreferenced non root objects\n" );
-        #}
+            if ( my $count = $purge->size ) {
+                $self->v( "found $count unreferenced, non root objects\n" );
+            }
+        } else {
+            $self->v("WARNING: no root entries found\n");
+        }
     } else {
         if ( $self->print ) {
             local $, = local $\ = "\n";

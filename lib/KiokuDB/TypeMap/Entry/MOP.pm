@@ -15,7 +15,7 @@ use namespace::clean -except => 'meta';
 has intrinsic => (
     isa => "Bool",
     is  => "ro",
-    default => 0,
+    predicate => "has_intrinsic",
 );
 
 # FIXME collapser and expaner should both be methods in Class::MOP::Class,
@@ -47,7 +47,15 @@ sub compile_collapser {
 
     my $meta_instance = $meta->get_meta_instance;
 
-    my $method = $self->intrinsic ? "collapse_intrinsic" : "collapse_first_class";
+    my $method;
+
+    if ( $self->has_intrinsic ) {
+        $method = $self->intrinsic ? "collapse_intrinsic" : "collapse_first_class";
+    } elsif ( $meta->does_role("KiokuDB::Role::Intrinsic") ) {
+        $method = "collapse_intrinsic";
+    } else {
+        $method = "collapse_first_class";
+    }
 
     my %attrs;
 
@@ -80,15 +88,28 @@ sub compile_collapser {
         );
     }
 
+    my $immutable = $meta->does_role("KiokuDB::Role::Immutable");
+    my $content_id = $meta->does_role("KiokuDB::Role::ID::Content");
+
     return sub {
         my ( $self, $obj, @args ) = @_;
 
         $self->$method(sub {
             my ( $self, %args ) = @_;
 
-            my %collapsed;
-
             my $object = $args{object};
+
+            if ( $immutable ) {
+                if ( my $prev = $self->live_objects->object_to_entry($object) ){
+                    return $self->make_skip_entry( %args, prev => $prev );
+                } elsif ( $content_id ) {
+                    if ( ($self->backend->exists($args{id}))[0] ) { # exists works in list context
+                        return $self->make_skip_entry(%args);
+                    }
+                }
+            }
+
+            my %collapsed;
 
             attr: foreach my $attr ( @attrs ) {
                 my $name = $attr->name;
@@ -107,7 +128,10 @@ sub compile_collapser {
                 }
             }
 
-            return \%collapsed;
+            return $self->make_entry(
+                %args,
+                data => \%collapsed,
+            );
         }, $obj, %attrs, @args);
     }
 }
@@ -184,12 +208,12 @@ sub compile_expander {
             }
         }
 
-        push @{ $self->_deferred }, sub {
+        $self->queue_finalizer(sub {
             foreach my $pair ( @values ) {
                 my ( $attr, $value ) = @$pair;
                 $attr->set_value($instance, $value);
             }
-        };
+        });
 
         return $instance;
     }

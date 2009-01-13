@@ -32,39 +32,71 @@ before populate => sub {
 sub verify {
     my $self = shift;
 
-    my $root = $self->root_set;
+    $self->txn_lives(sub {
+        my $root = $self->root_set;
 
-    does_ok( $root, "Data::Stream::Bulk" );
+        does_ok( $root, "Data::Stream::Bulk" );
 
-    is_deeply(
-        [ sort map { $_->name } $root->all ],
-        [ sort qw(foo bar gorch) ],
-        "root set",
-    );
+        my @objs = $root->all;
 
-    my $child_entries = $self->backend->child_entries;
+        my @ids = $self->objects_to_ids(@objs);
 
-    does_ok( $child_entries, "Data::Stream::Bulk" );
+        is_deeply(
+            [ sort map { $_->name } @objs ],
+            [ sort qw(foo bar gorch) ],
+            "root set",
+        );
 
-    my $children = $child_entries->filter(sub {[ $self->directory->linker->load_entries(@$_) ]});
+        is_deeply(
+            [ sort $self->backend->root_entry_ids->all ],
+            [ sort @ids ],
+        );
+    });
 
-    is_deeply(
-        [ sort map { $_->name } $children->all ],
-        [ sort qw(quxx) ],
-        "child entries",
-    );
+    $self->txn_lives(sub {
+        my $child_entries = $self->backend->child_entries;
 
-    my $all_entries = $self->backend->all_entries;
+        does_ok( $child_entries, "Data::Stream::Bulk" );
+        my $children = $child_entries->filter(sub {[ $self->directory->linker->load_entries(@$_) ]});
 
-    does_ok( $all_entries, "Data::Stream::Bulk" );
+        my @objs = $children->all;
 
-    my $all = $all_entries->filter(sub {[ $self->directory->linker->load_entries(@$_) ]});
+        my @ids = $self->objects_to_ids(@objs);
 
-    is_deeply(
-        [ sort map { $_->name } $all->all ],
-        [ sort qw(foo bar gorch quxx) ],
-        "all entries",
-    );
+        is_deeply(
+            [ sort map { $_->name } @objs ],
+            [ sort qw(quxx) ],
+            "child entries",
+        );
+
+        is_deeply(
+            [ sort $self->backend->child_entry_ids->all ],
+            [ sort @ids ],
+        );
+    });
+
+    $self->txn_lives(sub {
+        my $all_entries = $self->backend->all_entries;
+
+        does_ok( $all_entries, "Data::Stream::Bulk" );
+
+        my $all = $all_entries->filter(sub {[ $self->directory->linker->load_entries(@$_) ]});
+
+        my @objs = $all->all;
+
+        my @ids = $self->objects_to_ids(@objs);
+
+        is_deeply(
+            [ sort map { $_->name } @objs ],
+            [ sort qw(foo bar gorch quxx) ],
+            "all entries",
+        );
+
+        is_deeply(
+            [ sort $self->backend->all_entry_ids->all ],
+            [ sort @ids ],
+        );
+    });
 }
 
 __PACKAGE__->meta->make_immutable;

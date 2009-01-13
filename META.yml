@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               KiokuDB
-version:            0.19
+version:            0.20
 abstract:           ~
 author:  []
 license:            unknown
@@ -15,15 +15,17 @@ requires:
     Data::Visitor:        0.20
     Hash::Util::FieldHash::Compat:  0
     IO:                   1.2301
-    JSON:                 2.12
+    JSON::XS:             2.231
     Module::Pluggable::Object:  0
     Moose:                0.63
     MooseX::App::Cmd:     0
     MooseX::Getopt:       0
+    MooseX::Role::Parameterized:  0.02
     MooseX::Types::Path::Class:  0
     MooseX::YAML:         0.02
     namespace::clean:     0.08
     Path::Class:          0
+    Proc::InvokeEditor:   1
     Scalar::Util:         0
     Scope::Guard:         0
     Search::GIN:          0.03
@@ -34,6 +36,7 @@ requires:
     Test::More:           0
     Test::use::ok:        0
     Tie::ToObject:        0
+    YAML::XS:             0.3
 no_index:
     directory:
         - t

@@ -47,14 +47,14 @@ my $l = KiokuDB::LiveObjects->new;
                 data => {},
             ),
         ),
-        KiokuDB::Entry->new(
-            id   => "bondage",
-            tied => "HASH",
-            data => KiokuDB::Entry->new(
-                class => "Foo",
-                data => {},
-            ),
-        ),
+        #KiokuDB::Entry->new(
+        #    id   => "bondage",
+        #    tied => "HASH",
+        #    data => KiokuDB::Entry->new(
+        #        class => "Foo",
+        #        data => {},
+        #    ),
+        #),
         KiokuDB::Entry->new(
             id => "bar",
             data => [ 1 .. 3 ],
@@ -129,6 +129,12 @@ is_deeply(
 );
 
 is_deeply(
+    [ KiokuDB::Entry->new( data => { foo => KiokuDB::Entry->new( data => [ $foo ] ) } )->referenced_ids ],
+    [ $foo->id ],
+    "intrinsic entry (ids)",
+);
+
+is_deeply(
     [ KiokuDB::Entry->new(
         data  => [qw(foo bar)],
         class => 'KiokuDB::Set::Stored',
@@ -136,5 +142,15 @@ is_deeply(
     )->references ],
     [ $foo, $bar ],
     "set entry",
+);
+
+is_deeply(
+    [ KiokuDB::Entry->new(
+        data  => [qw(foo bar)],
+        class => 'KiokuDB::Set::Stored',
+        id    => 'the_set',
+    )->referenced_ids ],
+    [ $foo->id, $bar->id ],
+    "set entry (ids)",
 );
 

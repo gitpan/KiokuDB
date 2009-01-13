@@ -10,6 +10,7 @@ use Carp qw(croak);
 use Scalar::Util qw(isweak refaddr reftype);
 
 use KiokuDB::Entry;
+use KiokuDB::Entry::Skip;
 use KiokuDB::Reference;
 
 use Data::Visitor 0.18;
@@ -26,6 +27,12 @@ has '+tied_as_objects' => ( default => 1 );
 
 has live_objects => (
     isa => "KiokuDB::LiveObjects",
+    is  => "ro",
+    required => 1,
+);
+
+has backend => (
+    does => "KiokuDB::Backend",
     is  => "ro",
     required => 1,
 );
@@ -152,6 +159,14 @@ sub collapse {
     return ( \%entries, @ids );
 }
 
+sub may_compact {
+    my ( $self, $ref_or_id ) = @_;
+
+    my $id = ref($ref_or_id) ? $ref_or_id->id : $ref_or_id;
+
+    not exists $self->_first_class->{$id};
+}
+
 sub compact_entries {
     my $self = shift;
 
@@ -228,6 +243,26 @@ sub make_entry {
         # intrinsic
         return KiokuDB::Entry->new(%args);
     }
+}
+
+sub make_skip_entry {
+    my ( $self, %args ) = @_;
+
+    my $object = $args{object};
+
+    my $prev = $args{prev} || $self->live_objects->object_to_entry($object);
+
+    my $id = $args{id};
+
+    unless ( $id ) {
+        croak "skip entries must have an ID" unless $prev;
+        $id = $prev->id;
+    }
+
+    $self->_entries->{$id} = KiokuDB::Entry::Skip->new(
+        ( $prev ? ( prev   => $prev ) : () ),
+        object => $object,
+    );
 }
 
 sub make_ref {
@@ -355,7 +390,7 @@ sub visit_tied {
             id     => $id,
             object => $ref,
             data   => $tie,
-            tied   => reftype($ref),
+            tied   => substr(reftype($ref), 0, 1),
         );
 
         return $self->make_ref( $id => $_[2] );
@@ -363,7 +398,7 @@ sub visit_tied {
         return $self->make_entry(
             object => $ref,
             data   => $tie,
-            tied   => reftype($ref),
+            tied   => substr(reftype($ref), 0, 1),
         );
     }
 }
@@ -407,12 +442,7 @@ sub collapse_first_class {
         @entry_args,
     );
 
-    my $data = $self->$collapse(@args);
-
-    $self->make_entry(
-        @args,
-        data => $data,
-    );
+    $self->$collapse(@args);
 
     # we pass $_[1], an alias, so that isweak works
     return $self->make_ref( $id => $_[1] );
@@ -431,10 +461,7 @@ sub collapse_intrinsic {
         @entry_args,
     );
 
-    return $self->make_entry(
-        @args,
-        data  => $self->$collapse(@args),
-    );
+    $self->$collapse(@args),
 }
 
 sub _object_id {

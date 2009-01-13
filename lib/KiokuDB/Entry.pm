@@ -5,8 +5,6 @@ use Moose;
 
 use Moose::Util::TypeConstraints;
 
-use MooseX::Types -declare => ['Tied'];
-
 use namespace::clean -except => 'meta';
 
 has id => (
@@ -20,7 +18,18 @@ has id => (
 has root => (
     isa => "Bool",
     is  => "rw",
+    lazy_build => 1,
 );
+
+sub _build_root {
+    my $self = shift;
+
+    if ( $self->has_id and my $prev = $self->prev ) {
+        return $prev->root;
+    } else {
+        return 0;
+    }
+}
 
 has deleted => (
     isa => "Bool",
@@ -29,7 +38,6 @@ has deleted => (
 );
 
 has data => (
-    isa => "Ref",
     is  => "ro",
     writer    => "_data",
     predicate => "has_data",
@@ -51,21 +59,14 @@ has class_meta => (
 
 my @tied = ( map { substr($_, 0, 1) } qw(HASH SCALAR ARRAY GLOB) );
 
-enum Tied, @tied;
-
-coerce Tied, from Str => via { substr($_, 0, 1) };
-
 has tied => (
-    isa => Tied,
-    is  => "ro",
-    coerce    => 1,
+    is => "ro",
     writer    => "_tied",
     predicate => "has_tied",
 );
 
 has backend_data => (
-    isa => "Ref",
-    is  => "rw",
+    is => "rw",
     predicate => "has_backend_data",
     clearer   => "clear_backend_data",
 );
@@ -77,8 +78,7 @@ has prev => (
 );
 
 has object => (
-    isa => "Any",
-    is  => "rw",
+    is => "rw",
     weak_ref => 1,
     predicate => "has_object",
 );
@@ -110,12 +110,22 @@ sub _build__references {
     } else {
         my @refs;
 
-        # overkill
-        use Data::Visitor::Callback;
-        Data::Visitor::Callback->new(
-            'KiokuDB::Reference' => sub { push @refs, $_ },
-            'KiokuDB::Entry'     => sub { push @refs, $_->references },
-        )->visit($self->data);
+        my @queue = $self->data;
+
+        while ( @queue ) {
+            my $next = pop @queue;
+
+            my $ref = ref $next;
+            if ( $ref eq 'HASH' ) {
+                push @queue, grep { ref } values %$next;
+            } elsif ( $ref eq 'ARRAY' ) {
+                push @queue, grep { ref } @$next;
+            } elsif ( $ref eq 'KiokuDB::Entry' ) {
+                push @refs, $next->references;
+            } elsif ( $ref eq 'KiokuDB::Reference' ) {
+                push @refs, $next;
+            }
+        }
 
         return \@refs;
     }
@@ -140,16 +150,7 @@ sub _build__referenced_ids {
     if ( $self->class eq 'KiokuDB::Set::Stored' ) { # FIXME should the typemap somehow handle this?
         return $self->data;
     } else {
-        my @refs;
-
-        # overkill
-        use Data::Visitor::Callback;
-        Data::Visitor::Callback->new(
-            'KiokuDB::Reference' => sub { push @refs, $_->id },
-            'KiokuDB::Entry'     => sub { push @refs, $_->referenced_ids },
-        )->visit($self->data);
-
-        return \@refs;
+        return [ map { $_->id } $self->references ];
     }
 }
 
@@ -199,7 +200,7 @@ sub _unpack {
 
         $self->_class($class) if length($class);
 
-        $self->root(1)    if $flags & _root_b;
+        $self->root($flags & _root_b);
         $self->_deleted(1) if $flags & _deleted_b;
 
         if ( my $tied = ( $flags & _tied_mask ) >> _tied_shift ) {
@@ -259,7 +260,7 @@ sub STORABLE_thaw {
 
     if ( $refs ) {
         my ( $data, $backend_data, $meta ) = @$refs;
-        $self->_data($data) if ref $data;
+        $self->_data($data) if defined $data;
         $self->backend_data($backend_data) if ref $backend_data;
         $self->_class_meta($meta) if ref $meta;
     }
