@@ -14,18 +14,18 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 9305ced1deac4a535fb8d4302366befc692ccf7e Changes
+SHA1 31ed6e287e4cbea7770a7325d0d8a070c2f3e966 Changes
 SHA1 2160acf7fd0efb78477575b28f9f198edb0c7bb2 MANIFEST
 SHA1 190e9058eb9c6446a1a3f3ddf15b082f1ecde152 MANIFEST.SKIP
-SHA1 981e5dd02867ba1b8434d6e9cddb0776f2842b26 META.yml
-SHA1 79e8f136395d71e462a74c8162e8523fed2ff48e Makefile.PL
+SHA1 5bd66d06e9b80f1d1580501f945f22aebbc3dfd1 META.yml
+SHA1 d86587ee5f03239f5d3d45a102ad81b0bfd8acf3 Makefile.PL
 SHA1 4d7f544a4a0526684bbdbbe8948bd2e474fa0ecb README.mkdn
 SHA1 9729e474dbeda1f7069d9bba3ed15ad5ea9f07da TODO
 SHA1 676fe6cea04dd3fe467d339a4b68a7d3a939ba29 bench/shootout.pl
 SHA1 b617e178b94ee62a476f7722bcc06a8a27b50b8c bench/size.pl
 SHA1 839e06129b9fa801212fb298365ce84e92b762f1 bench/small.pl
 SHA1 2623cebc5fef1140e5bad4345f225fd6596dce10 bin/kioku
-SHA1 173d5a781165ee8c0e7bf9eda03a165d264970d6 lib/KiokuDB.pm
+SHA1 d653265d9787ecbdd54a235d049da444b3a1b8bf lib/KiokuDB.pm
 SHA1 eea75b59a26cbd646d6729fdc02ce033dce6c9a7 lib/KiokuDB/Backend.pm
 SHA1 4fe6dfcc4d8b1c1eddcf206729818c35dc4f26ae lib/KiokuDB/Backend/Hash.pm
 SHA1 26fbacd2dd12f060a15e4e95b8baf3b569581873 lib/KiokuDB/Backend/Role/BinarySafe.pm
@@ -185,7 +185,7 @@ SHA1 bdd1d89ed9f804c81fe06075fde3cb3729a686bc t/uuid.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.7 (Darwin)
 
-iD8DBQFJa+/FVCwRwOvSdBgRAhqmAKC+U2qpUgC6bsZLb5wDhHxATO8mHACgwqee
-/i/y4eAgra+Hpz92s2ej11w=
-=N9Do
+iD8DBQFJbVHgVCwRwOvSdBgRAuzwAKC4rqkX6ouJQCA1uoloPpS7bKwdIQCghZUQ
+jS/z7TQ+NFygA2bcOxz7/KU=
+=RzXZ
 -----END PGP SIGNATURE-----

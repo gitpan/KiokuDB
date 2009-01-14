@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               KiokuDB
-version:            0.20
+version:            0.21
 abstract:           ~
 author:  []
 license:            unknown
@@ -15,6 +15,7 @@ requires:
     Data::Visitor:        0.20
     Hash::Util::FieldHash::Compat:  0
     IO:                   1.2301
+    JSON:                 2.12
     JSON::XS:             2.231
     Module::Pluggable::Object:  0
     Moose:                0.63
