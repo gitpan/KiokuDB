@@ -7,6 +7,7 @@ lib/KiokuDB.pm
 lib/KiokuDB/Backend.pm
 lib/KiokuDB/Backend/Hash.pm
 lib/KiokuDB/Backend/Role/BinarySafe.pm
+lib/KiokuDB/Backend/Role/Broken.pm
 lib/KiokuDB/Backend/Role/Clear.pm
 lib/KiokuDB/Backend/Role/Prefetch.pm
 lib/KiokuDB/Backend/Role/Query.pm
@@ -15,6 +16,7 @@ lib/KiokuDB/Backend/Role/Query/Simple.pm
 lib/KiokuDB/Backend/Role/Query/Simple/Linear.pm
 lib/KiokuDB/Backend/Role/Scan.pm
 lib/KiokuDB/Backend/Role/TXN.pm
+lib/KiokuDB/Backend/Role/TXN/Memory.pm
 lib/KiokuDB/Backend/Role/TXN/Nested.pm
 lib/KiokuDB/Backend/Role/UnicodeSafe.pm
 lib/KiokuDB/Backend/Serialize.pm

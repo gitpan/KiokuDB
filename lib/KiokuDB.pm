@@ -3,7 +3,7 @@
 package KiokuDB;
 use Moose;
 
-our $VERSION = "0.21";
+our $VERSION = "0.22";
 
 use constant SERIAL_IDS => not not our $SERIAL_IDS;
 
@@ -203,9 +203,49 @@ sub _build_linker {
 sub exists {
     my ( $self, @ids ) = @_;
 
-    my @res = $self->backend->exists(@ids);
+    if ( @ids == 1 ) {
+        my $id = $ids[0];
 
-    return @ids == 1 ? $res[0] : @res;
+        if ( my $entry = $self->live_objects->id_to_entry($ids[0]) ) {
+            return not $entry->deleted;
+        }
+
+        if ( my $entry = ($self->backend->exists($id))[0] ) { # backend returns a list
+            if ( ref $entry ) {
+                $self->live_objects->insert_entries($entry);
+            }
+
+            return 1;
+        } else {
+            return '';
+        }
+    } else {
+        my ( %entries, %exists );
+
+        @entries{@ids} = $self->live_objects->ids_to_entries(@ids);
+
+        my @missing;
+
+        foreach my $id ( @ids ) {
+            if ( ref ( my $entry = $entries{$id} ) ) {
+                $exists{$id} = not $entry->deleted;
+            } else {
+                push @missing, $id;
+            }
+        }
+
+        if ( @missing ) {
+            my @values = $self->backend->exists(@missing);
+
+            if ( my @entries = grep { ref } @values ) {
+                $self->live_objects->insert_entries(@entries);
+            }
+
+            @exists{@missing} = map { ref($_) ? 1 : $_ } @values;
+        }
+
+        return @ids == 1 ? $exists{$ids[0]} : @exists{@ids};
+    }
 }
 
 sub lookup {
@@ -282,13 +322,13 @@ sub backend_search {
 sub root_set {
     my ( $self ) = @_;
 
-    $self->_load_entry_stream( $self->backend->root_entries );
+    $self->_load_entry_stream( $self->backend->root_entries( live_objects => $self->live_objects ) );
 }
 
 sub all_objects {
     my ( $self ) = @_;
 
-    $self->_load_entry_stream( $self->backend->all_entries );
+    $self->_load_entry_stream( $self->backend->all_entries( live_objects => $self->live_objects ) );
 }
 
 sub grep {
@@ -475,7 +515,9 @@ sub delete {
     #push @entries, $l->ids_to_entries(@ids) if @ids;
     my @ids_or_entries = ( @entries, @ids );
 
-    $self->backend->delete(@ids_or_entries);
+    if ( my @new_entries = grep { ref } $self->backend->delete(@ids_or_entries) ) {
+        push @entries, @new_entries;
+    }
 
     $l->update_entries(@entries);
 }
@@ -508,6 +550,10 @@ __END__
 =head1 NAME
 
 KiokuDB - Object Graph storage engine
+
+=head1 TUTORIAL
+
+If you're new to L<KiokuDB> check out L<KiokuDB::Tutorial>.
 
 =head1 SYNOPSIS
 
@@ -558,8 +604,8 @@ Its purpose is to provide persistence for "regular" objects with as little
 effort as possible, without sacrificing control over how persistence is
 actually done, especially for harder to serialize objects.
 
-L<KiokuDB> is also non-invasive: it does not use ties, `AUTOLOAD`, proxy objects,
-C<sv_magic> or any other type of trickery.
+L<KiokuDB> is also non-invasive: it does not use ties, C<AUTOLOAD>, proxy
+objects, C<sv_magic> or any other type of trickery.
 
 Many features important for proper Perl space semantics are supported,
 including shared data, circular structures, weak references, tied structures,
@@ -594,6 +640,12 @@ and use a schema, which makes them fairly predictable.
 When using transparent systems like L<KiokuDB> or L<Pixie> it is more important
 to understand what's going on behind the scenes in order to avoid surprises and
 limitations.
+
+An architectural overview is available on the website:
+L<http://www.iinteractive.com/kiokudb/arch.html>
+
+The process is explained here and in the various component documentation in
+more detail.
 
 =head2 Collapsing
 

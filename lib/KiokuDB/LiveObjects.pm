@@ -35,6 +35,11 @@ has _ids => (
     #},
 );
 
+sub id_to_object {
+    my ( $self, $id ) = @_;
+    $self->_ids->{$id};
+}
+
 sub ids_to_objects {
     my ( $self, @ids ) = @_;
     @{ $self->_ids }{@ids};
@@ -67,6 +72,11 @@ has _entry_ids => (
     #    values => "live_entries",
     #},
 );
+
+sub id_to_entry {
+    my ( $self, $id ) = @_;
+    $self->_entry_ids->{$id};
+}
 
 sub ids_to_entries {
     my ( $self, @ids ) = @_;
@@ -127,11 +137,6 @@ sub new_txn {
     return $child;
 }
 
-sub id_to_object {
-    my ( $self, $id ) = @_;
-    scalar $self->ids_to_objects($id);
-}
-
 sub objects_to_ids {
     my ( $self, @objects ) = @_;
 
@@ -190,18 +195,15 @@ sub update_entries {
     foreach my $entry ( @entries ) {
         my $id = $entry->id;
 
-        my $obj = $i->{$id};
-
-        croak "The object doesn't exist"
-            unless defined $obj;
+        push @ret, $ei->{$id} if defined wantarray;
 
         weaken($ei->{$id} = $entry);
         $eo->{$entry} ||= Scope::Guard->new(sub { delete $ei->{$id} });
 
-        my $ent = $o->{$obj};
-
-        push @ret, $ent->{entry} if defined wantarray;
-        $ent->{entry} = $entry;
+        if ( defined(my $obj = $i->{$id}) ) {
+            my $ent = $o->{$obj};
+            $ent->{entry} = $entry;
+        }
     }
 
     if ( my $s = $self->txn_scope ) {
