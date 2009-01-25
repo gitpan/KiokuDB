@@ -52,6 +52,7 @@ lib/KiokuDB/Cmd/WithDSN/Create.pm
 lib/KiokuDB/Cmd/WithDSN/Read.pm
 lib/KiokuDB/Cmd/WithDSN/Write.pm
 lib/KiokuDB/Collapser.pm
+lib/KiokuDB/Collapser/Buffer.pm
 lib/KiokuDB/Entry.pm
 lib/KiokuDB/Entry/Skip.pm
 lib/KiokuDB/GC/Naive.pm
@@ -64,6 +65,7 @@ lib/KiokuDB/Linker.pm
 lib/KiokuDB/LiveObjects.pm
 lib/KiokuDB/LiveObjects/Scope.pm
 lib/KiokuDB/LiveObjects/TXNScope.pm
+lib/KiokuDB/Meta/Attribute/DoNotSerialize.pm
 lib/KiokuDB/Meta/Attribute/Lazy.pm
 lib/KiokuDB/Meta/Instance.pm
 lib/KiokuDB/Reference.pm
@@ -130,6 +132,7 @@ lib/KiokuDB/TypeMap/Entry/StorableHook.pm
 lib/KiokuDB/TypeMap/Resolver.pm
 lib/KiokuDB/TypeMap/Shadow.pm
 lib/KiokuDB/Util.pm
+lib/Moose/Meta/Attribute/Custom/Trait/KiokuDB/DoNotSerialize.pm
 lib/Moose/Meta/Attribute/Custom/Trait/KiokuDB/Lazy.pm
 Makefile.PL
 MANIFEST			This list of files
