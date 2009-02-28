@@ -42,6 +42,19 @@ use constant HAVE_MX_OP             => eval { require MooseX::Object::Pluggable 
     use Moose::Role;
 
     sub a_role_method { "hello" }
+
+    package Some::Class;
+    use Moose;
+
+    if ( KiokuDB::Test::Fixture::TypeMap::Default::HAVE_MX_TRAITS ) {
+        with qw(MooseX::Traits);
+    }
+
+    if ( KiokuDB::Test::Fixture::TypeMap::Default::HAVE_MX_OP ) {
+        with qw(MooseX::Object::Pluggable);
+    }
+
+    has name => ( is => "rw" );
 }
 
 with qw(KiokuDB::Test::Fixture);
@@ -88,6 +101,37 @@ sub create {
                     algorithm => "SHA-1", salt_random => 20,
                     passphrase => "passphrase"
                 ),
+            },
+        ) : (),
+        HAVE_MX_TRAITS ? (
+            traits => {
+                obj => Some::Class->new_with_traits(
+                    traits => [qw(Some::Other::Role Some::Third::Role)],
+                    name => "blah",
+                    other_role_attr => "foo",
+                ),
+            },
+        ) : (),
+        HAVE_MX_OP ? (
+            op_one => do {
+                my $obj = Some::Class->new( name => "first" );
+
+                $obj->load_plugin("+Some::Other::Role");
+
+                $obj->other_role_attr("after");
+
+                $obj;
+            },
+            op_two => do {
+                my $obj = Some::Class->new( name => "second" );
+                
+                $obj->load_plugin("+Some::Other::Role");
+
+                $obj->other_role_attr("after");
+
+                $obj->load_plugin("+Some::Third::Role");
+
+                $obj;
             },
         ) : (),
         homer => $homer,
@@ -178,6 +222,38 @@ sub verify {
         isa_ok( $file, "Path::Class::File" );
 
         is( $file->basename, "foo.txt", "basename" );
+    }
+
+    if ( HAVE_MX_TRAITS ) {
+        $self->no_live_objects;
+        my $s = $self->new_scope;
+
+        my $obj = $self->lookup_ok("traits")->{obj};
+
+        does_ok( $obj, "Some::Other::Role" );
+        does_ok( $obj, "Some::Third::Role" );
+
+        is( $obj->other_role_attr, "foo", "trait attr" );
+        
+        is( $obj->name, "blah", "normal attr" );
+    }
+
+    if ( HAVE_MX_OP ) {
+        $self->no_live_objects;
+        my $s = $self->new_scope;
+
+        my $one = $self->lookup_ok("op_one");
+
+        does_ok( $one, "Some::Other::Role" );
+
+        is( $one->other_role_attr, "after", "role attr" );
+
+        my $two = $self->lookup_ok("op_two");
+
+        does_ok( $two, "Some::Other::Role" );
+        does_ok( $two, "Some::Third::Role" );
+
+        is( eval { $two->other_role_attr }, "after", "role attr" );
     }
 }
 

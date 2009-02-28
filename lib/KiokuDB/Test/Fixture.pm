@@ -115,9 +115,15 @@ sub run {
     }
 }
 
+has get_directory => (
+    isa => "CodeRef|Str",
+    is  => "ro",
+);
+
 has directory => (
     is  => "ro",
     isa => "KiokuDB",
+    lazy_build => 1,
     handles => [qw(
         lookup exists
         store
@@ -149,6 +155,12 @@ has directory => (
         objects_to_ids
     )],
 );
+
+sub _build_directory {
+    my $self = shift;
+    my $method = $self->get_directory or die "either 'directory' or 'get_directory' is required";
+    return $self->$method;
+}
 
 sub live_objects {
     shift->directory->live_objects->live_objects
@@ -183,10 +195,10 @@ sub delete_ok {
 sub lookup_ok {
     my ( $self, @ids ) = @_;
 
-    local $Test::Builder::Level = $Test::Builder::Level + 1;
-
     my @ret;
     _lives_and_ret { @ret = $self->lookup( @ids ) } "lookup " . scalar(@ids) . " objects";
+
+    local $Test::Builder::Level = $Test::Builder::Level + 1;
 
     is( scalar(grep { ref } @ret), scalar(@ids), "all lookups succeeded" );
 

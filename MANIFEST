@@ -9,6 +9,7 @@ lib/KiokuDB/Backend/Hash.pm
 lib/KiokuDB/Backend/Role/BinarySafe.pm
 lib/KiokuDB/Backend/Role/Broken.pm
 lib/KiokuDB/Backend/Role/Clear.pm
+lib/KiokuDB/Backend/Role/Concurrency/POSIX.pm
 lib/KiokuDB/Backend/Role/Prefetch.pm
 lib/KiokuDB/Backend/Role/Query.pm
 lib/KiokuDB/Backend/Role/Query/GIN.pm
@@ -69,6 +70,7 @@ lib/KiokuDB/Meta/Attribute/DoNotSerialize.pm
 lib/KiokuDB/Meta/Attribute/Lazy.pm
 lib/KiokuDB/Meta/Instance.pm
 lib/KiokuDB/Reference.pm
+lib/KiokuDB/Role/API.pm
 lib/KiokuDB/Role/ID.pm
 lib/KiokuDB/Role/ID/Content.pm
 lib/KiokuDB/Role/Immutable.pm
@@ -98,6 +100,7 @@ lib/KiokuDB/Test/Employee.pm
 lib/KiokuDB/Test/Fixture.pm
 lib/KiokuDB/Test/Fixture/Binary.pm
 lib/KiokuDB/Test/Fixture/Clear.pm
+lib/KiokuDB/Test/Fixture/Concurrency.pm
 lib/KiokuDB/Test/Fixture/GIN/Class.pm
 lib/KiokuDB/Test/Fixture/ObjectGraph.pm
 lib/KiokuDB/Test/Fixture/Overwrite.pm

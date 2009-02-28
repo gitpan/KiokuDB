@@ -3,7 +3,7 @@
 package KiokuDB;
 use Moose;
 
-our $VERSION = "0.23";
+our $VERSION = "0.24";
 
 use constant SERIAL_IDS => not not our $SERIAL_IDS;
 
@@ -20,6 +20,8 @@ use Hash::Util::FieldHash::Compat qw(idhash);
 use Carp qw(croak);
 
 use namespace::clean -except => [qw(meta SERIAL_IDS)];
+
+# with qw(KiokuDB::Role::API); # moved lower
 
 sub connect {
     my ( $class, $dsn, @args ) = @_;
@@ -148,7 +150,9 @@ has live_objects => (
         clear_live_objects => "clear",
         new_scope          => "new_scope",
         object_to_id       => "object_to_id",
-        objects_to_ids     => "objects_to_ids"
+        objects_to_ids     => "objects_to_ids",
+        id_to_object       => "id_to_object",
+        ids_to_objects     => "ids_to_objects",
     },
 );
 
@@ -199,6 +203,11 @@ sub _build_linker {
         queue => $self->linker_queue,
     );
 }
+
+
+with qw(KiokuDB::Role::API);
+
+
 
 sub exists {
     my ( $self, @ids ) = @_;
@@ -510,7 +519,15 @@ sub delete {
 }
 
 sub txn_do {
-    my ( $self, $code, %args ) = @_;
+    my ( $self, @args ) = @_;
+
+    unshift @args, 'body' if @args % 2 == 1;
+
+    my %args = @args;
+
+    my $code = delete $args{body};
+
+    my $s = $args{scope} && $self->new_scope;
 
     my $backend = $self->backend;
 
@@ -520,10 +537,15 @@ sub txn_do {
         my $rollback = $args{rollback};
         $args{rollback} = sub { $scope->rollback; $rollback && $rollback->() };
 
-        $backend->txn_do( $code, %args );
+        return $backend->txn_do( $code, %args );
     } else {
         return $code->();
     }
+}
+
+sub directory {
+    my $self = shift;
+    return $self;
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -685,6 +707,44 @@ Lastly, root set membership may also be specified explicitly by the typemap.
 A root set member must be explicitly using C<delete> or removed from the root
 set before it will be purged with any garbage collection scheme.
 
+=head1 TRANSACTIONS
+
+On supporting backends the C<txn_do> method will execute a block and commit the
+transaction at its end.
+
+Nesting of C<txn_do> blocks is always supported, though rolling back a nested
+transaction may produce different results on different backends.
+
+If the backend does not support transactions C<txn_do> simply executes the code
+block normally.
+
+=head1 CONCURRENCY
+
+Most transactional backends are also concurrent.
+
+L<KiokuDB::Backend::BDB> and L<KiokuDB::Backend::CouchDB> default to
+serializable transaction isolation and do not suffer from deadlocks, but
+serialization errors may occur, aborting the transaction (in which case the
+transaction should be tried again).
+
+L<KiokuDB::Backend::Files> provides good concurrency support but will only
+detect deadlocks on platforms which return C<EDEADLK> from C<flock).
+L<Directory::Transactional> may provide alternative mechanisms in the future.
+
+Concurrency support in L<KiokuDB::Backend::DBI> depends on the database. SQLite
+defaults to serializable transaction isolation out of the box, wheras MySQL and
+PostgreSQL default to read committed.
+
+Depending on your application read committed isolation may be sufficient, but
+due to the graph structure nature of the data repeatable reads or serializable
+level isolation is highly reccomended. Read committed isolation generally works
+well when each row in the database is more or less independent of others, and
+various constraints ensure integrity. Unfortunately this is not the case with
+the graph layout.
+
+To enable stronger isolation guarantees see
+L<KiokuDB::Backend::DBI/Transactions> for per-database pointers.
+
 =head1 ATTRIBUTES
 
 L<KiokuDB> uses a number of delegates which do the actual work.
@@ -749,12 +809,12 @@ An example DSN is:
     my $dir = KiokuDB->connect("bdb:dir=path/to/data/");
 
 The backend moniker name is extracted by splitting on the colon. The rest of
-the string is passed tp C<new_from_dsn>, which is documented in more detail in
+the string is passed to C<new_from_dsn>, which is documented in more detail in
 L<KiokuDB::Backend>.
 
 Typically DSN arguments are separated by C<;>, with C<=> separating keys and
 values. Arguments with no value are assumed to denote boolean truth (e.g.
-C<jspon:dir=foo;pretty> means c<dir => "foo", pretty => 1>).
+C<jspon:dir=foo;pretty> means C<< dir => "foo", pretty => 1 >>).
 
 Extra arguments are passed both to the backend constructor, and the C<KiokuDB>
 constructor.
@@ -833,12 +893,17 @@ C<update> must be called for the change to take effect.
 
 =item txn_do $code, %args
 
+=item txn_do %args
+
 Executes $code within the scope of a transaction.
 
 This requires that the backend supports transactions
 (L<KiokuDB::Backend::Role::TXN>).
 
 Transactions may be nested.
+
+If the C<scope> argument is true an implicit call to C<new_scope> will be made,
+keeping the scope for the duration of the transaction.
 
 =item search \%proto
 
@@ -847,7 +912,7 @@ Transactions may be nested.
 Searching requires a backend that supports querying.
 
 The C<\%proto> form is currently unspecified but in the future should provide a
-simple but consistent way of looking objects by attributes.
+simple but consistent way of looking up objects by attributes.
 
 The second form is backend specific querying, for instance
 L<Search::GIN::Query> objects passed to L<KiokuDB::Backend::BDB::GIN> or
@@ -869,6 +934,24 @@ C<$filter>.
 =item scan $callback
 
 Iterates the root set calling C<$callback> for each object.
+
+=item object_to_id
+
+=item objects_to_ids
+
+=item id_to_object
+
+=item ids_to_objects
+
+Delegates to L<KiokuDB::LiveObjects>
+
+=item directory
+
+Returns C<$self>.
+
+This is used when setting up L<KiokuDB::Role::API> delegation chains. Calling
+C<directory> on any level of delegator will always return the real L<KiokuDB>
+instance no matter how deep.
 
 =back
 
