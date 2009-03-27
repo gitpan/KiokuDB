@@ -3,7 +3,7 @@
 package KiokuDB;
 use Moose;
 
-our $VERSION = "0.24";
+our $VERSION = "0.25";
 
 use constant SERIAL_IDS => not not our $SERIAL_IDS;
 
@@ -603,11 +603,6 @@ If you're new to L<KiokuDB> check out L<KiokuDB::Tutorial>.
     # others use GIN queries (DBI supports both)
     $d->search($gin_query);
 
-=head1 ALPHA WARNING
-
-L<KiokuDB> is still in its infancy. No fundamental changes are expected, but
-nevertheless backwards compatibility is not yet guaranteed.
-
 =head1 DESCRIPTION
 
 L<KiokuDB> is a Moose based frontend to various data stores, somewhere in
@@ -728,7 +723,7 @@ serialization errors may occur, aborting the transaction (in which case the
 transaction should be tried again).
 
 L<KiokuDB::Backend::Files> provides good concurrency support but will only
-detect deadlocks on platforms which return C<EDEADLK> from C<flock).
+detect deadlocks on platforms which return C<EDEADLK> from C<flock>.
 L<Directory::Transactional> may provide alternative mechanisms in the future.
 
 Concurrency support in L<KiokuDB::Backend::DBI> depends on the database. SQLite

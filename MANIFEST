@@ -64,6 +64,7 @@ lib/KiokuDB/LinkChecker.pm
 lib/KiokuDB/LinkChecker/Results.pm
 lib/KiokuDB/Linker.pm
 lib/KiokuDB/LiveObjects.pm
+lib/KiokuDB/LiveObjects/Guard.pm
 lib/KiokuDB/LiveObjects/Scope.pm
 lib/KiokuDB/LiveObjects/TXNScope.pm
 lib/KiokuDB/Meta/Attribute/DoNotSerialize.pm
