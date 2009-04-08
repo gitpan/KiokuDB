@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               KiokuDB
-version:            0.25
+version:            0.26
 abstract:           ~
 author:  []
 license:            unknown
@@ -9,7 +9,7 @@ configure_requires:
     ExtUtils::MakeMaker:  0
 requires:
     App::Cmd:             0.202
-    Class::MOP:           0.73
+    Class::MOP:           0.81
     Data::Stream::Bulk:   0.03
     Data::UUID::LibUUID:  0
     Data::Visitor:        0.20
@@ -18,7 +18,7 @@ requires:
     JSON:                 2.12
     JSON::XS:             2.231
     Module::Pluggable::Object:  0
-    Moose:                0.7
+    Moose:                0.74
     MooseX::App::Cmd:     0
     MooseX::Getopt:       0
     MooseX::Role::Parameterized:  0.02
