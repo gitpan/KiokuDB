@@ -74,6 +74,7 @@ lib/KiokuDB/Reference.pm
 lib/KiokuDB/Role/API.pm
 lib/KiokuDB/Role/ID.pm
 lib/KiokuDB/Role/ID/Content.pm
+lib/KiokuDB/Role/ID/Digest.pm
 lib/KiokuDB/Role/Immutable.pm
 lib/KiokuDB/Role/Intrinsic.pm
 lib/KiokuDB/Role/Scan.pm
@@ -82,6 +83,7 @@ lib/KiokuDB/Role/UUIDs.pm
 lib/KiokuDB/Role/UUIDs/DataUUID.pm
 lib/KiokuDB/Role/UUIDs/LibUUID.pm
 lib/KiokuDB/Role/UUIDs/SerialIDs.pm
+lib/KiokuDB/Role/WithDigest.pm
 lib/KiokuDB/Serializer.pm
 lib/KiokuDB/Serializer/JSON.pm
 lib/KiokuDB/Serializer/Memory.pm

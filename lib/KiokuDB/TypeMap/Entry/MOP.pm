@@ -127,7 +127,8 @@ sub compile_collapser {
             my $object = $args{object};
 
             if ( $immutable ) {
-                if ( my $prev = $self->live_objects->object_to_entry($object) ){
+                # FIXME this doesn't handle unset_root
+                if ( my $prev = $self->live_objects->object_to_entry($object) ) {
                     return $self->make_skip_entry( %args, prev => $prev );
                 } elsif ( $content_id ) {
                     if ( ($self->backend->exists($args{id}))[0] ) { # exists works in list context
@@ -145,7 +146,7 @@ sub compile_collapser {
                         my $value = $meta_instance->Class::MOP::Instance::get_slot_value($object, $name); # FIXME fix KiokuDB::Meta::Instance to allow fetching thunk
 
                         if ( ref $value eq 'KiokuDB::Thunk' ) {
-                            $collapsed{$name} = KiokuDB::Reference->new( id => $value->id );
+                            $collapsed{$name} = $value->collapsed;
                             next attr;
                         }
                     }
@@ -219,8 +220,8 @@ sub compile_expander {
             my $value = $data->{$name};
 
             if ( ref $value ) {
-                if ( $lazy{$name} and ref($value) eq 'KiokuDB::Reference' ) {
-                    my $thunk = KiokuDB::Thunk->new( id => $value->id, linker => $linker, attr => $attr );
+                if ( $lazy{$name} and ref($value) ) {
+                    my $thunk = KiokuDB::Thunk->new( collapsed => $value, linker => $linker, attr => $attr );
                     $meta_instance->set_slot_value($instance, $attr->name, $thunk); # FIXME low level variant of $attr->set_value
                 } else {
                     my @pair = ( $attr, undef );
