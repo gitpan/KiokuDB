@@ -4,10 +4,17 @@ package KiokuDB::Test::Fixture::Small;
 use Moose;
 
 use Test::More;
+use Test::Exception;
+
+use Scalar::Util qw(refaddr);
 
 use KiokuDB::Test::Person;
 use KiokuDB::Test::Employee;
 use KiokuDB::Test::Company;
+
+sub p;
+
+use namespace::clean -except => 'meta';
 
 sub p {
     my @args = @_;
@@ -15,7 +22,7 @@ sub p {
     KiokuDB::Test::Person->new(@args);
 }
 
-with qw(KiokuDB::Test::Fixture);
+with qw(KiokuDB::Test::Fixture) => { excludes => [qw/populate sort/] };
 
 sub sort { -100 }
 
@@ -79,6 +86,12 @@ sub verify {
 
         isa_ok( $oscar, "KiokuDB::Test::Person" );
 
+        my $entry = $self->directory->live_objects->object_to_entry($joe);
+
+        ok( $entry->has_object, "entry is associated with object" );
+
+        is( refaddr($entry->object), refaddr($joe), "the right object" );
+
         is( $joe->name, "joe", "name" );
 
         ok( my $parents = $joe->parents, "parents" );
@@ -96,6 +109,8 @@ sub verify {
         isa_ok( $company, "KiokuDB::Test::Company" );
 
         is( $oscar->name, "oscar", "name" );
+
+        lives_ok { $self->directory->lookup("no_such_id") } "lookup of nonexistent ID is nonfatal";
     });
 }
 __PACKAGE__

@@ -9,13 +9,13 @@ use Carp qw(croak);
 
 use namespace::clean -except => 'meta';
 
-with qw(
-    KiokuDB::Backend::Serialize::Delegate
-    KiokuDB::Backend
-    KiokuDB::Backend::Role::Query::Simple::Linear
-    KiokuDB::Backend::Role::Scan
-    KiokuDB::Backend::Role::Clear
-    KiokuDB::Backend::Role::TXN::Memory
+with (
+    'KiokuDB::Backend::Serialize::Delegate',
+    'KiokuDB::Backend',
+    'KiokuDB::Backend::Role::Query::Simple::Linear',
+    'KiokuDB::Backend::Role::Scan' => { excludes => 'all_entry_ids' },
+    'KiokuDB::Backend::Role::Clear',
+    'KiokuDB::Backend::Role::TXN::Memory',
 );
 
 has storage => (
@@ -29,7 +29,7 @@ sub clear {
     %{ $self->storage } = ();
 }
 
-sub get {
+sub get_from_storage {
     my ( $self, @uids ) = @_;
 
     my $s = $self->storage;

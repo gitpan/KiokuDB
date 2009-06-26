@@ -43,6 +43,18 @@ You can also use DSN strings to connect to the various backends:
 
     KiokuDB->connect("bdb:dir=foo", create => 1);
 
+Or use a configuration file
+
+    KiokuDB->connect("/path/to/my_db.yml");
+    KiokuDB->connect("/path/to/dir");
+
+With a configuration file like this:
+
+    backend:
+      class: KiokuDB::Backend::DBI
+      dsn: dbi:SQLite:dbname=/tmp/test.db
+      create: 1
+
 =head1 USING THE DBI BACKEND
 
 During this tutorial we will be using the DBI backend for two reasons. The
@@ -229,7 +241,7 @@ Now that we have both objects in the database, lets link them together:
 Now we have created a persistent B<object graph>, that is several objects which
 point to each other.
 
-The reason C<spouse> was had the C<weak_ref> option was so that this circular
+The reason C<spouse> had the C<weak_ref> option was so that this circular
 structure will not leak.
 
 When then objects are updated in the database L<KiokuDB> sees that their
@@ -413,7 +425,7 @@ When the collapser encounters an object it will ask
 L<KiokuDB::TypeMap::Resolver> for a collapsing routine based on the class of
 the object.
 
-This lookup is typically performed by C<ref $object>, not using inheritence,
+This lookup is typically performed by C<ref $object>, not using inheritance,
 because a typemap entry that is safe to use with a superclass isn't necessarily
 safe to use with a subclass. If you B<do> want inherited entries, specify
 C<isa_entries>:
@@ -667,7 +679,7 @@ write performance as well.
 
 =head1 QUERIES
 
-L<KiokuDB:Backend::BDB::GIN> is a subclass of L<KiokuDB::Backend::BDB> that
+L<KiokuDB::Backend::BDB::GIN> is a subclass of L<KiokuDB::Backend::BDB> that
 provides L<Search::GIN> integration.
 
 L<Search::GIN> is a framework to index and query objects, inspired by Postgres'
@@ -701,7 +713,7 @@ indexing of our objects:
 
 To look up the objects, we use the a manual key lookup query:
 
-    my $query = Search::GIN::Query::Maual->new(
+    my $query = Search::GIN::Query::Manual->new(
         values => {
             type => "person",
         },

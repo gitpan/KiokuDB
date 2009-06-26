@@ -19,6 +19,7 @@ use constant required_backend_roles => qw(TypeMap::Default);
 
 use Tie::RefHash;
 use constant HAVE_DATETIME          => eval { require DateTime };
+use constant HAVE_DATETIME_FMT      => eval { require DateTime::Format::Strptime };
 use constant HAVE_URI               => eval { require URI };
 use constant HAVE_URI_WITH_BASE     => eval { require URI::WithBase };
 use constant HAVE_AUTHEN_PASSPHRASE => eval { require Authen::Passphrase::SaltedDigest };
@@ -57,7 +58,7 @@ use constant HAVE_MX_OP             => eval { require MooseX::Object::Pluggable 
     has name => ( is => "rw" );
 }
 
-with qw(KiokuDB::Test::Fixture);
+with qw(KiokuDB::Test::Fixture) => { excludes => 'required_backend_roles' };
 
 sub create {
     tie my %refhash, 'Tie::RefHash';
@@ -81,10 +82,17 @@ sub create {
 
     $homer->role_attr("foo");
 
+    my $foo = "blah";
+
+    my @x = ( 1 );
+
     return (
+        scalar  => \$foo,
         refhash => \%refhash,
+        coderef => sub { $x[0]++; },
         HAVE_IXHASH            ? ( ixhash => \%ixhash                                           ) : (),
         HAVE_DATETIME          ? ( datetime   => { obj => DateTime->now }                       ) : (),
+        HAVE_DATETIME_FMT      ? ( datetime_fmt   => { obj => DateTime->now(formatter => DateTime::Format::Strptime->new( pattern => '%F' ) ) }                       ) : (),
         HAVE_PATH_CLASS        ? ( path_class => { obj => Path::Class::file('bar', 'foo.txt') } ) : (),
         HAVE_URI               ? ( uri        => { obj => URI->new('http://www.google.com/') }  ) : (),
         HAVE_URI_WITH_BASE     ? (
@@ -144,6 +152,18 @@ sub verify {
     {
         my $s = $self->new_scope;
 
+        my $scalar = $self->lookup_ok("scalar");
+
+        is( ref($scalar), "SCALAR", "reftype for scalar" );
+
+        is( $$scalar, "blah", "value" );
+    }
+
+    $self->no_live_objects;
+
+    {
+        my $s = $self->new_scope;
+
         my $rh = $self->lookup_ok("refhash");
 
         is( ref($rh), "HASH", "plain hash" );
@@ -151,6 +171,46 @@ sub verify {
 
         is_deeply( [ sort { ref($a) ? -1 : ( ref($b) ? 1 : ( $a cmp $b ) ) } keys %$rh ], [ ["foo"], "blah" ], "keys" );
 
+    }
+
+    $self->no_live_objects;
+
+    {
+        my $s = $self->new_scope;
+
+        my $c = $self->lookup_ok("coderef");
+
+        is( ref($c), "CODE", "coderef" );
+
+        is( $c->(), 1, "invoke closure" );
+        is( $c->(), 2, "invoke closure" );
+    }
+
+    $self->no_live_objects;
+
+    {
+        my $s = $self->new_scope;
+
+        my $c = $self->lookup_ok("coderef");
+
+        is( ref($c), "CODE", "coderef" );
+
+        is( $c->(), 1, "invoke closure" );
+        is( $c->(), 2, "invoke closure" );
+
+        $self->store_ok($c);
+    }
+
+    $self->no_live_objects;
+
+    {
+        my $s = $self->new_scope;
+
+        my $c = $self->lookup_ok("coderef");
+
+        is( ref($c), "CODE", "coderef" );
+
+        is( $c->(), 3, "closure updated" );
     }
 
     $self->no_live_objects;
@@ -190,6 +250,26 @@ sub verify {
 
         isa_ok( $date, "DateTime" );
     }
+    
+    if ( HAVE_DATETIME_FMT ) {
+        $self->no_live_objects;
+        my $s = $self->new_scope;
+
+        my $date = $self->lookup_ok("datetime_fmt")->{obj};
+
+        isa_ok( $date, "DateTime" );
+        
+        SKIP: {
+            skip "Not possible with JSON atm", 1 if (
+                $self->directory->backend->can("serializer")
+                and $self->directory->backend->serializer->isa('KiokuDB::Serializer::JSON')
+            );
+            
+            isa_ok( $date->formatter, "DateTime::Format::Strptime" );
+        }
+        
+    }
+    
 
     if ( HAVE_URI ) {
         $self->no_live_objects;

@@ -14,9 +14,8 @@ WriteMakefile(
     PL_FILES     => { },
     EXE_FILES    => [ grep { /\w$/ } glob("bin/*") ],
     PREREQ_PM    => {
-        'Moose' => 0.74,
-        'MooseX::Role::Parameterized' => 0.02,
-        'Class::MOP' => 0.81,
+        'Moose' => 0.83,
+        'MooseX::Role::Parameterized' => 0.10,
         #'MooseX::AttributeHelpers' => '0.14',
         'MooseX::Clone' => 0.04,
         'MooseX::Types::Path::Class' => 0,
@@ -75,5 +74,8 @@ WriteMakefile(
 
         # used in command line tools
         'Proc::InvokeEditor' => 1,
+
+        # closure serializing support
+        'PadWalker' => 1.9
     },
 );

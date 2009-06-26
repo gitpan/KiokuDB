@@ -3,34 +3,20 @@
 package KiokuDB::TypeMap::Entry::Std;
 use Moose::Role;
 
+use KiokuDB::TypeMap::Entry::Compiled;
+
 no warnings 'recursion';
 
 use namespace::clean -except => 'meta';
 
 with qw(
     KiokuDB::TypeMap::Entry
-    KiokuDB::Role::UUIDs
+    KiokuDB::TypeMap::Entry::Std::ID
+    KiokuDB::TypeMap::Entry::Std::Compile
+    KiokuDB::TypeMap::Entry::Std::Intrinsic
+    KiokuDB::TypeMap::Entry::Std::Expand
 );
 
-requires "compile_mappings";
-
-has intrinsic => (
-    isa => "Bool",
-    is  => "ro",
-    default => 0,
-);
-
-sub compile {
-    my ( $self, @args ) = @_;
-
-    my ( $collapse_map, $expand_map, $id_map ) = $self->compile_mappings(@args);
-
-    my $collapse = $self->intrinsic
-        ? sub { shift->collapse_intrinsic( $collapse_map, @_ ) }
-        : sub { shift->collapse_first_class( $collapse_map, @_ ) };
-
-    return ( $collapse, $expand_map, $id_map || "generate_uuid" );
-}
 
 __PACKAGE__
 

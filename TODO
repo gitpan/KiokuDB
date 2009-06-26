@@ -53,7 +53,19 @@
       nonblocking api role for most backends (see event based api below)
     * see also RPC server below
 
+* Cache::Bounded for immutable objects
+    * simple hack to keep them live longer than normal
+
+* simple profiling hooks
+    * under some debug mode collect timing info for linker & collapser
+    * display this info in Catalyst::Model::KiokuDB's debug output
+
 === Medium ===
+
+* root set membership delegated to typemap
+    * will allow Root and NonRoot roles in MOP typemap entry
+    * top level values for ->store and ->insert still set default
+    * ->set_root always authoritative
 
 * Schema versioning
     * store version in entries
@@ -145,6 +157,31 @@
       still can't write those queries)
     * sharding thsould be implemented as a base role that backends can
       implement
+
+* CodeRefs serialization
+    * PadWalker support for Data::Visitor
+    * look into Lexical::Persistence
+
+* Attribute meta traits
+    * each of these is relatively small and self contained
+    * lazy build attributes (for cached values)
+        * build on store
+        * keep when storing but dont build on store
+            * make sure update() on immutable objects works for this, too
+        * do not serialize
+    * ID attribute
+        * don't store ID twice, once as a field and once in the entry (skip the
+          field)
+        * better than KiokuDB::Role::ID
+    * Digest Part
+        * resistent to subclassing/role composition
+            * however, order must be stable, sort get_all_attributes
+                * order by sort index is provided
+                * rest of attributes sorted:
+                    * required attributes before non required ones
+                    * sub sort by name
+                * required attributes first, ordered by sort index or name if no sort index is provided
+    * Build on store meta trait
 
 === Large ===
 
