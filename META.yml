@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               KiokuDB
-version:            0.28
+version:            0.29
 abstract:           ~
 author:  []
 license:            unknown
@@ -9,9 +9,10 @@ configure_requires:
     ExtUtils::MakeMaker:  0
 requires:
     App::Cmd:             0.202
-    Data::Stream::Bulk:   0.03
+    Data::Stream::Bulk:   0.05
     Data::UUID::LibUUID:  0
     Data::Visitor:        0.24
+    Digest::SHA:          0
     Hash::Util::FieldHash::Compat:  0
     IO:                   1.23
     JSON:                 2.12
