@@ -14,18 +14,18 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 2f648a2097c6a9c21ce8ebc67930b5e078b5488c Changes
-SHA1 53c4a442c032d1410cdd247e2e19ab6e7c68b114 MANIFEST
+SHA1 4e46c75598b0a351d35dcf39e9957e245083c04b Changes
+SHA1 97be133b4d070e0ea6409299981430fc39205393 MANIFEST
 SHA1 190e9058eb9c6446a1a3f3ddf15b082f1ecde152 MANIFEST.SKIP
-SHA1 7ff0ea1065a3df7db4e3f6cd96c4a98a40b7e61c META.yml
-SHA1 12e923728922a5bef3d1fcc84faffafdade3fa1c Makefile.PL
+SHA1 2d86e0c16c791f32c11c1c3700358ba9d3d43333 META.yml
+SHA1 5c01982f5e88d721202f47d3a3f3c5b327bd6700 Makefile.PL
 SHA1 b237f02f33d9d2791a1e900f81fd0ed01b431a79 README.mkdn
-SHA1 1b6415622ae85221da8e995ce954f0d96ac58efe TODO
+SHA1 7bb0092e2b28fe65d20cf79f68751741e395a243 TODO
 SHA1 676fe6cea04dd3fe467d339a4b68a7d3a939ba29 bench/shootout.pl
 SHA1 7422735d7f9e510d85f6d398c30f4592ecf3a13c bench/size.pl
 SHA1 839e06129b9fa801212fb298365ce84e92b762f1 bench/small.pl
-SHA1 2623cebc5fef1140e5bad4345f225fd6596dce10 bin/kioku
-SHA1 222e536dd3d0d64bf470fed46483d80637f7d082 lib/KiokuDB.pm
+SHA1 1ab64f353b0b108adab6b040b6b8c054ba7045ea bin/kioku
+SHA1 f773b5fbd560ce7115d9184e7de976d0deacdb35 lib/KiokuDB.pm
 SHA1 eea75b59a26cbd646d6729fdc02ce033dce6c9a7 lib/KiokuDB/Backend.pm
 SHA1 6698ff909659dc9ad03ce1741c36fa42927dec38 lib/KiokuDB/Backend/Hash.pm
 SHA1 26fbacd2dd12f060a15e4e95b8baf3b569581873 lib/KiokuDB/Backend/Role/BinarySafe.pm
@@ -57,23 +57,7 @@ SHA1 4dc9c694e5dfc58780f1005dfc955e30cf424c29 lib/KiokuDB/Backend/TypeMap/Defaul
 SHA1 b0199b1e78813feec4847c0c2ceb8ed6d34bfb05 lib/KiokuDB/Backend/TypeMap/Default/JSON.pm
 SHA1 d41a7ab62de3d46575d59cfc2f05271ea30bf444 lib/KiokuDB/Backend/TypeMap/Default/Storable.pm
 SHA1 e3a8da6bb25bb2168a3e139617c059e6dc63d2bc lib/KiokuDB/Class.pm
-SHA1 c696ba113ee8310e55e1c6dcfe601d9cbc9a786a lib/KiokuDB/Cmd.pm
-SHA1 c2b8d2dd6edfc090994d32c2b41bbc407fc31208 lib/KiokuDB/Cmd/Base.pm
-SHA1 1e844fdee41beedf77b41a4d2003a230788602f4 lib/KiokuDB/Cmd/Command/Dump.pm
-SHA1 570583bb78f94a320a173210088f4dea6a816fc2 lib/KiokuDB/Cmd/Command/Edit.pm
-SHA1 e87a44690e89e0408a3d92120b442710587759ce lib/KiokuDB/Cmd/Command/FSCK.pm
-SHA1 d1d41fb721fca531b4faf15fc91947b7279fa660 lib/KiokuDB/Cmd/Command/GC.pm
-SHA1 4fc03c4a9c502f07d702a654729dcd06f00692ea lib/KiokuDB/Cmd/Command/Load.pm
-SHA1 441202768ae62b59002e3ffe8b07e19e07c95304 lib/KiokuDB/Cmd/DumpFormatter.pm
-SHA1 0c746e5bd47eedcd10ae4738ed0a540dbe934a8f lib/KiokuDB/Cmd/InputHandle.pm
-SHA1 71fb2d0cddd099081b5d9513dc9b106d331e3ed4 lib/KiokuDB/Cmd/OutputHandle.pm
-SHA1 217f0a6e8c4076730a5f06ce69a2035d496d35e0 lib/KiokuDB/Cmd/SpecifiedEntries.pm
-SHA1 1464142db5b39818a68ba4afafeccb340eefef5c lib/KiokuDB/Cmd/TXN.pm
 SHA1 8fd3aa61fa6f2e33dc0693e7fafe9485942cc7c3 lib/KiokuDB/Cmd/Verbosity.pm
-SHA1 a16785428d29074624e3078185bb7a97a2b34500 lib/KiokuDB/Cmd/WithDSN.pm
-SHA1 943033b792d17e89862ca67185d4c6643afb5e51 lib/KiokuDB/Cmd/WithDSN/Create.pm
-SHA1 fd1d9d0928dc63da6d3bd606f3006ad4ee1c02de lib/KiokuDB/Cmd/WithDSN/Read.pm
-SHA1 7af19adbbeafa992554f0d0808218ab9bab3ba06 lib/KiokuDB/Cmd/WithDSN/Write.pm
 SHA1 89cbd249b74ad37ea89a0d3e4f69a96762d5696f lib/KiokuDB/Collapser.pm
 SHA1 dee297aaa4ab6cd43cfb65d521105925fd8015df lib/KiokuDB/Collapser/Buffer.pm
 SHA1 39a9f8de633ba79189250fed51d793d11370c678 lib/KiokuDB/Entry.pm
@@ -178,7 +162,6 @@ SHA1 77419c7ece25b4cdd32620b5a00c18d95d1d35f9 t/coderefs.t
 SHA1 12e94db9f99375ee9c1f3d84868329b04fab7ca4 t/collapser.t
 SHA1 76302b548e6a0f879ff42a0609345c9a41e2c940 t/digest.t
 SHA1 655d4e868ec9e708c485b423420615ee73c80c51 t/directory.t
-SHA1 ccb04e03aa1d6bde0cd668de3573ce813507fce6 t/dump.t
 SHA1 4925cb90cd74ba951f78e0fab7f8541c2d11930f t/entry.t
 SHA1 89532f25f97d9ce862bd43de41aaab8560872f3e t/gc_naive.t
 SHA1 8e031872ed1200e8a667c58db2f0b2bd08cf1a2d t/gin.t
@@ -209,7 +192,7 @@ SHA1 bdd1d89ed9f804c81fe06075fde3cb3729a686bc t/uuid.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.7 (Darwin)
 
-iD8DBQFKRWEMVCwRwOvSdBgRAi1xAJ9QYL8OjU8pyJP45OfXJ2HafMhplgCgpaaZ
-4EcySX93+70ZPXZi2MK5uJk=
-=DPfN
+iD8DBQFKUK6LVCwRwOvSdBgRAk++AJ4y1wXtltt9pLA8ppDeXgwLc3a69wCdFHCM
+kjaMARTV/QGIxVV8U9pd2Oc=
+=JvoD
 -----END PGP SIGNATURE-----

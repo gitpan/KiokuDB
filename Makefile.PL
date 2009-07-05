@@ -6,6 +6,22 @@ use ExtUtils::MakeMaker;
 
 require 5.008; # utf8 and what not
 
+
+my @cmd_dep;
+if ( eval { require KiokuDB::Cmd; 1 } ) {
+    open my $fh, "<", "lib/KiokuDB.pm" or die $!;
+    while ( <$fh> ) {
+        if ( /REQUIRED_CMD_VERSION\s*=/ ) {
+            eval $_;
+            last;
+        }
+    }
+
+    unless ( eval { KiokuDB::Cmd->VERSION($::REQUIRED_CMD_VERSION); 1 } ) {
+        warn "Note: Adding KiokuDB::Cmd $::REQUIRED_CMD_VERSION to dependencies because a previous version is installed.\n\n";
+        push @cmd_dep, "KiokuDB::Cmd" => $::REQUIRED_CMD_VERSION;
+    }
+}
 WriteMakefile(
     NAME         => 'KiokuDB',
     VERSION_FROM => 'lib/KiokuDB.pm',
@@ -18,13 +34,7 @@ WriteMakefile(
         'MooseX::Role::Parameterized' => 0.10,
         #'MooseX::AttributeHelpers' => '0.14',
         'MooseX::Clone' => 0.04,
-        'MooseX::Types::Path::Class' => 0,
         'Path::Class' => 0,
-
-        # Command line utilities
-        'MooseX::Getopt' => 0,
-        'App::Cmd' => 0.202,
-        'MooseX::App::Cmd' => 0,
 
         # configure
         'MooseX::YAML' => 0.02,
@@ -72,13 +82,12 @@ WriteMakefile(
 
         'IO' => 1.23,
 
-        # used in command line tools
-        'Proc::InvokeEditor' => 1,
-
         # closure serializing support
         'PadWalker' => 1.9,
 
         # Role::ID::Digest
         'Digest::SHA' => 0,
+
+        @cmd_dep,
     },
 );
