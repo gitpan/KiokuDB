@@ -35,7 +35,6 @@ lib/KiokuDB/Backend/TypeMap/Default.pm
 lib/KiokuDB/Backend/TypeMap/Default/JSON.pm
 lib/KiokuDB/Backend/TypeMap/Default/Storable.pm
 lib/KiokuDB/Class.pm
-lib/KiokuDB/Cmd/Verbosity.pm
 lib/KiokuDB/Collapser.pm
 lib/KiokuDB/Collapser/Buffer.pm
 lib/KiokuDB/Entry.pm
@@ -67,6 +66,7 @@ lib/KiokuDB/Role/UUIDs.pm
 lib/KiokuDB/Role/UUIDs/DataUUID.pm
 lib/KiokuDB/Role/UUIDs/LibUUID.pm
 lib/KiokuDB/Role/UUIDs/SerialIDs.pm
+lib/KiokuDB/Role/Verbosity.pm
 lib/KiokuDB/Role/WithDigest.pm
 lib/KiokuDB/Serializer.pm
 lib/KiokuDB/Serializer/JSON.pm
