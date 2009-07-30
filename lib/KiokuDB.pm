@@ -3,7 +3,7 @@
 package KiokuDB;
 use Moose;
 
-our $VERSION = "0.31";
+our $VERSION = "0.32";
 
 use constant SERIAL_IDS => not not our $SERIAL_IDS;
 
@@ -22,6 +22,8 @@ use Carp qw(croak);
 use namespace::clean -except => [qw(meta SERIAL_IDS)];
 
 # with qw(KiokuDB::Role::API); # moved lower
+
+no warnings 'recursion';
 
 our $REQUIRED_CMD_VERSION = "0.02";
 sub cmd_is_up_to_date {
@@ -868,7 +870,8 @@ It is an error to update an object not in the database.
 
 =item deep_update @objects
 
-Update @objects and all of the objects they reference.
+Update @objects and all of the objects they reference. All references
+objects must already be in the database.
 
 =item insert @objects
 
