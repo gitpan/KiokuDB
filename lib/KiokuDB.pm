@@ -3,7 +3,7 @@
 package KiokuDB;
 use Moose;
 
-our $VERSION = "0.32";
+our $VERSION = "0.33";
 
 use constant SERIAL_IDS => not not our $SERIAL_IDS;
 
@@ -18,6 +18,7 @@ use KiokuDB::Stream::Objects;
 
 use Hash::Util::FieldHash::Compat qw(idhash);
 use Carp qw(croak);
+use Try::Tiny;
 
 use namespace::clean -except => [qw(meta SERIAL_IDS)];
 
@@ -28,7 +29,7 @@ no warnings 'recursion';
 our $REQUIRED_CMD_VERSION = "0.02";
 sub cmd_is_up_to_date {
     require KiokuDB::Cmd;
-    eval { KiokuDB::Cmd->VERSION($REQUIRED_CMD_VERSION); 1 };
+    try { KiokuDB::Cmd->VERSION($REQUIRED_CMD_VERSION); 1 };
 }
 
 
@@ -271,27 +272,19 @@ sub lookup {
 
     my $linker = $self->linker;
 
-    my ( $e, @objects );
+    try {
+        my @objects = $linker->get_or_load_objects(@ids);
 
-    eval {
-        local $@;
-        eval { @objects = $linker->get_or_load_objects(@ids) };
-        $e = $@;
-    };
-
-    if ( $e ) {
-        if ( ref($e) and $e->{missing} ) {
-            return;
+        if ( @ids == 1 ) {
+            return $objects[0];
+        } else {
+            return @objects;
         }
+    } catch {
+        die $_ unless ref and $_->{missing};
 
-        die $e;
-    }
-
-    if ( @ids == 1 ) {
-        return $objects[0];
-    } else {
-        return @objects;
-    }
+        return;
+    };
 }
 
 sub search {
@@ -401,6 +394,25 @@ sub _register {
     }
 
     return @objs;
+}
+
+sub refresh {
+    my ( $self, @objects ) = @_;
+
+    my $l = $self->live_objects;
+
+    croak "Object not in storage"
+        if grep { not defined } $l->objects_to_entries(@objects);
+
+    $self->linker->refresh_objects(@objects);
+
+    if ( defined wantarray ) {
+        if ( @objects == 1 ) {
+           return $objects[0];
+        } else {
+           return @objects;
+        }
+    }
 }
 
 sub store {
@@ -857,10 +869,14 @@ storage.
 
 =item store @objects
 
+=item store %objects
+
 Recursively collapses C<@objects> and inserts or updates the entries.
 
 This performs a full update of every reachable object from C<@objects>,
 snapshotting everything.
+
+Strings found in the object list are assumed to be IDs for the following objects.
 
 =item update @objects
 
@@ -874,6 +890,8 @@ Update @objects and all of the objects they reference. All references
 objects must already be in the database.
 
 =item insert @objects
+
+=item insert %objects
 
 Inserts objects to the database.
 

@@ -105,6 +105,7 @@ lib/KiokuDB/Test/Fixture/Unicode.pm
 lib/KiokuDB/Test/Person.pm
 lib/KiokuDB/Thunk.pm
 lib/KiokuDB/Tutorial.pod
+lib/KiokuDB/Tutorial/JA.pod
 lib/KiokuDB/TypeMap.pm
 lib/KiokuDB/TypeMap/ClassBuilders.pm
 lib/KiokuDB/TypeMap/Composite.pm
@@ -154,6 +155,7 @@ t/lazy.t
 t/link_checker.t
 t/link_checker_real.t
 t/live_objs.t
+t/moose_triggers.t
 t/ref.t
 t/scaling.t
 t/serializer.t

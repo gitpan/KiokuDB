@@ -38,7 +38,8 @@ WriteMakefile(
     PL_FILES     => { },
     EXE_FILES    => [ grep { /\w$/ } glob("bin/*") ],
     PREREQ_PM    => {
-        'Moose' => 0.83,
+        'Moose' => 0.92,
+        'Class::MOP' => 0.94,
         'MooseX::Role::Parameterized' => 0.10,
         #'MooseX::AttributeHelpers' => '0.14',
         'MooseX::Clone' => 0.04,
@@ -48,6 +49,7 @@ WriteMakefile(
         'MooseX::YAML' => 0.02,
 
         # misc dev shit
+        'Try::Tiny' => 0,
         'Scalar::Util' => 0,
         #'Devel::PartialDump' => '0.06',
         'namespace::clean' => '0.08',
@@ -63,7 +65,7 @@ WriteMakefile(
         'Task::Weaken'  => 0,
 
         # scanning and searching
-        'Data::Stream::Bulk' => "0.05",
+        'Data::Stream::Bulk' => "0.07",
 
         # live objects
         'Hash::Util::FieldHash::Compat' => 0,
@@ -79,7 +81,7 @@ WriteMakefile(
         'Module::Pluggable::Object' => 0,
         'Test::use::ok' => 0,
         'Test::Exception' => 0,
-        'Test::More' => 0,
+        'Test::More' => 0.88,
 
         'Search::GIN' => 0.03,
 
