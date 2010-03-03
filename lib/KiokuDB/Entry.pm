@@ -59,6 +59,13 @@ has class_meta => (
     predicate => "has_class_meta",
 );
 
+has class_version => (
+    isa => "Str",
+    is  => "ro",
+    writer => "_class_version",
+    predicate => "has_class_version",
+);
+
 my @tied = ( map { substr($_, 0, 1) } qw(HASH SCALAR ARRAY GLOB) );
 
 has tied => (
@@ -80,6 +87,16 @@ has prev => (
     clearer => "clear_prev",
 );
 
+sub root_prev {
+    my $self = shift;
+
+    if ( $self->has_prev ) {
+        return $self->prev->root_prev;
+    } else {
+        return $self;
+    }
+}
+
 has object => (
     traits => [qw(NoClone)],
     is => "rw",
@@ -97,6 +114,15 @@ sub deletion_entry {
         deleted => 1,
         ( $self->has_object       ? ( object       => $self->object       ) : () ),
         ( $self->has_backend_data ? ( backend_data => $self->backend_data ) : () ),
+    );
+}
+
+sub derive {
+    my ( $self, @args ) = @_;
+
+    $self->clone(
+        prev => $self,
+        @args,
     );
 }
 
@@ -253,9 +279,10 @@ sub STORABLE_freeze {
     return (
         $self->_pack,
         [
-            ( $self->has_data         ? $self->data         : undef ),
-            ( $self->has_backend_data ? $self->backend_data : undef ),
-            ( $self->has_class_meta   ? $self->class_meta   : undef ),
+            ( $self->has_data          ? $self->data         : undef ),
+            ( $self->has_backend_data  ? $self->backend_data : undef ),
+            ( $self->has_class_meta    ? $self->class_meta   : undef ),
+            ( $self->has_class_version ? $self->class_version : undef ),
         ],
     );
 }
@@ -266,10 +293,11 @@ sub STORABLE_thaw {
     $self->_unpack($attrs);
 
     if ( $refs ) {
-        my ( $data, $backend_data, $meta ) = @$refs;
+        my ( $data, $backend_data, $meta, $version ) = @$refs;
         $self->_data($data) if defined $data;
         $self->backend_data($backend_data) if ref $backend_data;
         $self->_class_meta($meta) if ref $meta;
+        $self->_class_version($version) if defined $version;
     }
 }
 

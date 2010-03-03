@@ -18,6 +18,7 @@ lib/KiokuDB/Backend/Role/Query/Simple/Linear.pm
 lib/KiokuDB/Backend/Role/Scan.pm
 lib/KiokuDB/Backend/Role/TXN.pm
 lib/KiokuDB/Backend/Role/TXN/Memory.pm
+lib/KiokuDB/Backend/Role/TXN/Memory/Scan.pm
 lib/KiokuDB/Backend/Role/TXN/Nested.pm
 lib/KiokuDB/Backend/Role/UnicodeSafe.pm
 lib/KiokuDB/Backend/Serialize.pm
@@ -62,6 +63,9 @@ lib/KiokuDB/Role/Immutable.pm
 lib/KiokuDB/Role/Intrinsic.pm
 lib/KiokuDB/Role/Scan.pm
 lib/KiokuDB/Role/TypeMap.pm
+lib/KiokuDB/Role/Upgrade/Data.pm
+lib/KiokuDB/Role/Upgrade/Handlers.pm
+lib/KiokuDB/Role/Upgrade/Handlers/Table.pm
 lib/KiokuDB/Role/UUIDs.pm
 lib/KiokuDB/Role/UUIDs/DataUUID.pm
 lib/KiokuDB/Role/UUIDs/LibUUID.pm
@@ -100,6 +104,7 @@ lib/KiokuDB/Test/Fixture/SimpleSearch.pm
 lib/KiokuDB/Test/Fixture/Small.pm
 lib/KiokuDB/Test/Fixture/TXN.pm
 lib/KiokuDB/Test/Fixture/TXN/Nested.pm
+lib/KiokuDB/Test/Fixture/TXN/Scan.pm
 lib/KiokuDB/Test/Fixture/TypeMap/Default.pm
 lib/KiokuDB/Test/Fixture/Unicode.pm
 lib/KiokuDB/Test/Person.pm

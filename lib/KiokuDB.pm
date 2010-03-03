@@ -3,7 +3,7 @@
 package KiokuDB;
 use Moose;
 
-our $VERSION = "0.35";
+our $VERSION = "0.37";
 
 use constant SERIAL_IDS => not not our $SERIAL_IDS;
 
@@ -137,6 +137,18 @@ sub _build_merged_typemap {
     }
 }
 
+has check_class_versions => (
+    isa => "Bool",
+    is  => "ro",
+    default => 0,
+);
+
+has class_version_table => (
+    isa => "HashRef[HashRef[Str|CodeRef|HashRef]]",
+    is  => "ro",
+    default => sub { return {} },
+);
+
 has typemap_resolver => (
     isa => "KiokuDB::TypeMap::Resolver",
     is  => "ro",
@@ -147,7 +159,11 @@ sub _build_typemap_resolver {
     my $self = shift;
 
     KiokuDB::TypeMap::Resolver->new(
-        typemap => $self->merged_typemap,
+        typemap        => $self->merged_typemap,
+        fallback_entry => KiokuDB::TypeMap::Entry::MOP->new(
+            class_version_table => $self->class_version_table,
+            check_class_versions => $self->check_class_versions,
+        ),
     );
 }
 
@@ -222,6 +238,8 @@ with qw(KiokuDB::Role::API);
 sub exists {
     my ( $self, @ids ) = @_;
 
+    return unless @ids;
+
     if ( @ids == 1 ) {
         my $id = $ids[0];
 
@@ -269,6 +287,8 @@ sub exists {
 
 sub lookup {
     my ( $self, @ids ) = @_;
+
+    return unless @ids;
 
     my $linker = $self->linker;
 
@@ -399,6 +419,8 @@ sub _register {
 sub refresh {
     my ( $self, @objects ) = @_;
 
+    return unless @objects;
+
     my $l = $self->live_objects;
 
     croak "Object not in storage"
@@ -420,6 +442,8 @@ sub _store {
 
     my @objects = $self->_register(@args);
 
+    return unless @objects;
+
     $self->store_objects( root_set => $root, objects => \@objects );
 }
 
@@ -430,6 +454,8 @@ sub _insert {
     my ( $self, $root, @args ) = @_;
 
     my @objects = $self->_register(@args);
+
+    return unless @objects;
 
     idhash my %entries;
 
@@ -519,6 +545,8 @@ sub store_objects {
 sub delete {
     my ( $self, @ids_or_objects ) = @_;
 
+    return unless @ids_or_objects;
+
     my $l = $self->live_objects;
 
     my ( @ids, @objects );
@@ -543,7 +571,7 @@ sub delete {
         push @entries, @new_entries;
     }
 
-    $l->update_entries(@entries);
+    $l->remove(@ids_or_objects);
 }
 
 sub txn_do {
@@ -815,6 +843,22 @@ If true adds L<KiokuDB::TypeMap::ClassBuilders> to the merged typemap.
 
 It's possible to provide a hash reference of options to give to
 L<KiokuDB::TypeMap::ClassBuilders/new>.
+
+=item check_class_versions
+
+Controls whether or not the class versions of objects are checked on load.
+
+Defaults to true.
+
+=item class_version_table
+
+A table of classes and versions that is passed to the default typemap entry for
+Moose/Class::MOP objects.
+
+When a class version has changed between the time that an object was stored and
+the time it's being retrieved, the data must be converted.
+
+See L<KiokuDB::TypeMap::Entry::MOP> for more details.
 
 =back
 

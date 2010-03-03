@@ -16,6 +16,15 @@ use ok 'KiokuDB';
 use ok 'KiokuDB::Backend::Hash';
 
 my $dir = KiokuDB->new(
+    check_class_versions => 1,
+    class_version_table => {
+        Foo => {
+            "0.01" => {
+                class_version => "0.02",
+                data          => { foo => "upgraded" },
+            },
+        },
+    },
     backend => KiokuDB::Backend::Hash->new,
     #backend => KiokuDB::Backend::JSPON->new(
     #    dir    => temp_root,
@@ -36,6 +45,8 @@ sub no_live_objects {
 {
     package Foo;
     use Moose;
+
+    our $VERSION = "0.02";
 
     has foo => (
         isa => "Str",
@@ -614,14 +625,8 @@ no_live_objects;
 
     $dir->delete($foo, $bar);
 
-    my @del_entries = $dir->live_objects->objects_to_entries($foo, $bar);
-
-    is( scalar(@del_entries), 2, "two deletion entries" );
-
-    for ( 0 .. 1 ) {
-        ok( $del_entries[$_]->deleted, "entry updated in live objects" );
-        is( $del_entries[$_]->prev, $entries[$_], "prev entry" )
-    }
+    is( $dir->live_objects->object_to_entry($foo), undef, "no entry object" );
+    is( $dir->live_objects->object_to_entry($bar), undef, "no entry object" );
 };
 
 no_live_objects;
@@ -662,5 +667,33 @@ no_live_objects;
 
 no_live_objects;
 
+{
+    {
+        my $s = $dir->new_scope;
+
+        my $id = $dir->insert( Foo->new( foo => "blah blah" ) );
+
+        my ( $entry ) = $dir->backend->get($id);
+
+        my $old_entry = $entry->clone(
+            class_version => "0.01",
+            id            => "old_object",
+        );
+
+        $dir->backend->insert($old_entry);
+    }
+
+    {
+        my $s = $dir->new_scope;
+
+        my $obj = $dir->lookup("old_object");
+
+        isa_ok( $obj, "Foo" );
+
+        is( $obj->foo, "upgraded", "field upgraded" );
+    }
+};
+
+no_live_objects;
 
 done_testing;
