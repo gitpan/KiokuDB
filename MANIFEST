@@ -165,6 +165,7 @@ t/ref.t
 t/scaling.t
 t/serializer.t
 t/set.t
+t/stream.t
 t/tied.t
 t/typemap.t
 t/typemap_default_json.t

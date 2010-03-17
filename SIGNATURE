@@ -14,10 +14,10 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 a87628464842e23f687b410a30b0879ffc0571ac Changes
-SHA1 98236838950efb53275e38e6889f6af8081baa02 MANIFEST
+SHA1 b8d96d6b21684c0046f30dfb7d7c7eb0c9b142fa Changes
+SHA1 6e7ca50e2d786c9c5440349ca5249b2e44d30f4c MANIFEST
 SHA1 606bd6424682249397d63caf905f651178a4d6cc MANIFEST.SKIP
-SHA1 1f40eaa41d89fd0f1b0b119f320d2b9a3c91c824 META.yml
+SHA1 c25e5f0588acdcf1bde20083a9bfc8ee9af832ef META.yml
 SHA1 cf7172141f0b1ee0c30d3076f7bb62ec13d5d6ba Makefile.PL
 SHA1 b237f02f33d9d2791a1e900f81fd0ed01b431a79 README.mkdn
 SHA1 7bb0092e2b28fe65d20cf79f68751741e395a243 TODO
@@ -25,7 +25,7 @@ SHA1 931109b3a886041f949924cd56f2ed9e9bf5a71d bench/shootout.pl
 SHA1 7422735d7f9e510d85f6d398c30f4592ecf3a13c bench/size.pl
 SHA1 839e06129b9fa801212fb298365ce84e92b762f1 bench/small.pl
 SHA1 ade52ad50a8929d6a49a1968a380f1b57bca83e7 bin/kioku
-SHA1 ff7fb96a04394a05be1c95bf98c481828ab2f238 lib/KiokuDB.pm
+SHA1 495f529236cc46956c29f5ab967b7fde1462ed42 lib/KiokuDB.pm
 SHA1 fd3239a2419b6a6dd4d923c1ee04267fc60bd086 lib/KiokuDB/Backend.pm
 SHA1 f509ffeb6ae9988901c0ed88f7a2825d9b4853c7 lib/KiokuDB/Backend/Hash.pm
 SHA1 26fbacd2dd12f060a15e4e95b8baf3b569581873 lib/KiokuDB/Backend/Role/BinarySafe.pm
@@ -69,7 +69,7 @@ SHA1 065d79970f38e1e2f239ce9bae8eea4521617106 lib/KiokuDB/GIN.pm
 SHA1 c195ead7a86bafd9b0d6458b6aaa83069677f9f9 lib/KiokuDB/LinkChecker.pm
 SHA1 6c750159c6a9b6debfc86ff1aa7f65902703cbce lib/KiokuDB/LinkChecker/Results.pm
 SHA1 20af07e5b7fbbc620eaeec6db9417259d71c4d84 lib/KiokuDB/Linker.pm
-SHA1 69cfb325944ac961570701f4aff7ce857819c392 lib/KiokuDB/LiveObjects.pm
+SHA1 1a23bfe424b7618505cff2702d5294e5db156c69 lib/KiokuDB/LiveObjects.pm
 SHA1 1042e55660d2acaf558c1e7e22a5485fa940015f lib/KiokuDB/LiveObjects/Guard.pm
 SHA1 11bbafd5be2ff2fd692b83fbf6384e0b7104b5b1 lib/KiokuDB/LiveObjects/Scope.pm
 SHA1 0431253e60fc5b77ad45f3ff213c6e2058e125f8 lib/KiokuDB/LiveObjects/TXNScope.pm
@@ -149,7 +149,7 @@ SHA1 221897226ab63b1cb6f3f7f6e3de6d90490b49bc lib/KiokuDB/TypeMap/Entry/Compiled
 SHA1 4824afd17da51d377a5141d76a8ad96563e4fb2d lib/KiokuDB/TypeMap/Entry/JSON/Scalar.pm
 SHA1 db90b677b914a866ecc01f3e6caf39d16c76dd94 lib/KiokuDB/TypeMap/Entry/MOP.pm
 SHA1 46cd4cb6a8e061808c7c50360378c619a30af2fb lib/KiokuDB/TypeMap/Entry/Naive.pm
-SHA1 7f701c6fc00a295df4967be9334235830cad6acb lib/KiokuDB/TypeMap/Entry/Passthrough.pm
+SHA1 b049893368ac8443b814d5dd36d74be2c01b3e94 lib/KiokuDB/TypeMap/Entry/Passthrough.pm
 SHA1 ed6c392357077303b2a7e4ddf247be1ad489d803 lib/KiokuDB/TypeMap/Entry/Ref.pm
 SHA1 cb54487a8acb3499532f416568bcb6f6f91e3f7d lib/KiokuDB/TypeMap/Entry/Set.pm
 SHA1 5062cec68aeeb89d564c1ce6592c90af654fb0e6 lib/KiokuDB/TypeMap/Entry/Std.pm
@@ -183,6 +183,7 @@ SHA1 d0303b1b3b621f921baf65b3dd306838133821fa t/ref.t
 SHA1 844aac34d15bd1ca58af8ecb4b3fa6f4fc4613ec t/scaling.t
 SHA1 f1fe44c24869095ab454391acedae2a56c2f9c8d t/serializer.t
 SHA1 51ddb907995b8112815df12041a0f747813c3b91 t/set.t
+SHA1 e367cba817de991bd7a423b943a1ac54684689e0 t/stream.t
 SHA1 12ee754c42331dfaab38731a211fa73e4a6f3a94 t/tied.t
 SHA1 c4cd95707c40e5e0fdbb607d7dece1c3e772713a t/typemap.t
 SHA1 8e7b85be155b9da1516172e97a11db549179d375 t/typemap_default_json.t
@@ -199,7 +200,7 @@ SHA1 bdd1d89ed9f804c81fe06075fde3cb3729a686bc t/uuid.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG/MacGPG2 v2.0.12 (Darwin)
 
-iEYEARECAAYFAkuR6FMACgkQVCwRwOvSdBj+xQCcCqZEed/pSkqxVq+7+GVebocM
-hkwAnRl2uIL+piBNVos5vY11WLp6icMP
-=gnQ6
+iEYEARECAAYFAkuhUagACgkQVCwRwOvSdBhnTwCePqN7cQyUjD3kF1Dz+n5oWhkN
+S+sAn392G1QFIJ0/ly8QUwkM527vksvX
+=lcSB
 -----END PGP SIGNATURE-----
