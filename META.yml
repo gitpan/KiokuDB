@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               KiokuDB
-version:            0.42
+version:            0.43
 abstract:           ~
 author:  []
 license:            unknown
@@ -36,6 +36,7 @@ requires:
     Test::Exception:      0
     Test::More:           0.88
     Test::use::ok:        0
+    Throwable:            0
     Tie::ToObject:        0
     Try::Tiny:            0
     YAML::XS:             0.3

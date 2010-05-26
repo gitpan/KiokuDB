@@ -3,7 +3,7 @@
 package KiokuDB;
 use Moose;
 
-our $VERSION = "0.42";
+our $VERSION = "0.43";
 
 use constant SERIAL_IDS => not not our $SERIAL_IDS;
 
@@ -310,9 +310,11 @@ sub lookup {
             return @objects;
         }
     } catch {
-        die $_ unless ref and $_->{missing};
+          return if blessed($_)
+                and $_->isa("KiokuDB::Error::MissingObjects")
+                and $_->missing_ids_are(@ids);
 
-        return;
+          die $_;
     };
 }
 
@@ -537,8 +539,6 @@ sub store_objects {
     my $objects = $args{objects};
 
     my ( $buffer, @ids ) = $self->collapser->collapse(%args);
-
-    my $entries = $buffer->entries;
 
     $buffer->imply_root(@ids) if $args{root_set};
 

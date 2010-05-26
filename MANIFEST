@@ -40,6 +40,9 @@ lib/KiokuDB/Collapser.pm
 lib/KiokuDB/Collapser/Buffer.pm
 lib/KiokuDB/Entry.pm
 lib/KiokuDB/Entry/Skip.pm
+lib/KiokuDB/Error.pm
+lib/KiokuDB/Error/MissingObjects.pm
+lib/KiokuDB/Error/UnknownObjects.pm
 lib/KiokuDB/GC/Naive.pm
 lib/KiokuDB/GC/Naive/Mark.pm
 lib/KiokuDB/GC/Naive/Sweep.pm
