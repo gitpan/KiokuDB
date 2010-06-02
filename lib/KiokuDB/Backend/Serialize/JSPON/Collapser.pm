@@ -40,11 +40,12 @@ sub collapse_jspon {
             return {
                 ( $data->has_class ? ( $self->class_field => $data->class ) : () ),
                 ( $data->has_class_meta ? ( $self->class_meta_field => $data->class_meta ) : () ),
+                ( defined $data->class_version ? ( $self->class_version_field => $data->class_version ) : () ),
                 ( $id ? ( $self->id_field => $id ) : () ),
                 ( $data->root ? ( $self->root_field => JSON::true() ) : () ),
                 ( $data->deleted ? ( $self->deleted_field => JSON::true() ) : () ),
                 ( $data->has_tied ? ( $self->tied_field => $data->tied ) : () ),
-                ( defined $data->backend_data ? ( $self->backend_data_field => $data->tied ) : () ),
+                ( defined $data->backend_data ? ( $self->backend_data_field => $data->backend_data ) : () ),
                 ( $self->inline_data
                     ? %{ $self->collapse_jspon($data->data) }
                     : ( $self->data_field => $self->collapse_jspon($data->data) )
