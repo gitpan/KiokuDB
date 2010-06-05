@@ -10,6 +10,7 @@ lib/KiokuDB/Backend/Role/BinarySafe.pm
 lib/KiokuDB/Backend/Role/Broken.pm
 lib/KiokuDB/Backend/Role/Clear.pm
 lib/KiokuDB/Backend/Role/Concurrency/POSIX.pm
+lib/KiokuDB/Backend/Role/GC.pm
 lib/KiokuDB/Backend/Role/Prefetch.pm
 lib/KiokuDB/Backend/Role/Query.pm
 lib/KiokuDB/Backend/Role/Query/GIN.pm
