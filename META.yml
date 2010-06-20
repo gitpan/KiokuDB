@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               KiokuDB
-version:            0.45
+version:            0.46_01
 abstract:           ~
 author:  []
 license:            unknown
