@@ -101,6 +101,7 @@ lib/KiokuDB/Test/Fixture/CAS.pm
 lib/KiokuDB/Test/Fixture/Clear.pm
 lib/KiokuDB/Test/Fixture/Concurrency.pm
 lib/KiokuDB/Test/Fixture/GIN/Class.pm
+lib/KiokuDB/Test/Fixture/MassInsert.pm
 lib/KiokuDB/Test/Fixture/ObjectGraph.pm
 lib/KiokuDB/Test/Fixture/Overwrite.pm
 lib/KiokuDB/Test/Fixture/Refresh.pm
