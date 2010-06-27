@@ -60,10 +60,12 @@ lib/KiokuDB/Meta/Attribute/Lazy.pm
 lib/KiokuDB/Meta/Instance.pm
 lib/KiokuDB/Reference.pm
 lib/KiokuDB/Role/API.pm
+lib/KiokuDB/Role/Cacheable.pm
 lib/KiokuDB/Role/ID.pm
 lib/KiokuDB/Role/ID/Content.pm
 lib/KiokuDB/Role/ID/Digest.pm
 lib/KiokuDB/Role/Immutable.pm
+lib/KiokuDB/Role/Immutable/Transitive.pm
 lib/KiokuDB/Role/Intrinsic.pm
 lib/KiokuDB/Role/Scan.pm
 lib/KiokuDB/Role/TypeMap.pm
@@ -104,6 +106,7 @@ lib/KiokuDB/Test/Fixture/Overwrite.pm
 lib/KiokuDB/Test/Fixture/Refresh.pm
 lib/KiokuDB/Test/Fixture/RootSet.pm
 lib/KiokuDB/Test/Fixture/Scan.pm
+lib/KiokuDB/Test/Fixture/Sets.pm
 lib/KiokuDB/Test/Fixture/SimpleSearch.pm
 lib/KiokuDB/Test/Fixture/Small.pm
 lib/KiokuDB/Test/Fixture/TXN.pm
@@ -168,7 +171,6 @@ t/moose_triggers.t
 t/ref.t
 t/scaling.t
 t/serializer.t
-t/set.t
 t/stream.t
 t/tied.t
 t/typemap.t
