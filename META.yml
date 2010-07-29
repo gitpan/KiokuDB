@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               KiokuDB
-version:            0.46
+version:            0.47
 abstract:           ~
 author:  []
 license:            unknown
@@ -10,7 +10,7 @@ configure_requires:
 build_requires:
     ExtUtils::MakeMaker:  0
 requires:
-    Cache::Ref:           0
+    Cache::Ref:           0.02
     Class::MOP:           0.94
     Data::Stream::Bulk:   0.07
     Data::UUID::LibUUID:  0

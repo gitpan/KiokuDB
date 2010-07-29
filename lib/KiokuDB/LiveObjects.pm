@@ -56,6 +56,11 @@ has _ids => (
     default => sub { return {} },
 );
 
+sub size {
+    my $self = shift;
+    scalar keys %{ $self->_objects };
+}
+
 sub _id_info {
     my ( $self, @ids ) = @_;
 
@@ -218,6 +223,16 @@ sub check_leaks {
             } else {
                 $tracker->leaked_objects(grep { defined } @leaked);
             }
+        }
+
+        if ( my $cache = $self->cache and $self->size > $self->cache->size * 1.1 ) {
+            # all live objects are marked 'cached', but the live object set is bigger than
+            # the cache size. This means objects have been expired out of the
+            # cache but are still referenced by other cache entries
+
+            do {
+                $cache->expire( 1 + int ( ( $self->size - $cache->size ) / 2 ) );
+            } while $self->size > $cache->size;
         }
     }
 }
@@ -560,7 +575,7 @@ merely prevents stale objects from staying loaded.
 
 This is a coderef or object.
 
-If any objects ar eleaked (see C<clear_leaks>) then the this can be used to
+If any objects are leaked (see C<clear_leaks>) then the this can be used to
 report them, or to break the circular structure.
 
 When an object is provided the C<leaked_objects> method is called. The coderef
