@@ -1,5 +1,5 @@
 0.48
-    - Reupload with proper MANIFEST
+    - Avoid warnings from Moose 1.10
 
 0.47
     - Avoid warnings from Moose 1.09 (Dave Rolsky)
