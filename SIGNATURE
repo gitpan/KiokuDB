@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.64.
+signed via the Module::Signature module, version 0.66.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -14,10 +14,10 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 74fd3867e0a25ec1166bad38e573cf3a0cbcad56 Changes
+SHA1 a6c0e97f05e9be92dfaf1e0e21b53f94a21d4c79 Changes
 SHA1 cb6bb57b0c3e8ff1716225781a607a4302dc3e68 MANIFEST
 SHA1 606bd6424682249397d63caf905f651178a4d6cc MANIFEST.SKIP
-SHA1 5741334ab0c77f4954fb995d706e1f307501c8e7 META.yml
+SHA1 cd9cdd4283e8735aa43d0d0f6dae3ddc11625867 META.yml
 SHA1 92324cef2f30815fd4de901cdcf9ef717f5c0dc2 Makefile.PL
 SHA1 b237f02f33d9d2791a1e900f81fd0ed01b431a79 README.mkdn
 SHA1 05aba833d803e1216aabc3366ba77a396bc211b2 TODO
@@ -25,7 +25,7 @@ SHA1 931109b3a886041f949924cd56f2ed9e9bf5a71d bench/shootout.pl
 SHA1 7422735d7f9e510d85f6d398c30f4592ecf3a13c bench/size.pl
 SHA1 839e06129b9fa801212fb298365ce84e92b762f1 bench/small.pl
 SHA1 093c533979351b7079c761a27d674610063aa974 bin/kioku
-SHA1 8e58b078a5be582c0e3de1992618f33f31763f76 lib/KiokuDB.pm
+SHA1 98ff59eb4a7816c772a243098b56f7b6259286ed lib/KiokuDB.pm
 SHA1 fd3239a2419b6a6dd4d923c1ee04267fc60bd086 lib/KiokuDB/Backend.pm
 SHA1 f509ffeb6ae9988901c0ed88f7a2825d9b4853c7 lib/KiokuDB/Backend/Hash.pm
 SHA1 26fbacd2dd12f060a15e4e95b8baf3b569581873 lib/KiokuDB/Backend/Role/BinarySafe.pm
@@ -121,7 +121,7 @@ SHA1 d8cf782b29b75e6f71a0f50936427b1d79563988 lib/KiokuDB/Test/Fixture.pm
 SHA1 2308dcfec8b749c9aadd1b9ad2e684695fd50223 lib/KiokuDB/Test/Fixture/Binary.pm
 SHA1 42b8352adcacd85b53024694234b6abc67766acb lib/KiokuDB/Test/Fixture/CAS.pm
 SHA1 b837887b280fd5b6ab46b32463cca43f20c9cbc8 lib/KiokuDB/Test/Fixture/Clear.pm
-SHA1 f4ae0f11d1c6291c48a715351fcbaac504d7bb9f lib/KiokuDB/Test/Fixture/Concurrency.pm
+SHA1 47047208c70c6e058b1361cf4d2df36c718fd90d lib/KiokuDB/Test/Fixture/Concurrency.pm
 SHA1 a62b8d036e147b1d46dee70849922f8ceb777b3e lib/KiokuDB/Test/Fixture/GIN/Class.pm
 SHA1 e4e8ff9a82cf90341374a4e74ee35d07e159bfe7 lib/KiokuDB/Test/Fixture/MassInsert.pm
 SHA1 1271e02e1f5b72f1c7116ee07000e809eca6543e lib/KiokuDB/Test/Fixture/ObjectGraph.pm
@@ -209,7 +209,7 @@ SHA1 a0437c7409c65cc373cf7139a56a6a62accc1dd2 t/versioning.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEARECAAYFAkxztO4ACgkQdC8qQo5jWl63BQCfQwkxa6n75mhufZ65SslbvWCf
-5lAAoIJUI6Nr79DbymlGACeOPg/x/1zx
-=XoLL
+iEYEARECAAYFAkyIR1sACgkQdC8qQo5jWl7vBQCdHZ/pHvLDVywjhzBv75aEqt90
+/fMAnAkuv6OiEPU5irdgGQ9lFfTcX2lj
+=hxDz
 -----END PGP SIGNATURE-----
