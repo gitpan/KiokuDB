@@ -47,11 +47,11 @@ WriteMakefile(
     NAME         => 'KiokuDB',
     VERSION_FROM => 'lib/KiokuDB.pm',
     INSTALLDIRS  => 'site',
-    SIGN         => 1,
+    #SIGN         => 1,
     PL_FILES     => { },
     EXE_FILES    => [ grep { /\w$/ } glob("bin/*") ],
     PREREQ_PM    => {
-        'Moose' => 0.92,
+        'Moose' => 1.17,
         'Class::MOP' => 0.94,
         'MooseX::Role::Parameterized' => 0.10,
         #'MooseX::AttributeHelpers' => '0.14',
@@ -70,8 +70,8 @@ WriteMakefile(
 
         # Identity is important
         ( eval { require Data::UUID::LibUUID }
-            ? ( "Data::UUID::LibUUID" => 0 )
-            : ( "Data::UUID"          => 0 ) ),
+            ? ( "Data::UUID::LibUUID" => '0.05' )
+            : ( "Data::UUID"          => '1.203' ) ),
 
         # visits are also important
         'Data::Visitor' => '0.24',

@@ -165,6 +165,7 @@ t/gin.t
 t/hash.t
 t/hash_backend.t
 t/jspon_serialization.t
+t/kiokudb_class_native.t
 t/lazy.t
 t/link_checker.t
 t/link_checker_real.t
@@ -190,4 +191,3 @@ t/uuid.t
 t/versioning.t
 TODO
 META.yml                                 Module meta-data (added by MakeMaker)
-SIGNATURE                                Public-key signature (added by MakeMaker)
