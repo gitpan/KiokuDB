@@ -191,3 +191,4 @@ t/uuid.t
 t/versioning.t
 TODO
 META.yml                                 Module meta-data (added by MakeMaker)
+SIGNATURE                                Public-key signature (added by MakeMaker)

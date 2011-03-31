@@ -47,7 +47,7 @@ WriteMakefile(
     NAME         => 'KiokuDB',
     VERSION_FROM => 'lib/KiokuDB.pm',
     INSTALLDIRS  => 'site',
-    #SIGN         => 1,
+    SIGN         => 1,
     PL_FILES     => { },
     EXE_FILES    => [ grep { /\w$/ } glob("bin/*") ],
     PREREQ_PM    => {
@@ -79,7 +79,7 @@ WriteMakefile(
         'Task::Weaken'  => 0,
 
         # scanning and searching
-        'Data::Stream::Bulk' => "0.07",
+        'Data::Stream::Bulk' => "0.08",
 
         # live objects
         'Hash::Util::FieldHash::Compat' => 0,
