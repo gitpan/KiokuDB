@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Stream::Objects;
+BEGIN {
+  $KiokuDB::Stream::Objects::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Stream::Objects::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Data::Stream::Bulk with live object management.
 
 use namespace::clean -except => 'meta';
 
@@ -12,10 +17,10 @@ has directory => (
 );
 
 has entry_stream => (
-	does => "Data::Stream::Bulk",
-	is   => "ro",
-	required => 1,
-	handles  => [qw(is_done loaded)],
+    does => "Data::Stream::Bulk",
+    is   => "ro",
+    required => 1,
+    handles  => [qw(is_done loaded)],
 );
 
 has linker => (
@@ -53,10 +58,10 @@ has _no_scope => (
     is  => "rw",
 );
 
-with qw(Data::Stream::Bulk) => { -excludes => 'loaded' };
+with qw(Data::Stream::Bulk) => { -version => 0.08, -excludes => 'loaded' };
 
 sub next {
-	my $self = shift;
+    my $self = shift;
 
     $self->_clear_scope;
 
@@ -91,7 +96,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::Stream::Objects - L<Data::Stream::Bulk> with live object management.
+KiokuDB::Stream::Objects - Data::Stream::Bulk with live object management.
+
+=head1 VERSION
+
+version 0.55
 
 =head1 DESCRIPTION
 
@@ -99,6 +108,15 @@ This class is for object streams coming out of L<KiokuDB>.
 
 C<new_scope> is called once for each block, and then cleared.
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

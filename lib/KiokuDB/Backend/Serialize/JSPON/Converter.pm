@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Backend::Serialize::JSPON::Converter;
+BEGIN {
+  $KiokuDB::Backend::Serialize::JSPON::Converter::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Backend::Serialize::JSPON::Converter::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: Common functionality for JSPON expansion/collapsing
 
 use namespace::clean -except => 'meta';
 
@@ -114,8 +119,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::Backend::Serialize::JSPON::Converter - Common functionality for JSPON
-expansion/collapsing
+KiokuDB::Backend::Serialize::JSPON::Converter - Common functionality for JSPON expansion/collapsing
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -163,5 +171,16 @@ Determines whether or not the entry data keys are escaped and the data is
 stored in the same top level mapping, or inside the C<data_field> key.
 
 =back
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut

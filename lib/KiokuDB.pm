@@ -1,9 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB;
+BEGIN {
+  $KiokuDB::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::VERSION = '0.55';
+}
 use Moose;
-
-our $VERSION = "0.54";
+# ABSTRACT: Object Graph storage engine
 
 use constant SERIAL_IDS => not not our $SERIAL_IDS;
 
@@ -16,13 +19,14 @@ use KiokuDB::TypeMap::Shadow;
 use KiokuDB::TypeMap::Resolver;
 use KiokuDB::Stream::Objects;
 
+use Moose 2.0000 ();
 use Moose::Util qw(does_role);
 
 use Hash::Util::FieldHash::Compat qw(idhash);
 use Carp qw(croak);
 use Try::Tiny;
 
-use namespace::clean -except => [qw(meta SERIAL_IDS)];
+use namespace::clean 0.08 -except => [qw(meta SERIAL_IDS)];
 
 # with qw(KiokuDB::Role::API); # moved lower
 
@@ -666,9 +670,9 @@ __END__
 
 KiokuDB - Object Graph storage engine
 
-=head1 TUTORIAL
+=head1 VERSION
 
-If you're new to L<KiokuDB> check out L<KiokuDB::Tutorial>.
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -742,6 +746,10 @@ data/code (for example interoperating with another app using CouchDB with JSPON
 semantics).
 
 =back
+
+=head1 TUTORIAL
+
+If you're new to L<KiokuDB> check out L<KiokuDB::Tutorial>.
 
 =head1 FUNDAMENTAL CONCEPTS
 
@@ -1027,7 +1035,6 @@ objects, which will not be updated.
 The C<nonroot> variant will not mark the objects as members of the root set
 (therefore they will be subject to garbage collection).
 
-
 =item delete @objects_or_ids
 
 Deletes the specified objects from the store.
@@ -1215,12 +1222,13 @@ on L<http://www.iinteractive.com/kiokudb/>
 
 =head1 AUTHOR
 
-Yuval Kogman E<lt>nothingmuch@woobling.orgE<gt>
+Yuval Kogman <nothingmuch@woobling.org>
 
-=head1 COPYRIGHT
+=head1 COPYRIGHT AND LICENSE
 
-    Copyright (c) 2008, 2009 Yuval Kogman, Infinity Interactive. All
-    rights reserved This program is free software; you can redistribute
-    it and/or modify it under the same terms as Perl itself.
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut

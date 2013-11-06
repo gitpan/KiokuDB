@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::GC::Naive;
+BEGIN {
+  $KiokuDB::GC::Naive::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::GC::Naive::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Naive mark and sweep garbage collection
 
 use KiokuDB::GC::Naive::Mark;
 use KiokuDB::GC::Naive::Sweep;
@@ -84,6 +89,10 @@ __END__
 
 KiokuDB::GC::Naive - Naive mark and sweep garbage collection
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     use KiokuDB::GC::Naive;
@@ -99,6 +108,15 @@ KiokuDB::GC::Naive - Naive mark and sweep garbage collection
 This class implements full mark and sweep garbage collection for a backend
 supporting L<KiokuDB::Backend::Role::Scan>.
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

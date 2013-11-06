@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Backend::Serialize::JSPON;
+BEGIN {
+  $KiokuDB::Backend::Serialize::JSPON::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Backend::Serialize::JSPON::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: JSPON serialization helper
 
 use KiokuDB::Backend::Serialize::JSPON::Expander;
 use KiokuDB::Backend::Serialize::JSPON::Collapser;
@@ -49,6 +54,10 @@ __END__
 
 KiokuDB::Backend::Serialize::JSPON - JSPON serialization helper
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     with qw(KiokuDB::Backend::Serialize::JSPON);
@@ -74,6 +83,15 @@ See L<KiokuDB::Backend::Serialize::JSPON::Collapser/collapse_jspon>
 
 =back
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

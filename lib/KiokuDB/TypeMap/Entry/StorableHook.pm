@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::TypeMap::Entry::StorableHook;
+BEGIN {
+  $KiokuDB::TypeMap::Entry::StorableHook::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::TypeMap::Entry::StorableHook::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Reuse existing Storable hooks for KiokuDB storage.
 
 use Scalar::Util qw(reftype);
 use Carp qw(croak);
@@ -177,7 +182,7 @@ sub _type ($) {
             return 'A';
         }
     } else {
-		croak sprintf "Unexpected object type (%s)", reftype($obj);
+        croak sprintf "Unexpected object type (%s)", reftype($obj);
     }
 }
 
@@ -197,7 +202,7 @@ sub _new ($;$) {
         tie @$ref, "To::Object", $tied if ref $tied;
         return $ref;
     } else {
-		croak sprintf "Unexpected object type (%d)", $type;
+        croak sprintf "Unexpected object type (%d)", $type;
     }
 }
 
@@ -213,7 +218,7 @@ sub _clear ($) {
     } elsif ( $type eq 'ARRAY' ) {
         @$obj = ();
     } else {
-		croak sprintf "Unexpected object type (%s)", reftype($obj);
+        croak sprintf "Unexpected object type (%s)", reftype($obj);
     }
 }
 
@@ -228,15 +233,27 @@ __END__
 
 =head1 NAME
 
-KiokuDB::TypeMap::Entry::StorableHook - Reuse existing L<Storable> hooks for
-L<KiokuDB> storage.
+KiokuDB::TypeMap::Entry::StorableHook - Reuse existing Storable hooks for KiokuDB storage.
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
-	use KiokuDB::TypeMap::Entry::StorableHook;
+    use KiokuDB::TypeMap::Entry::StorableHook;
 
 =head1 DESCRIPTION
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

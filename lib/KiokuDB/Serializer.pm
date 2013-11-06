@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Serializer;
+BEGIN {
+  $KiokuDB::Serializer::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Serializer::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: Standalone serializer object
 
 use Carp qw(croak);
 
@@ -44,6 +49,10 @@ __END__
 
 KiokuDB::Serializer - Standalone serializer object
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     Backend->new(
@@ -57,3 +66,16 @@ L<KiokuDB::Backend::Serialize::Storable>) but can be used independently.
 
 This is used by L<KiokuDB::Backend::Serialize::Delegate> and
 L<KiokuDB::Cmd::DumpFormatter>.
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::TypeMap::Resolver;
+BEGIN {
+  $KiokuDB::TypeMap::Resolver::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::TypeMap::Resolver::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Caching resolver for KiokuDB::TypeMap
 
 use Carp qw(croak);
 
@@ -124,7 +129,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::TypeMap::Resolver - Caching resolver for L<KiokuDB::TypeMap>
+KiokuDB::TypeMap::Resolver - Caching resolver for KiokuDB::TypeMap
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -135,5 +144,16 @@ Since L<KiokuDB::TypeMap>s are fairly complex, and L<KiokuDB::TypeMap::Entry>
 objects can benefit from specializing to a class by precomputing some things,
 resolution is performed once per class, and the results are cached in the
 resolver.
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut

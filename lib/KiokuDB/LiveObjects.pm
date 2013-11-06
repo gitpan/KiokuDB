@@ -1,14 +1,20 @@
-#!/usr/bin/perl
-
 package KiokuDB::LiveObjects;
+BEGIN {
+  $KiokuDB::LiveObjects::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::LiveObjects::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Live object set tracking
 
 use Scalar::Util qw(weaken refaddr);
 use KiokuDB::LiveObjects::Guard;
 use Hash::Util::FieldHash::Compat qw(fieldhash);
 use Carp qw(croak);
 BEGIN { local $@; eval 'use Devel::PartialDump qw(croak)' };
-use Set::Object;
+use Set::Object 1.26;
+use Cache::Ref 0.02;
 
 use KiokuDB::LiveObjects::Scope;
 use KiokuDB::LiveObjects::TXNScope;
@@ -544,6 +550,10 @@ __END__
 
 KiokuDB::LiveObjects - Live object set tracking
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     $live_objects->insert( $entry => $object );
@@ -709,5 +719,16 @@ This prevents C<push> from being called on this scope object implicitly
 anymore.
 
 =back
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut

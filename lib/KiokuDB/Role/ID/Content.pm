@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Role::ID::Content;
+BEGIN {
+  $KiokuDB::Role::ID::Content::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Role::ID::Content::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: Content dependent object IDs
 
 use namespace::clean -except => 'meta';
 
@@ -19,6 +24,10 @@ __END__
 =head1 NAME
 
 KiokuDB::Role::ID::Content - Content dependent object IDs
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -54,6 +63,15 @@ L<KiokuDB::Role::Immutable> objects.
 Additionally, it is not an error to insert such objects twice since the objects
 are assumed to be identical.
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

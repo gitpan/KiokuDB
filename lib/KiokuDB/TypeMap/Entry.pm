@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::TypeMap::Entry;
+BEGIN {
+  $KiokuDB::TypeMap::Entry::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::TypeMap::Entry::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: Role for KiokuDB::TypeMap entries
 
 use namespace::clean -except => 'meta';
 
@@ -15,7 +20,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::TypeMap::Entry - Role for L<KiokuDB::TypeMap> entries
+KiokuDB::TypeMap::Entry - Role for KiokuDB::TypeMap entries
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -47,3 +56,16 @@ expanding the object.
 L<KiokuDB::TypeMap::Entry::Std> provides a more concise way of defining typemap entries.
 
 =back
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

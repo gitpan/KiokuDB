@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Set::Deferred;
+BEGIN {
+  $KiokuDB::Set::Deferred::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Set::Deferred::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Implementation of deferred set.
 
 use Carp qw(croak);
 
@@ -179,6 +184,10 @@ __END__
 
 KiokuDB::Set::Deferred - Implementation of deferred set.
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     # created automatically when sets are loaded from the database
@@ -190,5 +199,15 @@ This class implements deferred sets conforming to the L<KiokuDB::Set> API.
 Do not use this class directly, instead use L<KiokuDB::Set::Transient> or
 L<KiokuDB::Util/set> to create sets.
 
-=cut
+=head1 AUTHOR
 
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

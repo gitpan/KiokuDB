@@ -1,4 +1,10 @@
 package KiokuDB::TypeMap::Entry::Compiled;
+BEGIN {
+  $KiokuDB::TypeMap::Entry::Compiled::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::TypeMap::Entry::Compiled::VERSION = '0.55';
+}
 use Moose;
 
 no warnings 'recursion';
@@ -33,7 +39,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::TypeMap::Entry::Compiled - Object for storing collapse/expand methods
+KiokuDB::TypeMap::Entry::Compiled
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -44,6 +54,10 @@ TODO
 Objects of this class should be returned by L<KiokuDB::TypeMap::Entry/compile>.
 You probably shouldn't be using this directly; you may just want to consume
 L<KiokuDB::TypeMap::Entry::Std> or something.
+
+=head1 NAME
+
+KiokuDB::TypeMap::Entry::Compiled - Object for storing collapse/expand methods
 
 =head1 ATTRIBUTES
 
@@ -58,7 +72,7 @@ argument, and should return the expanded object.
 =item collapse_method
 
 Contains a subroutine reference (or a string, denoting a method name).  It is
-called as method on the L<KiokuDB::Collapser>.  Takes the object to 
+called as method on the L<KiokuDB::Collapser>.  Takes the object to
 be collapsed as an argument, and should return a L<KiokuDB::Reference>.
 
 =item id_method
@@ -82,5 +96,16 @@ The class for which the methods are being compiled.
 The L<KiokuDB::TypeMap::Entry> that created this object.
 
 =back
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut

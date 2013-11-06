@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Set::Transient;
+BEGIN {
+  $KiokuDB::Set::Transient::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Set::Transient::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Implementation of in memory sets.
 
 use Carp qw(croak);
 
@@ -35,6 +40,10 @@ __END__
 
 KiokuDB::Set::Transient - Implementation of in memory sets.
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     my $set = KiokuDB::Set::Transient->new(
@@ -55,5 +64,15 @@ These sets can be constructed by the user for insertion into storage.
 
 See L<KiokuDB::Set> for more details.
 
-=cut
+=head1 AUTHOR
 
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

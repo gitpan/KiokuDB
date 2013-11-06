@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::TypeMap::Entry::Naive;
+BEGIN {
+  $KiokuDB::TypeMap::Entry::Naive::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::TypeMap::Entry::Naive::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: A typemap entry for "simple" objects
 
 no warnings 'recursion';
 
@@ -50,6 +55,10 @@ __END__
 
 KiokuDB::TypeMap::Entry::Naive - A typemap entry for "simple" objects
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     KiokuDB::TypeMap->new(
@@ -94,3 +103,16 @@ Perl SV level magic is not retained, apart from tied values.
 If true the object will be collapsed without an ID as part of its parent.
 
 =back
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

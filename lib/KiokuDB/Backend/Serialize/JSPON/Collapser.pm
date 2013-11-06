@@ -1,11 +1,17 @@
-#!/usr/bin/perl
-
 package KiokuDB::Backend::Serialize::JSPON::Collapser;
+BEGIN {
+  $KiokuDB::Backend::Serialize::JSPON::Collapser::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Backend::Serialize::JSPON::Collapser::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Collapse entry data to JSPON compliant structures
 
 use KiokuDB::Entry;
 use KiokuDB::Reference;
-use JSON;
+use JSON 2.12;
+use JSON::XS 2.231;
 
 use namespace::clean -except => 'meta';
 
@@ -85,8 +91,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::Backend::Serialize::JSPON::Collapser - Collapse entry data to
-JSPON compliant structures
+KiokuDB::Backend::Serialize::JSPON::Collapser - Collapse entry data to JSPON compliant structures
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -118,5 +127,15 @@ suitable for serialization as a JSON string.
 
 =back
 
-=cut
+=head1 AUTHOR
 
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

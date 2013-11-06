@@ -1,116 +1,189 @@
-#!/usr/bin/perl -w
 
 use strict;
-
-use ExtUtils::MakeMaker;
-
-require 5.008; # utf8 and what not
-
-if ( $] == 5.010 ) {
-        warn <<WARNING
-
-  *********************************************************
-  *                                                       *
-  *      Note: Perl 5.10.0 leaks memory in weaken(),      *
-  *      This bug has been fixed in version 5.10.1        *
-  *                                                       *
-  *********************************************************
-
-WARNING
-}
+use warnings;
 
 
-if ( eval { require KiokuDB::Cmd; 1 } ) {
-    open my $fh, "<", "lib/KiokuDB.pm" or die $!;
-    while ( <$fh> ) {
-        if ( /REQUIRED_CMD_VERSION\s*=/ ) {
-            eval $_;
-            last;
-        }
-    }
 
-    unless ( eval { KiokuDB::Cmd->VERSION($::REQUIRED_CMD_VERSION); 1 } ) {
-        warn <<WARNING
+use ExtUtils::MakeMaker 6.30;
 
-  *********************************************************
-  *                                                       *
-  *    Note: your copy of KiokuDB::Cmd is out of date     *
-  *                                                       *
-  *  Version $::REQUIRED_CMD_VERSION is required by this version of KiokuDB  *
-  *                                                       *
-  *********************************************************
 
-WARNING
-    }
-}
-WriteMakefile(
-    NAME         => 'KiokuDB',
-    VERSION_FROM => 'lib/KiokuDB.pm',
-    INSTALLDIRS  => 'site',
-    PL_FILES     => { },
-    EXE_FILES    => [ grep { /\w$/ } glob("bin/*") ],
-    PREREQ_PM    => {
-        'Moose' => 1.17,
-        'Class::MOP' => 0.94,
-        'MooseX::Role::Parameterized' => 0.10,
-        #'MooseX::AttributeHelpers' => '0.14',
-        'MooseX::Clone' => 0.04,
-        'Path::Class' => 0,
 
-        # configure
-        'MooseX::YAML' => 0.04,
-
-        # misc dev shit
-        'Try::Tiny' => 0,
-        'Throwable' => 0,
-        'Scalar::Util' => 0,
-        #'Devel::PartialDump' => '0.06',
-        'namespace::clean' => '0.08',
-
-        # Identity is important
-        ( eval { require Data::UUID::LibUUID }
-            ? ( "Data::UUID::LibUUID" => '0.05' )
-            : ( "Data::UUID"          => '1.203' ) ),
-
-        # visits are also important
-        'Data::Visitor' => '0.24',
-        'Tie::ToObject' => 0,
-        'Task::Weaken'  => 0,
-
-        # scanning and searching
-        'Data::Stream::Bulk' => "0.08",
-
-        # live objects
-        'Hash::Util::FieldHash::Compat' => 0,
-        ( eval { require Hash::Util::FieldHash } ? () : (
-            # for 5.8 we need some specific versions of fieldhash deps
-            'Tie::RefHash::Weak' => '0.09',
-            'Variable::Magic'    => '0.24',
-        )),
-        'Scope::Guard' => 0,
-
-        'Set::Object' => '1.26',
-
-        'Cache::Ref' => '0.02',
-
-        'Module::Pluggable::Object' => 0,
-        'Test::use::ok' => 0,
-        'Test::Exception' => 0,
-        'Test::More' => 0.88,
-
-        'Search::GIN' => 0.03,
-
-        'JSON' => 2.12,
-        'JSON::XS' => 2.231,
-        'YAML::XS' => 0.30,
-        'Storable' => 0,
-
-        'IO' => 1.23,
-
-        # closure serializing support
-        'PadWalker' => 1.9,
-
-        # Role::ID::Digest
-        'Digest::SHA' => 0,
-    },
+my %WriteMakefileArgs = (
+  "ABSTRACT" => "Object Graph storage engine",
+  "AUTHOR" => "Yuval Kogman <nothingmuch\@woobling.org>",
+  "BUILD_REQUIRES" => {},
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
+  },
+  "DISTNAME" => "KiokuDB",
+  "EXE_FILES" => [
+    "bin/kioku"
+  ],
+  "LICENSE" => "perl",
+  "NAME" => "KiokuDB",
+  "PREREQ_PM" => {
+    "B" => 0,
+    "B::Deparse" => 0,
+    "Cache::Ref" => "0.02",
+    "Carp" => 0,
+    "Data::Stream::Bulk" => "0.08",
+    "Data::Stream::Bulk::Util" => 0,
+    "Data::Swap" => 0,
+    "Data::UUID" => "1.203",
+    "Data::Visitor" => "0.24",
+    "Digest::SHA" => 0,
+    "Encode" => 0,
+    "Hash::Util::FieldHash::Compat" => 0,
+    "IO::Handle" => 0,
+    "JSON" => "2.12",
+    "JSON::XS" => "2.231",
+    "List::Util" => 0,
+    "Module::Pluggable::Object" => 0,
+    "Moose" => "2.0000",
+    "Moose::Exporter" => 0,
+    "Moose::Role" => 0,
+    "Moose::Util" => 0,
+    "Moose::Util::MetaRole" => 0,
+    "Moose::Util::TypeConstraints" => 0,
+    "MooseX::Clone" => "0.04",
+    "MooseX::Clone::Meta::Attribute::Trait::NoClone" => 0,
+    "MooseX::Role::Parameterized" => "0.10",
+    "MooseX::YAML" => "0.04",
+    "POSIX" => 0,
+    "PadWalker" => "1.9",
+    "Path::Class" => 0,
+    "Scalar::Util" => 0,
+    "Scope::Guard" => 0,
+    "Search::GIN::Driver" => 0,
+    "Search::GIN::Extract" => 0,
+    "Search::GIN::Query::Class" => "0.03",
+    "Set::Object" => "1.26",
+    "Storable" => 0,
+    "Sub::Exporter" => 0,
+    "Symbol" => 0,
+    "Test::Exception" => 0,
+    "Test::Moose" => 0,
+    "Test::More" => "0.88",
+    "Throwable" => 0,
+    "Tie::RefHash" => 0,
+    "Tie::ToObject" => 0,
+    "Try::Tiny" => 0,
+    "YAML::XS" => "0.30",
+    "constant" => 0,
+    "namespace::clean" => "0.08",
+    "overload" => 0,
+    "strict" => 0,
+    "utf8" => 0,
+    "warnings" => 0
+  },
+  "TEST_REQUIRES" => {
+    "Cache::Ref::CART" => 0,
+    "Cache::Ref::CLOCK" => 0,
+    "Data::Dumper" => 0,
+    "Data::Stream::Bulk::Callback" => 0,
+    "File::Spec" => 0,
+    "IO::Handle" => 0,
+    "IPC::Open3" => 0,
+    "Search::GIN::Driver::Hash" => 0,
+    "Search::GIN::Extract::Class" => 0,
+    "Search::GIN::Extract::Delegate" => 0,
+    "Test::More" => "0.88",
+    "base" => 0,
+    "if" => 0
+  },
+  "VERSION" => "0.55",
+  "test" => {
+    "TESTS" => "t/*.t"
+  }
 );
+
+
+my %FallbackPrereqs = (
+  "B" => 0,
+  "B::Deparse" => 0,
+  "Cache::Ref" => "0.02",
+  "Cache::Ref::CART" => 0,
+  "Cache::Ref::CLOCK" => 0,
+  "Carp" => 0,
+  "Data::Dumper" => 0,
+  "Data::Stream::Bulk" => "0.08",
+  "Data::Stream::Bulk::Callback" => 0,
+  "Data::Stream::Bulk::Util" => 0,
+  "Data::Swap" => 0,
+  "Data::UUID" => "1.203",
+  "Data::Visitor" => "0.24",
+  "Digest::SHA" => 0,
+  "Encode" => 0,
+  "File::Spec" => 0,
+  "Hash::Util::FieldHash::Compat" => 0,
+  "IO::Handle" => 0,
+  "IPC::Open3" => 0,
+  "JSON" => "2.12",
+  "JSON::XS" => "2.231",
+  "List::Util" => 0,
+  "Module::Pluggable::Object" => 0,
+  "Moose" => "2.0000",
+  "Moose::Exporter" => 0,
+  "Moose::Role" => 0,
+  "Moose::Util" => 0,
+  "Moose::Util::MetaRole" => 0,
+  "Moose::Util::TypeConstraints" => 0,
+  "MooseX::Clone" => "0.04",
+  "MooseX::Clone::Meta::Attribute::Trait::NoClone" => 0,
+  "MooseX::Role::Parameterized" => "0.10",
+  "MooseX::YAML" => "0.04",
+  "POSIX" => 0,
+  "PadWalker" => "1.9",
+  "Path::Class" => 0,
+  "Scalar::Util" => 0,
+  "Scope::Guard" => 0,
+  "Search::GIN::Driver" => 0,
+  "Search::GIN::Driver::Hash" => 0,
+  "Search::GIN::Extract" => 0,
+  "Search::GIN::Extract::Class" => 0,
+  "Search::GIN::Extract::Delegate" => 0,
+  "Search::GIN::Query::Class" => "0.03",
+  "Set::Object" => "1.26",
+  "Storable" => 0,
+  "Sub::Exporter" => 0,
+  "Symbol" => 0,
+  "Test::Exception" => 0,
+  "Test::Moose" => 0,
+  "Test::More" => "0.88",
+  "Throwable" => 0,
+  "Tie::RefHash" => 0,
+  "Tie::ToObject" => 0,
+  "Try::Tiny" => 0,
+  "YAML::XS" => "0.30",
+  "base" => 0,
+  "constant" => 0,
+  "if" => 0,
+  "namespace::clean" => "0.08",
+  "overload" => 0,
+  "strict" => 0,
+  "utf8" => 0,
+  "warnings" => 0
+);
+
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
+  delete $WriteMakefileArgs{TEST_REQUIRES};
+  delete $WriteMakefileArgs{BUILD_REQUIRES};
+  $WriteMakefileArgs{PREREQ_PM} = \%FallbackPrereqs;
+}
+
+delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
+  unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
+
+if ($] < 5.010) {
+    $WriteMakefileArgs{PREREQ_PM} = {
+        %{ $WriteMakefileArgs{PREREQ_PM} },
+        "Tie::RefHash::Weak" => "0.09",
+        "Variable::Magic" => "0.24",
+    };
+}
+
+WriteMakefile(%WriteMakefileArgs);
+
+
+

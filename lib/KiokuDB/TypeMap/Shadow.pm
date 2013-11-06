@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::TypeMap::Shadow;
+BEGIN {
+  $KiokuDB::TypeMap::Shadow::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::TypeMap::Shadow::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Try a list of KiokuDB::TypeMaps in order
 
 use namespace::clean -except => 'meta';
 
@@ -35,7 +40,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::TypeMap::Shadow - Try a list of L<KiokuDB::TypeMap>s in order
+KiokuDB::TypeMap::Shadow - Try a list of KiokuDB::TypeMaps in order
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -59,5 +68,16 @@ L<KiokuDB::TypeMap::Default> instance provided by the backend.
 
 This differs from using C<includes> in L<KiokuDB::TypeMap> because that
 inclusion is computed symmetrically, like roles.
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut

@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::TypeMap::Entry::Std;
+BEGIN {
+  $KiokuDB::TypeMap::Entry::Std::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::TypeMap::Entry::Std::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: Role for more easily specifying collapse/expand methods
 
 use KiokuDB::TypeMap::Entry::Compiled;
 
@@ -24,6 +29,10 @@ __END__
 =head1 NAME
 
 KiokuDB::TypeMap::Entry::Std - Role for more easily specifying collapse/expand methods
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -52,5 +61,16 @@ L<KiokuDB::TypeMap::Entry>
 L<KiokuDB::TypeMap::Entry::Std::ID>
 L<KiokuDB::TypeMap::Entry::Std::Compile>
 L<KiokuDB::TypeMap::Entry::Std::Intrinsic>
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut

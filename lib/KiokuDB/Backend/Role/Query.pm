@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Backend::Role::Query;
+BEGIN {
+  $KiokuDB::Backend::Role::Query::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Backend::Role::Query::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: Backend specific query API
 
 use namespace::clean -except => 'meta';
 
@@ -21,6 +26,10 @@ __END__
 =head1 NAME
 
 KiokuDB::Backend::Role::Query - Backend specific query API
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -43,6 +52,15 @@ The backend is expected to interpret the search arguments which are passed
 through from L<KiokuDB/search> as is, and return a L<Data::Stream::Bulk> of
 matching entries.
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

@@ -1,5 +1,12 @@
 package KiokuDB::Role::API;
+BEGIN {
+  $KiokuDB::Role::API::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Role::API::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: Role for KiokuDB api (used to setup delegations).
 
 use namespace::clean -except => 'meta';
 
@@ -56,7 +63,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::Role::API - Role for L<KiokuDB> api (used to setup delegations).
+KiokuDB::Role::API - Role for KiokuDB api (used to setup delegations).
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -130,3 +141,16 @@ The C<directory> method should be used to fetch the actual L<KiokuDB> delegate.
 This will work no matter how deeply it is nested.
 
 =back
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

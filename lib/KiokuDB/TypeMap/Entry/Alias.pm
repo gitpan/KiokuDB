@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::TypeMap::Entry::Alias;
+BEGIN {
+  $KiokuDB::TypeMap::Entry::Alias::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::TypeMap::Entry::Alias::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: An alias in the typemap to another entry
 
 use namespace::clean -except => 'meta';
 
@@ -23,6 +28,10 @@ __END__
 
 KiokuDB::TypeMap::Entry::Alias - An alias in the typemap to another entry
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     my $typemap = KiokuDB::TypeMap->new(
@@ -38,3 +47,16 @@ KiokuDB::TypeMap::Entry::Alias - An alias in the typemap to another entry
 
 This pseudo-entry directs the typemap resolution to re-resolve with the key in
 the C<to> field.
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

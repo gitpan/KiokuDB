@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Backend::Role::UnicodeSafe;
+BEGIN {
+  $KiokuDB::Backend::Role::UnicodeSafe::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Backend::Role::UnicodeSafe::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: An informational role for binary data safe backends.
 
 use namespace::clean -except => 'meta';
 
@@ -15,8 +20,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::Backend::Role::UnicodeSafe - An informational role for binary data safe
-backends.
+KiokuDB::Backend::Role::UnicodeSafe - An informational role for binary data safe backends.
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -37,3 +45,15 @@ retreived as B<byte> strings upon deserialization.
 
 This mostly has to do with L<KiokuDB::Backend::Serialize> variants.
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

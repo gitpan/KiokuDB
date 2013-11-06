@@ -1,5 +1,12 @@
 package KiokuDB::Role::Upgrade::Handlers::Table;
+BEGIN {
+  $KiokuDB::Role::Upgrade::Handlers::Table::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Role::Upgrade::Handlers::Table::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: A role for classes
 
 use namespace::clean;
 
@@ -27,7 +34,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::Role::Upgrade::Handlers::Table - A role for classes 
+KiokuDB::Role::Upgrade::Handlers::Table - A role for classes
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -50,3 +61,16 @@ definition, instead of as arguments to the L<KiokuDB> handle constructor.
 
 See L<KiokuDB::TypeMap::Entry::MOP> more details and
 L<KiokuDB::Role::Upgrade::Data> for a lower level alternative.
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

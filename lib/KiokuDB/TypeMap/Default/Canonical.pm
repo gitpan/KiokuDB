@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::TypeMap::Default::Canonical;
+BEGIN {
+  $KiokuDB::TypeMap::Default::Canonical::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::TypeMap::Default::Canonical::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: A KiokuDB::TypeMap::Default implementation that canonicalizes the standard types to simplified versions.
 
 use namespace::clean -except => 'meta';
 
@@ -88,10 +93,26 @@ __END__
 
 =head1 NAME
 
-KiokuDB::TypeMap::Default::Canonical - A L<KiokuDB::TypeMap::Default>
-implementation that canonicalizes the standard types to simplified versions.
+KiokuDB::TypeMap::Default::Canonical - A KiokuDB::TypeMap::Default implementation that canonicalizes the standard types to simplified versions.
+
+=head1 VERSION
+
+version 0.55
 
 =head1 DESCRIPTION
 
 This typemap is suitable for serialization using L<JSON>. It stringifies or
 otherwise converts data structures into primitive representations.
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

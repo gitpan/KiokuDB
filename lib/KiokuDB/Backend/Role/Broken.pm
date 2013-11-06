@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Backend::Role::Broken;
+BEGIN {
+  $KiokuDB::Backend::Role::Broken::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Backend::Role::Broken::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: Skip test fixtures
 
 use namespace::clean -except => 'meta';
 
@@ -16,6 +21,10 @@ __END__
 =head1 NAME
 
 KiokuDB::Backend::Role::Broken - Skip test fixtures
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -32,6 +41,15 @@ If your backend can't pass a test fixture you can ask to skip it using this role
 
 Simply return the fixture's name from the C<skip_fixtures> sub.
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

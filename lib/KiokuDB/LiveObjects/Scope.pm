@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::LiveObjects::Scope;
+BEGIN {
+  $KiokuDB::LiveObjects::Scope::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::LiveObjects::Scope::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Scope helper object
 
 use namespace::clean -except => 'meta';
 
@@ -69,6 +74,10 @@ __END__
 
 KiokuDB::LiveObjects::Scope - Scope helper object
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     {
@@ -110,6 +119,15 @@ Effectively kills the scope by clearing it and removing it from the live object 
 
 =back
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

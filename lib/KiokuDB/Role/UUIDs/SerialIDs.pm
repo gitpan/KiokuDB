@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Role::UUIDs::SerialIDs;
+BEGIN {
+  $KiokuDB::Role::UUIDs::SerialIDs::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Role::UUIDs::SerialIDs::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: Serial ID assignment based on a global counter.
 
 use namespace::clean -except => 'meta';
 
@@ -16,8 +21,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::Role::UUIDs::SerialIDs - Serial ID assignment based on a global
-counter.
+KiokuDB::Role::UUIDs::SerialIDs - Serial ID assignment based on a global counter.
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -37,5 +45,16 @@ runs, making things easier to follow.
 
 Do B<NOT> use this role for storage of actual data, because ID clashes are
 almost guaranteed to cause data loss.
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut

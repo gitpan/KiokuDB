@@ -1,8 +1,15 @@
 package KiokuDB::TypeMap::Entry::Closure;
+BEGIN {
+  $KiokuDB::TypeMap::Entry::Closure::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::TypeMap::Entry::Closure::VERSION = '0.55';
+}
 use Moose;
 
 use Carp qw(croak);
 use Scalar::Util qw(refaddr);
+use PadWalker 1.9;
 
 no warnings 'recursion';
 
@@ -15,7 +22,6 @@ sub compile_collapse_body {
 
     require B;
     require B::Deparse;
-    require PadWalker;
 
     return sub {
         my ( $collapser, %args ) = @_;
@@ -50,7 +56,7 @@ sub compile_collapse_body {
             my $file;
 
             if ( my $meta = Class::MOP::get_metaclass_by_name($pkg) ) {
-                if ( my $method = $meta->get_method($name) ) { 
+                if ( my $method = $meta->get_method($name) ) {
                     if ( refaddr($method->body) == refaddr($sub)
                             and
                         $method->isa("Class::MOP::Method::Generated")
@@ -98,8 +104,6 @@ sub _deparse {
 
 sub compile_expand {
     my $self = shift;
-
-    require PadWalker;
 
     return sub {
         my ( $linker, $entry ) = @_;
@@ -188,3 +192,26 @@ __PACKAGE__->meta->make_immutable;
 __PACKAGE__
 
 __END__
+
+=pod
+
+=head1 NAME
+
+KiokuDB::TypeMap::Entry::Closure
+
+=head1 VERSION
+
+version 0.55
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

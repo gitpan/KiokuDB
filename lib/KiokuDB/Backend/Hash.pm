@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Backend::Hash;
+BEGIN {
+  $KiokuDB::Backend::Hash::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Backend::Hash::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: In memory backend for testing purposes.
 
 use Data::Stream::Bulk::Util qw(bulk);
 
@@ -85,6 +90,10 @@ __END__
 
 KiokuDB::Backend::Hash - In memory backend for testing purposes.
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     my $dir = KiokuDB->new(
@@ -96,5 +105,16 @@ KiokuDB::Backend::Hash - In memory backend for testing purposes.
 This L<KiokuDB> backend provides in memory storage and retrieval of
 L<KiokuDB::Entry> objects using L<Storable>'s C<dclone> to make dumps of the
 backend clear.
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut

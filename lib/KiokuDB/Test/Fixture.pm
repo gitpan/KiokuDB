@@ -1,6 +1,10 @@
-#!/usr/bin/perl
-
 package KiokuDB::Test::Fixture;
+BEGIN {
+  $KiokuDB::Test::Fixture::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Test::Fixture::VERSION = '0.55';
+}
 use Moose::Role;
 
 use Test::More;
@@ -274,7 +278,7 @@ sub no_live_objects {
     my @e;
 
     my $failed;
-    
+
     $failed++ unless is( scalar(@l), 0, "no live objects" );
 
     unless ( $self->directory->live_objects->txn_scope ) {
@@ -337,3 +341,26 @@ sub txn_lives {
 __PACKAGE__
 
 __END__
+
+=pod
+
+=head1 NAME
+
+KiokuDB::Test::Fixture
+
+=head1 VERSION
+
+version 0.55
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

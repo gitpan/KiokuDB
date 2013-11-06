@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::TypeMap::Entry::Passthrough;
+BEGIN {
+  $KiokuDB::TypeMap::Entry::Passthrough::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::TypeMap::Entry::Passthrough::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: A typemap entry of objects that will be serialized by the backend.
 
 use Carp qw(croak);
 
@@ -78,8 +83,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::TypeMap::Entry::Passthrough - A typemap entry of objects that will be
-serialized by the backend.
+KiokuDB::TypeMap::Entry::Passthrough - A typemap entry of objects that will be serialized by the backend.
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -110,3 +118,16 @@ If false, the object will get its own ID and entry, and the object will be in
 the C<data> field of that entry.
 
 =back
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

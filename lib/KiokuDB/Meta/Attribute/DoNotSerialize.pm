@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Meta::Attribute::DoNotSerialize;
+BEGIN {
+  $KiokuDB::Meta::Attribute::DoNotSerialize::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Meta::Attribute::DoNotSerialize::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: Trait for skipped attributes
 
 use Moose::Util qw(does_role);
 
@@ -18,6 +23,10 @@ __END__
 =head1 NAME
 
 KiokuDB::Meta::Attribute::DoNotSerialize - Trait for skipped attributes
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -41,6 +50,15 @@ attribute when serializing.
 L<KiokuDB> also recognizes L<MooseX::Meta::Attribute::Trait::DoNotSerialize>,
 but if you don't want to install L<MooseX::Storage> you can use this instead.
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

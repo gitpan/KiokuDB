@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::TypeMap::Composite;
+BEGIN {
+  $KiokuDB::TypeMap::Composite::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::TypeMap::Composite::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: A role for KiokuDB::TypeMaps created out of many smaller typemaps
 
 use KiokuDB::TypeMap;
 
@@ -9,6 +14,12 @@ use namespace::clean -except => 'meta';
 
 {
     package KiokuDB::TypeMap::Composite::TypeMapAttr;
+BEGIN {
+  $KiokuDB::TypeMap::Composite::TypeMapAttr::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::TypeMap::Composite::TypeMapAttr::VERSION = '0.55';
+}
     use Moose::Role;
 
     use namespace::clean -except => 'meta';
@@ -138,8 +149,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::TypeMap::Composite - A role for L<KiokuDB::TypeMaps> created out of
-many smaller typemaps
+KiokuDB::TypeMap::Composite - A role for KiokuDB::TypeMaps created out of many smaller typemaps
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -148,7 +162,7 @@ many smaller typemaps
 
     extends qw(KiokuDB::TypeMap);
 
-	with qw(KiokuDB::TypeMap::Composite);
+    with qw(KiokuDB::TypeMap::Composite);
 
 
     # declare typemaps to inherit from using the KiokuDB::TypeMap trait
@@ -276,5 +290,15 @@ persist automatically:
 
 =back
 
-=cut
+=head1 AUTHOR
 
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

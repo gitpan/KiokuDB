@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::LiveObjects::TXNScope;
+BEGIN {
+  $KiokuDB::LiveObjects::TXNScope::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::LiveObjects::TXNScope::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Transaction scope.
 
 use Scalar::Util qw(weaken);
 
@@ -64,6 +69,10 @@ __END__
 
 KiokuDB::LiveObjects::TXNScope - Transaction scope.
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     $txn_scope = $live_objects->new_txn;
@@ -104,6 +113,15 @@ Calls C<KiokuDB::LiveObjects/rollback_entries> with all the recorded entries.
 
 =back
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

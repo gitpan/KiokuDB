@@ -1,11 +1,16 @@
-#!/usr/bin/perl
-
 package KiokuDB::Backend::Serialize::YAML;
+BEGIN {
+  $KiokuDB::Backend::Serialize::YAML::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Backend::Serialize::YAML::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: YAML::XS based serialization of KiokuDB::Entry objects.
 
 use IO::Handle;
 
-use YAML::XS qw(Load Dump);
+use YAML::XS 0.30 qw(Load Dump);
 
 use namespace::clean -except => 'meta';
 
@@ -78,8 +83,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::Backend::Serialize::YAML - L<YAML::XS> based serialization of
-L<KiokuDB::Entry> objects.
+KiokuDB::Backend::Serialize::YAML - YAML::XS based serialization of KiokuDB::Entry objects.
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -114,3 +122,16 @@ Reads until a YAML document boundry is reached, and then deserializes the
 current buffer.
 
 =back
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

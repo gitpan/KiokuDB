@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Backend::TypeMap::Default;
+BEGIN {
+  $KiokuDB::Backend::TypeMap::Default::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Backend::TypeMap::Default::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: A role for backends with a default typemap
 
 use namespace::clean -except => 'meta';
 
@@ -24,6 +29,10 @@ __END__
 
 KiokuDB::Backend::TypeMap::Default - A role for backends with a default typemap
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     package MyBackend;
@@ -44,5 +53,15 @@ C<_build_default_typemap> that will return a L<KiokuDB::TypeMap> instance.
 
 See L<KiokuDB::TypeMap::Default> for details.
 
-=cut
+=head1 AUTHOR
 
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

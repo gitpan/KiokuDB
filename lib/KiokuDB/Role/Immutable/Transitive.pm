@@ -1,7 +1,14 @@
 package KiokuDB::Role::Immutable::Transitive;
+BEGIN {
+  $KiokuDB::Role::Immutable::Transitive::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Role::Immutable::Transitive::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: A role for immutable objects that only point at other such objects.
 
-use namespace::autoclean;
+use namespace::clean -except => 'meta';
 
 with qw(
     KiokuDB::Role::Immutable
@@ -19,8 +26,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::Role::Immutable::Transitive - A role for immutable objects that only
-point at other such objects.
+KiokuDB::Role::Immutable::Transitive - A role for immutable objects that only point at other such objects.
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -34,7 +44,15 @@ that this object and all objects it points to are immutable.
 These objects can be freely cached as live instances, since none of the data
 they keep live is ever updated.
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-
-

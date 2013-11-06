@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Role::ID;
+BEGIN {
+  $KiokuDB::Role::ID::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Role::ID::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: A role for objects who choose their own ID.
 
 use namespace::clean -except => 'meta';
 
@@ -16,6 +21,10 @@ __END__
 =head1 NAME
 
 KiokuDB::Role::ID - A role for objects who choose their own ID.
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -57,5 +66,15 @@ Should return a string to be used as the ID of the object.
 
 =back
 
-=cut
+=head1 AUTHOR
 
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::LinkChecker;
+BEGIN {
+  $KiokuDB::LinkChecker::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::LinkChecker::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Reference consistency checker
 
 use KiokuDB::LinkChecker::Results;
 
@@ -58,6 +63,10 @@ __END__
 
 KiokuDB::LinkChecker - Reference consistency checker
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     use KiokuDB::LinkChecker;
@@ -72,6 +81,15 @@ KiokuDB::LinkChecker - Reference consistency checker
 
 This is the low level link checker used by L<KiokuDB::Cmd::Command::FSCK>.
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

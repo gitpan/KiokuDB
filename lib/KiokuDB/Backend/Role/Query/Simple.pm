@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Backend::Role::Query::Simple;
+BEGIN {
+  $KiokuDB::Backend::Role::Query::Simple::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Backend::Role::Query::Simple::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: Simple query api
 
 use namespace::clean -except => 'meta';
 
@@ -37,6 +42,10 @@ __END__
 
 KiokuDB::Backend::Role::Query::Simple - Simple query api
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     with qw(KiokuDB::Backend::Role::Query::Simple);
@@ -63,6 +72,15 @@ will search for objects whose C<name> attribute contains the string C<Mia>.
 
 More complex operations will be defined in the future.
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

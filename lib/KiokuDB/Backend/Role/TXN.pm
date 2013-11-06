@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Backend::Role::TXN;
+BEGIN {
+  $KiokuDB::Backend::Role::TXN::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Backend::Role::TXN::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: Backend level transaction support.
 
 use Carp qw(croak);
 use Try::Tiny;
@@ -11,15 +16,15 @@ use namespace::clean -except => 'meta';
 requires qw(txn_begin txn_commit txn_rollback);
 
 sub txn_do {
-	my ( $self, $coderef, %args ) = @_;
+    my ( $self, $coderef, %args ) = @_;
 
-	my @args = @{ $args{args} || [] };
+    my @args = @{ $args{args} || [] };
 
-	my ( $commit, $rollback ) = @args{qw(commit rollback)};
+    my ( $commit, $rollback ) = @args{qw(commit rollback)};
 
-	ref $coderef eq 'CODE' or croak '$coderef must be a CODE reference';
+    ref $coderef eq 'CODE' or croak '$coderef must be a CODE reference';
 
-	my @txn_args = $self->txn_begin;
+    my @txn_args = $self->txn_begin;
 
     try {
         my @ret;
@@ -39,15 +44,15 @@ sub txn_do {
     } catch {
         my $err = $_;
 
-		try {
-			$self->txn_rollback(@txn_args);
+        try {
+            $self->txn_rollback(@txn_args);
             $rollback->() if $rollback;
         } catch {
-			croak "Transaction aborted: $err, rollback failed: $_";
-		};
+            croak "Transaction aborted: $err, rollback failed: $_";
+        };
 
-		die $err;
-	}
+        die $err;
+    }
 }
 
 __PACKAGE__
@@ -59,6 +64,10 @@ __END__
 =head1 NAME
 
 KiokuDB::Backend::Role::TXN - Backend level transaction support.
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -80,7 +89,6 @@ This API is inspired by standard database transactions much like you get with
 L<DBI>.
 
 This is the low level interface required by L<KiokuDB/txn_do>.
-
 
 =head1 OPTIONAL METHODS
 
@@ -110,7 +118,6 @@ C<txn_commit> or C<txn_rollback> as necessary.
 
 The current handle will be passed to nested calls to C<txn_begin>.
 
-
 =item txn_commit $txn
 
 Commit the transaction.
@@ -120,5 +127,16 @@ Commit the transaction.
 Rollback the transaction.
 
 =back
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut

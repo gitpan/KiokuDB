@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Thunk;
+BEGIN {
+  $KiokuDB::Thunk::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Thunk::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Internal only placeholder for deferred objects
 
 use namespace::clean -except => 'meta';
 
@@ -60,6 +65,10 @@ __END__
 
 KiokuDB::Thunk - Internal only placeholder for deferred objects
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     # do not use directly,
@@ -74,3 +83,15 @@ mark with L<KiokuDB::Meta::Attribute::Lazy> automatically, and should never be
 visible to the user because L<KiokuDB::Meta::Instance> will automatically
 inflate it before it's even seen by the accessor's code.
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

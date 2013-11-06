@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Backend::Role::Scan;
+BEGIN {
+  $KiokuDB::Backend::Role::Scan::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Backend::Role::Scan::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: Root set iteration
 
 sub entries_to_ids {
     my $stream = shift;
@@ -46,6 +51,10 @@ __END__
 =head1 NAME
 
 KiokuDB::Backend::Role::Scan - Root set iteration
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -93,6 +102,15 @@ Should return a L<Data::Stream::Bulk> of everything but the root entries.
 
 =back
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::TypeMap::Entry::Callback;
+BEGIN {
+  $KiokuDB::TypeMap::Entry::Callback::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::TypeMap::Entry::Callback::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Callback based inflation/deflation of objects
 
 no warnings 'recursion';
 
@@ -140,6 +145,10 @@ __END__
 
 KiokuDB::TypeMap::Entry::Callback - Callback based inflation/deflation of objects
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     KiokuDB::TypeMap->new(
@@ -197,3 +206,16 @@ This is useful for value like objects, for whom the reference address makes no
 difference (such as L<URI> objects).
 
 =back
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

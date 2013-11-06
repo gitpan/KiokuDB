@@ -1,12 +1,13 @@
-#!/usr/bin/perl
-
 package KiokuDB::Class;
-
-use strict;
-use warnings;
-
-use Moose ();
+BEGIN {
+  $KiokuDB::Class::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Class::VERSION = '0.55';
+}
 use Moose::Exporter;
+# ABSTRACT: KiokuDB specific metaclass
+
 use Moose::Util::MetaRole;
 
 use KiokuDB::Meta::Instance;
@@ -41,7 +42,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::Class - L<KiokuDB> specific metaclass
+KiokuDB::Class - KiokuDB specific metaclass
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -62,5 +67,15 @@ Currently only L<KiokuDB::Meta::Attribute::Lazy> is set up (by extending
 L<Moose::Meta::Instance> with a custom role to support it), but in the future
 indexing, identity, and various optimizations will be supported by this.
 
-=cut
+=head1 AUTHOR
 
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Backend::Role::BinarySafe;
+BEGIN {
+  $KiokuDB::Backend::Role::BinarySafe::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Backend::Role::BinarySafe::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: An informational role for binary data safe backends.
 
 use namespace::clean -except => 'meta';
 
@@ -13,8 +18,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::Backend::Role::BinarySafe - An informational role for binary data safe
-backends.
+KiokuDB::Backend::Role::BinarySafe - An informational role for binary data safe backends.
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -35,3 +43,15 @@ This mostly has to do with L<KiokuDB::Backend::Serialize> variants (for example
 L<KiokuDB::Backend::Serialize::Storable> is binary safe, while
 L<KiokuDB::Backend::Serialize::JSON> is not).
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Set;
+BEGIN {
+  $KiokuDB::Set::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Set::VERSION = '0.55';
+}
 use Moose::Role 'requires', 'has' => { -as => "attr" }; # need a 'has' method
+# ABSTRACT: Set::Object wrapper for KiokuDB with lazy loading.
 
 use Moose::Util::TypeConstraints 'coerce', 'from', 'via';
 
@@ -148,7 +153,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::Set - L<Set::Object> wrapper for KiokuDB with lazy loading.
+KiokuDB::Set - Set::Object wrapper for KiokuDB with lazy loading.
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -194,5 +203,15 @@ L<KiokuDB::Set::Loaded> object.
 This is the result of vivifying the members of a deferred set, and is similar
 to transient sets in implementation.
 
-=cut
+=head1 AUTHOR
 
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

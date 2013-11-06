@@ -1,6 +1,10 @@
-#!/usr/bin/perl
-
 package KiokuDB::Test::Fixture::Overwrite;
+BEGIN {
+  $KiokuDB::Test::Fixture::Overwrite::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Test::Fixture::Overwrite::VERSION = '0.55';
+}
 use Moose;
 
 use Test::More;
@@ -14,6 +18,12 @@ use KiokuDB::Test::Company;
 
 {
     package KiokuDB::Test::BLOB;
+BEGIN {
+  $KiokuDB::Test::BLOB::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Test::BLOB::VERSION = '0.55';
+}
     use Moose;
 
     with qw(KiokuDB::Role::ID::Content);
@@ -148,3 +158,25 @@ __PACKAGE__
 
 __END__
 
+=pod
+
+=head1 NAME
+
+KiokuDB::Test::Fixture::Overwrite
+
+=head1 VERSION
+
+version 0.55
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

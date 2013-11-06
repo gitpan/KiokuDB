@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Role::UUIDs;
+BEGIN {
+  $KiokuDB::Role::UUIDs::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Role::UUIDs::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: UUID generation role.
 
 use Try::Tiny;
 
@@ -27,6 +32,10 @@ __END__
 
 KiokuDB::Role::UUIDs - UUID generation role.
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     with qw(KiokuDB::Role::UUIDs);
@@ -48,5 +57,16 @@ L<Data::UUID>) an implementation role is selected.
 Create a new UUID
 
 =back
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut

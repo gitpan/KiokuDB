@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::TypeMap;
+BEGIN {
+  $KiokuDB::TypeMap::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::TypeMap::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Class to collapsing/expanding logic.
 
 use Carp qw(croak);
 use Try::Tiny;
@@ -180,6 +185,10 @@ __END__
 
 KiokuDB::TypeMap - Class to collapsing/expanding logic.
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     use KiokuDB::TypeMap;
@@ -254,3 +263,16 @@ An array reference of all the classes in C<all_isa_entries>, sorted from least
 derived to most derived.
 
 =back
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

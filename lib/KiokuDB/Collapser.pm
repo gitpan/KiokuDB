@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Collapser;
+BEGIN {
+  $KiokuDB::Collapser::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Collapser::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Collapse object hierarchies to entry data
 
 no warnings 'recursion';
 
@@ -17,7 +22,7 @@ use KiokuDB::Reference;
 use KiokuDB::Collapser::Buffer;
 use KiokuDB::Error::UnknownObjects;
 
-use Data::Visitor 0.18;
+use Data::Visitor 0.24;
 
 use Set::Object qw(set);
 
@@ -413,8 +418,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::Collapser - Collapse object hierarchies to entry
-data
+KiokuDB::Collapser - Collapse object hierarchies to entry data
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -514,5 +522,15 @@ This delegates collapsing to the backend serialization. This is convenient for
 when a backend uses e.g. L<Storable> to serialize entries, and the object in
 question already has a C<STORABLE_freeze> and C<STORABLE_thaw> method.
 
-=cut
+=head1 AUTHOR
 
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

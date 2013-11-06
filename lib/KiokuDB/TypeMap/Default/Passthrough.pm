@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::TypeMap::Default::Passthrough;
+BEGIN {
+  $KiokuDB::TypeMap::Default::Passthrough::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::TypeMap::Default::Passthrough::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: A KiokuDB::TypeMap::Default instance suitable for Storable.
 
 use namespace::clean -except => 'meta';
 
@@ -87,10 +92,26 @@ __END__
 
 =head1 NAME
 
-KiokuDB::TypeMap::Default::Passthrough - A L<KiokuDB::TypeMap::Default>
-instance suitable for L<Storable>.
+KiokuDB::TypeMap::Default::Passthrough - A KiokuDB::TypeMap::Default instance suitable for Storable.
+
+=head1 VERSION
+
+version 0.55
 
 =head1 DESCRIPTION
 
 This typemap lets most of the default data types be passed through untouched,
 so that their own L<Storable> hooks may be invoked.
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

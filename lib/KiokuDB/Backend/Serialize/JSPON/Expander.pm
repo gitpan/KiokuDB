@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Backend::Serialize::JSPON::Expander;
+BEGIN {
+  $KiokuDB::Backend::Serialize::JSPON::Expander::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Backend::Serialize::JSPON::Expander::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Inflate JSPON to entry data.
 
 use Carp qw(croak);
 use Scalar::Util qw(weaken);
@@ -161,8 +166,11 @@ __END__
 
 =head1 NAME
 
-KiokuDB::Backend::Serialize::JSPON::Expander - Inflate JSPON to entry
-data.
+KiokuDB::Backend::Serialize::JSPON::Expander - Inflate JSPON to entry data.
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -192,3 +200,16 @@ L<KiokuDB::Backend::Serialize::JSPON::Expander>.
 Recursively inflates the hash reference, returning a L<KiokuDB::Entry> object.
 
 =back
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

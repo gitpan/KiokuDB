@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Linker;
+BEGIN {
+  $KiokuDB::Linker::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Linker::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Relinks live objects from storage entries
 
 # perf improvements:
 # use a queue of required objects, queue up references, and bulk fetch
@@ -390,6 +395,10 @@ __END__
 
 KiokuDB::Linker - Relinks live objects from storage entries
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     # mostly internal
@@ -424,5 +433,15 @@ scope's job is to maintain a reference count of at least 1 for any loaded
 object, until it is destroyed itself. This ensures that weak references are not
 destroyed prematurely, but allows their use in order to avoid memory leaks.
 
-=cut
+=head1 AUTHOR
 
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

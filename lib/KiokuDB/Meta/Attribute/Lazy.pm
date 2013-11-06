@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Meta::Attribute::Lazy;
+BEGIN {
+  $KiokuDB::Meta::Attribute::Lazy::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Meta::Attribute::Lazy::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: Trait for lazy loaded attributes
 
 use Moose::Util qw(does_role);
 
@@ -28,6 +33,10 @@ __END__
 =head1 NAME
 
 KiokuDB::Meta::Attribute::Lazy - Trait for lazy loaded attributes
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -65,6 +74,15 @@ contains references to the ID and the linker, and L<KiokuDB::Meta::Instance>
 will know to replace the placeholder with the actual loaded object when it is
 fetched from the object by an accessor.
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

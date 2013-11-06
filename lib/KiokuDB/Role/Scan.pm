@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Role::Scan;
-use MooseX::Role::Parameterized;
+BEGIN {
+  $KiokuDB::Role::Scan::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Role::Scan::VERSION = '0.55';
+}
+use MooseX::Role::Parameterized 0.10;
+# ABSTRACT: A role for entry scanning.
 
 use namespace::clean -except => 'meta';
 
@@ -103,6 +108,10 @@ __END__
 
 KiokuDB::Role::Scan - A role for entry scanning.
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     package My::Entry::Processor;
@@ -150,6 +159,15 @@ sets up an attribute with delegations.
 
 =back
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

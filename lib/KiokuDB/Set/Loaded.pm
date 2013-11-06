@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Set::Loaded;
+BEGIN {
+  $KiokuDB::Set::Loaded::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Set::Loaded::VERSION = '0.55';
+}
 use Moose;
+# ABSTRACT: Implementation of loaded sets
 
 use Carp qw(croak);
 
@@ -45,6 +50,10 @@ __END__
 
 KiokuDB::Set::Loaded - Implementation of loaded sets
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     # created automatically when deferred sets are vivified
@@ -54,6 +63,15 @@ KiokuDB::Set::Loaded - Implementation of loaded sets
 This is the implementation of a loaded set. A L<KiokuDB::Set::Deferred>
 automatically upgrades into a loaded set when its set members are retrieved.
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

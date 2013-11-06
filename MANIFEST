@@ -1,8 +1,16 @@
+Changes
+LICENSE
+MANIFEST
+META.json
+META.yml
+Makefile.PL
+README.mkdn
+TODO
 bench/shootout.pl
 bench/size.pl
 bench/small.pl
 bin/kioku
-Changes
+dist.ini
 lib/KiokuDB.pm
 lib/KiokuDB/Backend.pm
 lib/KiokuDB/Backend/Hash.pm
@@ -69,13 +77,13 @@ lib/KiokuDB/Role/Immutable/Transitive.pm
 lib/KiokuDB/Role/Intrinsic.pm
 lib/KiokuDB/Role/Scan.pm
 lib/KiokuDB/Role/TypeMap.pm
-lib/KiokuDB/Role/Upgrade/Data.pm
-lib/KiokuDB/Role/Upgrade/Handlers.pm
-lib/KiokuDB/Role/Upgrade/Handlers/Table.pm
 lib/KiokuDB/Role/UUIDs.pm
 lib/KiokuDB/Role/UUIDs/DataUUID.pm
 lib/KiokuDB/Role/UUIDs/LibUUID.pm
 lib/KiokuDB/Role/UUIDs/SerialIDs.pm
+lib/KiokuDB/Role/Upgrade/Data.pm
+lib/KiokuDB/Role/Upgrade/Handlers.pm
+lib/KiokuDB/Role/Upgrade/Handlers/Table.pm
 lib/KiokuDB/Role/Verbosity.pm
 lib/KiokuDB/Role/WithDigest.pm
 lib/KiokuDB/Serializer.pm
@@ -150,11 +158,8 @@ lib/KiokuDB/Util.pm
 lib/Moose/Meta/Attribute/Custom/Trait/KiokuDB/DoNotSerialize.pm
 lib/Moose/Meta/Attribute/Custom/Trait/KiokuDB/Lazy.pm
 lib/POD2/JA/KiokuDB/Tutorial.pod
-Makefile.PL
-MANIFEST			This list of files
-MANIFEST.SKIP
 notes/std_layout.txt
-README.mkdn
+t/00-compile.t
 t/coderefs.t
 t/collapser.t
 t/digest.t
@@ -189,6 +194,6 @@ t/typemap_resolver.t
 t/typemap_values.t
 t/uuid.t
 t/versioning.t
-TODO
-META.yml                                 Module YAML meta-data (added by MakeMaker)
-META.json                                Module JSON meta-data (added by MakeMaker)
+xt/release/eol.t
+xt/release/no-tabs.t
+xt/release/pod-syntax.t

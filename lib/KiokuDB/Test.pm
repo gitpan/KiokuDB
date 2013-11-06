@@ -1,9 +1,13 @@
-#!/usr/bin/perl
-
 package KiokuDB::Test;
-
+BEGIN {
+  $KiokuDB::Test::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Test::VERSION = '0.55';
+}
 use strict;
 use warnings;
+# ABSTRACT: Reusable tests for KiokuDB backend authors.
 
 use Scalar::Util qw(blessed);
 use Test::More;
@@ -42,9 +46,15 @@ __PACKAGE__
 
 __END__
 
+=pod
+
 =head1 NAME
 
-KiokuDB::Test - Reusable tests for L<KiokuDB> backend authors.
+KiokuDB::Test - Reusable tests for KiokuDB backend authors.
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -52,7 +62,7 @@ KiokuDB::Test - Reusable tests for L<KiokuDB> backend authors.
 
     use KiokuDB::Test;
 
-    use ok "KiokuDB::Backend::MySpecialBackend";
+    use KiokuDB::Backend::MySpecialBackend;
 
     my $b = KiokuDB::Backend::MySpecialBackend->new( ... );
 
@@ -85,3 +95,16 @@ Fixtures generally check for backend roles and skip unless the backend supports
 that set of features.
 
 =back
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

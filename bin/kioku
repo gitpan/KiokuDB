@@ -1,7 +1,7 @@
 #!/usr/bin/perl
-
 use strict;
 use warnings;
+# PODNAME: kioku
 
 use KiokuDB;
 use Try::Tiny;
@@ -12,8 +12,6 @@ unless ( try_run() ) {
     } else {
         print "KiokuDB::Cmd is not installed (it's now shipped in a separate distribution).\n";
     }
-
-    try_auto_install();
 }
 
 print "\nPlease install an up to date KiokuDB::Cmd from CPAN\n";
@@ -28,21 +26,27 @@ sub try_run {
     exit;
 }
 
-sub try_auto_install {
-    if (try {
-        require Module::AutoInstall;
-        require ExtUtils::MakeMaker;
-        1;
-    }) {
-        print "\n";
-        if ( ExtUtils::MakeMaker::prompt("Module::AutoInstall is available. Should I use it to install KiokuDB::Cmd?", "N/y") =~ /^y/i ) {
-            my @installed = Module::AutoInstall->install( [], "KiokuDB::Cmd" => $KiokuDB::REQUIRED_CMD_VERSION );
-            print "\n\n";
-            print "Please retry running your command :)\n";
-            exit 1;
-        }
-    }
+__END__
 
-    return;
-}
+=pod
 
+=head1 NAME
+
+kioku
+
+=head1 VERSION
+
+version 0.55
+
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

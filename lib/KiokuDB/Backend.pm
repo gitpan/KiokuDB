@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Backend;
+BEGIN {
+  $KiokuDB::Backend::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Backend::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: Backend interface role
 
 use Moose::Util::TypeConstraints;
 use Try::Tiny;
@@ -65,6 +70,10 @@ __END__
 =head1 NAME
 
 KiokuDB::Backend - Backend interface role
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -266,6 +275,15 @@ distinct live object set. The backend may choose to share cached entry B<data>,
 as that is not mutated by L<KiokuDB::Linker>, but not the L<KiokuDB::Entry>
 instances themselves.
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

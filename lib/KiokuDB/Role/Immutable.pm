@@ -1,7 +1,12 @@
-#!/usr/bin/perl
-
 package KiokuDB::Role::Immutable;
+BEGIN {
+  $KiokuDB::Role::Immutable::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Role::Immutable::VERSION = '0.55';
+}
 use Moose::Role;
+# ABSTRACT: A role for objects that are never updated.
 
 use namespace::clean -except => 'meta';
 
@@ -16,6 +21,10 @@ __END__
 =head1 NAME
 
 KiokuDB::Role::Immutable - A role for objects that are never updated.
+
+=head1 VERSION
+
+version 0.55
 
 =head1 SYNOPSIS
 
@@ -42,6 +51,15 @@ will not work, you need to update the child directly:
 
     $kiokudb->update($immutable->child);
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

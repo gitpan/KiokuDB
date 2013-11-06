@@ -1,13 +1,18 @@
-#!/usr/bin/perl
-
 package KiokuDB::Util;
-
+BEGIN {
+  $KiokuDB::Util::AUTHORITY = 'cpan:NUFFIN';
+}
+{
+  $KiokuDB::Util::VERSION = '0.55';
+}
 use strict;
 use warnings;
+# ABSTRACT: Utility functions for working with KiokuDB
 
 use Path::Class;
 
 use Carp qw(croak);
+use MooseX::YAML 0.04;
 use Scalar::Util qw(blessed);
 
 use namespace::clean;
@@ -80,8 +85,6 @@ sub load_config {
         $config_file->openr;
     }
 
-
-    require MooseX::YAML;
     MooseX::YAML::LoadFile($config_file);
 }
 
@@ -141,8 +144,6 @@ sub load_yaml_files {
     my ( @files ) = @_;
 
     my @objects;
-
-    require MooseX::YAML;
 
     foreach my $file ( @files ) {
         my @data = MooseX::YAML::LoadFile($file);
@@ -210,6 +211,10 @@ __END__
 
 KiokuDB::Util - Utility functions for working with KiokuDB
 
+=head1 VERSION
+
+version 0.55
+
 =head1 SYNOPSIS
 
     use KiokuDB::Util qw(set weak_set);
@@ -270,6 +275,15 @@ You can use a hash to specify custom IDs:
 
 =back
 
+=head1 AUTHOR
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
-
-

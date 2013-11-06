@@ -3,12 +3,12 @@
 use strict;
 use warnings;
 
-use Test::More tests => 12;
+use Test::More;
 
 sub check_role ($) {
     my $role = shift;
 
-    use_ok $role;
+    eval "require $role" || die $@;
 
     can_ok( $role, 'generate_uuid' );
 
@@ -29,4 +29,4 @@ SKIP: {
 
 check_role 'KiokuDB::Role::UUIDs';
 
-
+done_testing;
