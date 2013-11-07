@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Role::TXN::Memory::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Role::TXN::Memory::VERSION = '0.55';
+  $KiokuDB::Backend::Role::TXN::Memory::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: In memory transactions.
@@ -214,7 +214,7 @@ KiokuDB::Backend::Role::TXN::Memory - In memory transactions.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

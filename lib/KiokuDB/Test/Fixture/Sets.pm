@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Test::Fixture::Sets::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Test::Fixture::Sets::VERSION = '0.55';
+  $KiokuDB::Test::Fixture::Sets::VERSION = '0.56';
 }
 use Moose;
 
@@ -267,7 +267,7 @@ KiokuDB::Test::Fixture::Sets
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

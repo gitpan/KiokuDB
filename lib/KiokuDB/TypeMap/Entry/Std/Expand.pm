@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Entry::Std::Expand::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Entry::Std::Expand::VERSION = '0.55';
+  $KiokuDB::TypeMap::Entry::Std::Expand::VERSION = '0.56';
 }
 use Moose::Role;
 
@@ -64,7 +64,7 @@ KiokuDB::TypeMap::Entry::Std::Expand
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

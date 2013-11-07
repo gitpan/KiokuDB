@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::LiveObjects::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::LiveObjects::VERSION = '0.55';
+  $KiokuDB::LiveObjects::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Live object set tracking
@@ -552,7 +552,7 @@ KiokuDB::LiveObjects - Live object set tracking
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

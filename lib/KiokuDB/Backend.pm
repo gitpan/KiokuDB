@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::VERSION = '0.55';
+  $KiokuDB::Backend::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Backend interface role
@@ -73,7 +73,7 @@ KiokuDB::Backend - Backend interface role
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

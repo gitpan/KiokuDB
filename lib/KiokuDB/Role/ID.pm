@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Role::ID::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Role::ID::VERSION = '0.55';
+  $KiokuDB::Role::ID::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: A role for objects who choose their own ID.
@@ -24,7 +24,7 @@ KiokuDB::Role::ID - A role for objects who choose their own ID.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

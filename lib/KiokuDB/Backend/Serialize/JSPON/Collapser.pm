@@ -3,15 +3,15 @@ BEGIN {
   $KiokuDB::Backend::Serialize::JSPON::Collapser::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Serialize::JSPON::Collapser::VERSION = '0.55';
+  $KiokuDB::Backend::Serialize::JSPON::Collapser::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Collapse entry data to JSPON compliant structures
 
 use KiokuDB::Entry;
 use KiokuDB::Reference;
+use JSON::XS 2.231 ();
 use JSON 2.12;
-use JSON::XS 2.231;
 
 use namespace::clean -except => 'meta';
 
@@ -95,7 +95,7 @@ KiokuDB::Backend::Serialize::JSPON::Collapser - Collapse entry data to JSPON com
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

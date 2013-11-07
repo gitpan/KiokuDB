@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Role::GC::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Role::GC::VERSION = '0.55';
+  $KiokuDB::Backend::Role::GC::VERSION = '0.56';
 }
 use Moose::Role;
 
@@ -25,7 +25,7 @@ KiokuDB::Backend::Role::GC
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

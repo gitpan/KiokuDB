@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Linker::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Linker::VERSION = '0.55';
+  $KiokuDB::Linker::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Relinks live objects from storage entries
@@ -397,7 +397,7 @@ KiokuDB::Linker - Relinks live objects from storage entries
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

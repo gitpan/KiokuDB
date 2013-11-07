@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Test::Fixture::Overwrite::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Test::Fixture::Overwrite::VERSION = '0.55';
+  $KiokuDB::Test::Fixture::Overwrite::VERSION = '0.56';
 }
 use Moose;
 
@@ -22,7 +22,7 @@ BEGIN {
   $KiokuDB::Test::BLOB::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Test::BLOB::VERSION = '0.55';
+  $KiokuDB::Test::BLOB::VERSION = '0.56';
 }
     use Moose;
 
@@ -166,7 +166,7 @@ KiokuDB::Test::Fixture::Overwrite
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

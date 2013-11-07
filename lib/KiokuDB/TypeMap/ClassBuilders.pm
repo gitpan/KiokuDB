@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::ClassBuilders::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::ClassBuilders::VERSION = '0.55';
+  $KiokuDB::TypeMap::ClassBuilders::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: A typemap for standard class builders
@@ -63,7 +63,7 @@ KiokuDB::TypeMap::ClassBuilders - A typemap for standard class builders
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

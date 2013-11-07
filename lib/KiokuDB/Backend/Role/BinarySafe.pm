@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Role::BinarySafe::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Role::BinarySafe::VERSION = '0.55';
+  $KiokuDB::Backend::Role::BinarySafe::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: An informational role for binary data safe backends.
@@ -22,7 +22,7 @@ KiokuDB::Backend::Role::BinarySafe - An informational role for binary data safe 
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Meta::Attribute::Lazy::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Meta::Attribute::Lazy::VERSION = '0.55';
+  $KiokuDB::Meta::Attribute::Lazy::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Trait for lazy loaded attributes
@@ -36,7 +36,7 @@ KiokuDB::Meta::Attribute::Lazy - Trait for lazy loaded attributes
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

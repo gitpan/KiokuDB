@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Role::Immutable::Transitive::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Role::Immutable::Transitive::VERSION = '0.55';
+  $KiokuDB::Role::Immutable::Transitive::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: A role for immutable objects that only point at other such objects.
@@ -30,7 +30,7 @@ KiokuDB::Role::Immutable::Transitive - A role for immutable objects that only po
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

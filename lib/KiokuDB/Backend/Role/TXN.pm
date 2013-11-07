@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Role::TXN::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Role::TXN::VERSION = '0.55';
+  $KiokuDB::Backend::Role::TXN::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Backend level transaction support.
@@ -67,7 +67,7 @@ KiokuDB::Backend::Role::TXN - Backend level transaction support.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Entry::StorableHook::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Entry::StorableHook::VERSION = '0.55';
+  $KiokuDB::TypeMap::Entry::StorableHook::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Reuse existing Storable hooks for KiokuDB storage.
@@ -237,7 +237,7 @@ KiokuDB::TypeMap::Entry::StorableHook - Reuse existing Storable hooks for KiokuD
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

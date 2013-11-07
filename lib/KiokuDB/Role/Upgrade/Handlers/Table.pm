@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Role::Upgrade::Handlers::Table::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Role::Upgrade::Handlers::Table::VERSION = '0.55';
+  $KiokuDB::Role::Upgrade::Handlers::Table::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: A role for classes
@@ -38,7 +38,7 @@ KiokuDB::Role::Upgrade::Handlers::Table - A role for classes
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

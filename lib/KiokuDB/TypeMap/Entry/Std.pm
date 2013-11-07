@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Entry::Std::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Entry::Std::VERSION = '0.55';
+  $KiokuDB::TypeMap::Entry::Std::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Role for more easily specifying collapse/expand methods
@@ -32,7 +32,7 @@ KiokuDB::TypeMap::Entry::Std - Role for more easily specifying collapse/expand m
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

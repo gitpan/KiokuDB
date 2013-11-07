@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Role::Scan::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Role::Scan::VERSION = '0.55';
+  $KiokuDB::Backend::Role::Scan::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Root set iteration
@@ -54,7 +54,7 @@ KiokuDB::Backend::Role::Scan - Root set iteration
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

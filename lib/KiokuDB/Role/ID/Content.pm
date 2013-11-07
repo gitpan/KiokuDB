@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Role::ID::Content::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Role::ID::Content::VERSION = '0.55';
+  $KiokuDB::Role::ID::Content::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Content dependent object IDs
@@ -27,7 +27,7 @@ KiokuDB::Role::ID::Content - Content dependent object IDs
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Entry::Passthrough::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Entry::Passthrough::VERSION = '0.55';
+  $KiokuDB::TypeMap::Entry::Passthrough::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: A typemap entry of objects that will be serialized by the backend.
@@ -87,7 +87,7 @@ KiokuDB::TypeMap::Entry::Passthrough - A typemap entry of objects that will be s
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

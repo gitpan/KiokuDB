@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Role::TXN::Nested::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Role::TXN::Nested::VERSION = '0.55';
+  $KiokuDB::Backend::Role::TXN::Nested::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Informational role for backends supporting rollback of nested transactions.
@@ -22,7 +22,7 @@ KiokuDB::Backend::Role::TXN::Nested - Informational role for backends supporting
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 DESCRIPTION
 

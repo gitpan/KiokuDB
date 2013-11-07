@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Role::Verbosity::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Role::Verbosity::VERSION = '0.55';
+  $KiokuDB::Role::Verbosity::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: A role for printing diagnosis to STDERR
@@ -40,7 +40,7 @@ KiokuDB::Role::Verbosity - A role for printing diagnosis to STDERR
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

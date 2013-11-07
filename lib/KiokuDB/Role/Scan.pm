@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Role::Scan::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Role::Scan::VERSION = '0.55';
+  $KiokuDB::Role::Scan::VERSION = '0.56';
 }
 use MooseX::Role::Parameterized 0.10;
 # ABSTRACT: A role for entry scanning.
@@ -110,7 +110,7 @@ KiokuDB::Role::Scan - A role for entry scanning.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

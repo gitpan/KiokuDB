@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::LiveObjects::TXNScope::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::LiveObjects::TXNScope::VERSION = '0.55';
+  $KiokuDB::LiveObjects::TXNScope::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Transaction scope.
@@ -71,7 +71,7 @@ KiokuDB::LiveObjects::TXNScope - Transaction scope.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

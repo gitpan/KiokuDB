@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Role::UUIDs::DataUUID::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Role::UUIDs::DataUUID::VERSION = '0.55';
+  $KiokuDB::Role::UUIDs::DataUUID::VERSION = '0.56';
 }
 use Moose::Role;
 
@@ -27,7 +27,7 @@ KiokuDB::Role::UUIDs::DataUUID
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

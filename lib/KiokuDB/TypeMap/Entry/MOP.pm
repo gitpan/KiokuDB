@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Entry::MOP::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Entry::MOP::VERSION = '0.55';
+  $KiokuDB::TypeMap::Entry::MOP::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: A KiokuDB::TypeMap entry for objects with a metaclass.
@@ -500,7 +500,7 @@ KiokuDB::TypeMap::Entry::MOP - A KiokuDB::TypeMap entry for objects with a metac
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

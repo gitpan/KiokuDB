@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Serialize::JSON::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Serialize::JSON::VERSION = '0.55';
+  $KiokuDB::Backend::Serialize::JSON::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Role to serialize entries to JSON strings with KiokuDB::Backend::Serialize::JSPON semantics
@@ -96,7 +96,7 @@ KiokuDB::Backend::Serialize::JSON - Role to serialize entries to JSON strings wi
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

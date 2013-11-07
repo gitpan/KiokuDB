@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Test::Fixture::TXN::Nested::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Test::Fixture::TXN::Nested::VERSION = '0.55';
+  $KiokuDB::Test::Fixture::TXN::Nested::VERSION = '0.56';
 }
 use Moose;
 
@@ -110,7 +110,7 @@ KiokuDB::Test::Fixture::TXN::Nested
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

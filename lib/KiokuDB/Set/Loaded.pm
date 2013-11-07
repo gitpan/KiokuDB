@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Set::Loaded::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Set::Loaded::VERSION = '0.55';
+  $KiokuDB::Set::Loaded::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Implementation of loaded sets
@@ -52,7 +52,7 @@ KiokuDB::Set::Loaded - Implementation of loaded sets
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

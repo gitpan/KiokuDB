@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Default::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Default::VERSION = '0.55';
+  $KiokuDB::TypeMap::Default::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: A standard KiokuDB::TypeMap with predefined entries.
@@ -95,7 +95,7 @@ KiokuDB::TypeMap::Default - A standard KiokuDB::TypeMap with predefined entries.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

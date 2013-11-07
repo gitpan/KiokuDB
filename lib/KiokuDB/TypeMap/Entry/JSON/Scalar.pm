@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Entry::JSON::Scalar::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Entry::JSON::Scalar::VERSION = '0.55';
+  $KiokuDB::TypeMap::Entry::JSON::Scalar::VERSION = '0.56';
 }
 use Moose;
 
@@ -71,7 +71,7 @@ KiokuDB::TypeMap::Entry::JSON::Scalar
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

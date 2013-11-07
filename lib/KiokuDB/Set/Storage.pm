@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Set::Storage::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Set::Storage::VERSION = '0.55';
+  $KiokuDB::Set::Storage::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Role for KiokuDB::Sets that are tied to storage.
@@ -26,7 +26,7 @@ KiokuDB::Set::Storage - Role for KiokuDB::Sets that are tied to storage.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

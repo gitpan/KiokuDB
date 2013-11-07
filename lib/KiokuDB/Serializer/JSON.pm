@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Serializer::JSON::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Serializer::JSON::VERSION = '0.55';
+  $KiokuDB::Serializer::JSON::VERSION = '0.56';
 }
 use Moose;
 
@@ -30,7 +30,7 @@ KiokuDB::Serializer::JSON
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Entry::Ref::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Entry::Ref::VERSION = '0.55';
+  $KiokuDB::TypeMap::Entry::Ref::VERSION = '0.56';
 }
 use Moose;
 
@@ -58,7 +58,7 @@ KiokuDB::TypeMap::Entry::Ref
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

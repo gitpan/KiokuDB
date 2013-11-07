@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::VERSION = '0.55';
+  $KiokuDB::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Object Graph storage engine
@@ -672,7 +672,7 @@ KiokuDB - Object Graph storage engine
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

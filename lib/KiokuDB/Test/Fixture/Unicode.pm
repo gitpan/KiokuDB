@@ -5,7 +5,7 @@ BEGIN {
   $KiokuDB::Test::Fixture::Unicode::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Test::Fixture::Unicode::VERSION = '0.55';
+  $KiokuDB::Test::Fixture::Unicode::VERSION = '0.56';
 }
 use Moose;
 
@@ -57,7 +57,7 @@ KiokuDB::Test::Fixture::Unicode
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

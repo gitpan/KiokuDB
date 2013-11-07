@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Thunk::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Thunk::VERSION = '0.55';
+  $KiokuDB::Thunk::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Internal only placeholder for deferred objects
@@ -67,7 +67,7 @@ KiokuDB::Thunk - Internal only placeholder for deferred objects
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Serialize::YAML::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Serialize::YAML::VERSION = '0.55';
+  $KiokuDB::Backend::Serialize::YAML::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: YAML::XS based serialization of KiokuDB::Entry objects.
@@ -87,7 +87,7 @@ KiokuDB::Backend::Serialize::YAML - YAML::XS based serialization of KiokuDB::Ent
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

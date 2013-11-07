@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Entry::Naive::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Entry::Naive::VERSION = '0.55';
+  $KiokuDB::TypeMap::Entry::Naive::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: A typemap entry for "simple" objects
@@ -57,7 +57,7 @@ KiokuDB::TypeMap::Entry::Naive - A typemap entry for "simple" objects
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

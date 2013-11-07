@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Set::Stored::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Set::Stored::VERSION = '0.55';
+  $KiokuDB::Set::Stored::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Stored representation of KiokuDB::Set objects.
@@ -28,7 +28,7 @@ KiokuDB::Set::Stored - Stored representation of KiokuDB::Set objects.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Entry::Std::Compile::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Entry::Std::Compile::VERSION = '0.55';
+  $KiokuDB::TypeMap::Entry::Std::Compile::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Provides a compile implementation
@@ -52,7 +52,7 @@ KiokuDB::TypeMap::Entry::Std::Compile - Provides a compile implementation
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Role::ID::Digest::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Role::ID::Digest::VERSION = '0.55';
+  $KiokuDB::Role::ID::Digest::VERSION = '0.56';
 }
 use Moose::Role;
 
@@ -30,7 +30,7 @@ KiokuDB::Role::ID::Digest
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

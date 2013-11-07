@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Serializer::Memory::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Serializer::Memory::VERSION = '0.55';
+  $KiokuDB::Serializer::Memory::VERSION = '0.56';
 }
 use Moose;
 
@@ -27,7 +27,7 @@ KiokuDB::Serializer::Memory
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

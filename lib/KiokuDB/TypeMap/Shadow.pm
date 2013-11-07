@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Shadow::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Shadow::VERSION = '0.55';
+  $KiokuDB::TypeMap::Shadow::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Try a list of KiokuDB::TypeMaps in order
@@ -44,7 +44,7 @@ KiokuDB::TypeMap::Shadow - Try a list of KiokuDB::TypeMaps in order
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

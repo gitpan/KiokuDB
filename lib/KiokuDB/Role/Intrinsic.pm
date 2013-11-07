@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Role::Intrinsic::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Role::Intrinsic::VERSION = '0.55';
+  $KiokuDB::Role::Intrinsic::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: A role for value objects
@@ -24,7 +24,7 @@ KiokuDB::Role::Intrinsic - A role for value objects
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

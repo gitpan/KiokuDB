@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Set::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Set::VERSION = '0.55';
+  $KiokuDB::Set::VERSION = '0.56';
 }
 use Moose::Role 'requires', 'has' => { -as => "attr" }; # need a 'has' method
 # ABSTRACT: Set::Object wrapper for KiokuDB with lazy loading.
@@ -157,7 +157,7 @@ KiokuDB::Set - Set::Object wrapper for KiokuDB with lazy loading.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

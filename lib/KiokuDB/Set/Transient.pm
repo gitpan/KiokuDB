@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Set::Transient::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Set::Transient::VERSION = '0.55';
+  $KiokuDB::Set::Transient::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Implementation of in memory sets.
@@ -42,7 +42,7 @@ KiokuDB::Set::Transient - Implementation of in memory sets.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

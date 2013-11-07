@@ -5,7 +5,7 @@ BEGIN {
   $KiokuDB::Test::Fixture::TypeMap::Default::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Test::Fixture::TypeMap::Default::VERSION = '0.55';
+  $KiokuDB::Test::Fixture::TypeMap::Default::VERSION = '0.56';
 }
 use Moose;
 
@@ -34,46 +34,26 @@ use constant HAVE_MX_TRAITS         => try { require MooseX::Traits };
 use constant HAVE_MX_OP             => try { require MooseX::Object::Pluggable };
 
 {
-    package Some::Role;
-BEGIN {
-  $Some::Role::AUTHORITY = 'cpan:NUFFIN';
-}
-{
-  $Some::Role::VERSION = '0.55';
-}
+    package
+        Some::Role;
     use Moose::Role;
 
     has role_attr => ( is => "rw" );
 
-    package Some::Other::Role;
-BEGIN {
-  $Some::Other::Role::AUTHORITY = 'cpan:NUFFIN';
-}
-{
-  $Some::Other::Role::VERSION = '0.55';
-}
+    package
+        Some::Other::Role;
     use Moose::Role;
 
     has other_role_attr => ( is => "rw" );
 
-    package Some::Third::Role;
-BEGIN {
-  $Some::Third::Role::AUTHORITY = 'cpan:NUFFIN';
-}
-{
-  $Some::Third::Role::VERSION = '0.55';
-}
+    package
+        Some::Third::Role;
     use Moose::Role;
 
     sub a_role_method { "hello" }
 
-    package Some::Class;
-BEGIN {
-  $Some::Class::AUTHORITY = 'cpan:NUFFIN';
-}
-{
-  $Some::Class::VERSION = '0.55';
-}
+    package
+        Some::Class;
     use Moose;
 
     if ( KiokuDB::Test::Fixture::TypeMap::Default::HAVE_MX_TRAITS ) {
@@ -380,7 +360,7 @@ KiokuDB::Test::Fixture::TypeMap::Default
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

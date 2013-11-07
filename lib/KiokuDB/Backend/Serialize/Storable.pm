@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Serialize::Storable::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Serialize::Storable::VERSION = '0.55';
+  $KiokuDB::Backend::Serialize::Storable::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Storable based serialization of KiokuDB::Entry objects.
@@ -58,7 +58,7 @@ KiokuDB::Backend::Serialize::Storable - Storable based serialization of KiokuDB:
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

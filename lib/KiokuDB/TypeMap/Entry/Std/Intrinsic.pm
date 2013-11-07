@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Entry::Std::Intrinsic::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Entry::Std::Intrinsic::VERSION = '0.55';
+  $KiokuDB::TypeMap::Entry::Std::Intrinsic::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Provides a compile_collapse implementation.
@@ -72,7 +72,7 @@ KiokuDB::TypeMap::Entry::Std::Intrinsic - Provides a compile_collapse implementa
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

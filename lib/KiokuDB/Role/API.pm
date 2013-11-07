@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Role::API::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Role::API::VERSION = '0.55';
+  $KiokuDB::Role::API::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Role for KiokuDB api (used to setup delegations).
@@ -67,7 +67,7 @@ KiokuDB::Role::API - Role for KiokuDB api (used to setup delegations).
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Role::UnicodeSafe::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Role::UnicodeSafe::VERSION = '0.55';
+  $KiokuDB::Backend::Role::UnicodeSafe::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: An informational role for binary data safe backends.
@@ -24,7 +24,7 @@ KiokuDB::Backend::Role::UnicodeSafe - An informational role for binary data safe
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

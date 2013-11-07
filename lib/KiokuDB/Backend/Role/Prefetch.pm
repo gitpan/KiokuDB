@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Role::Prefetch::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Role::Prefetch::VERSION = '0.55';
+  $KiokuDB::Backend::Role::Prefetch::VERSION = '0.56';
 }
 use Moose::Role;
 
@@ -23,7 +23,7 @@ KiokuDB::Backend::Role::Prefetch
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

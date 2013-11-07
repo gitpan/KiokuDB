@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Stream::Objects::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Stream::Objects::VERSION = '0.55';
+  $KiokuDB::Stream::Objects::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Data::Stream::Bulk with live object management.
@@ -100,7 +100,7 @@ KiokuDB::Stream::Objects - Data::Stream::Bulk with live object management.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 DESCRIPTION
 

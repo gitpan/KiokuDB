@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Composite::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Composite::VERSION = '0.55';
+  $KiokuDB::TypeMap::Composite::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: A role for KiokuDB::TypeMaps created out of many smaller typemaps
@@ -18,7 +18,7 @@ BEGIN {
   $KiokuDB::TypeMap::Composite::TypeMapAttr::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Composite::TypeMapAttr::VERSION = '0.55';
+  $KiokuDB::TypeMap::Composite::TypeMapAttr::VERSION = '0.56';
 }
     use Moose::Role;
 
@@ -153,7 +153,7 @@ KiokuDB::TypeMap::Composite - A role for KiokuDB::TypeMaps created out of many s
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

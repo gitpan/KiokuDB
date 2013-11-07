@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Entry::Alias::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Entry::Alias::VERSION = '0.55';
+  $KiokuDB::TypeMap::Entry::Alias::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: An alias in the typemap to another entry
@@ -30,7 +30,7 @@ KiokuDB::TypeMap::Entry::Alias - An alias in the typemap to another entry
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

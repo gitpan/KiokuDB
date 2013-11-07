@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Meta::Attribute::DoNotSerialize::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Meta::Attribute::DoNotSerialize::VERSION = '0.55';
+  $KiokuDB::Meta::Attribute::DoNotSerialize::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Trait for skipped attributes
@@ -26,7 +26,7 @@ KiokuDB::Meta::Attribute::DoNotSerialize - Trait for skipped attributes
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

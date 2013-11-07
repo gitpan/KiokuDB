@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Role::Query::Simple::Linear::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Role::Query::Simple::Linear::VERSION = '0.55';
+  $KiokuDB::Backend::Role::Query::Simple::Linear::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Query::Simple implemented with a linear scan of all entries.
@@ -41,7 +41,7 @@ KiokuDB::Backend::Role::Query::Simple::Linear - Query::Simple implemented with a
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

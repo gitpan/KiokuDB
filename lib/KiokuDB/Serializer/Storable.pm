@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Serializer::Storable::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Serializer::Storable::VERSION = '0.55';
+  $KiokuDB::Serializer::Storable::VERSION = '0.56';
 }
 use Moose;
 
@@ -28,7 +28,7 @@ KiokuDB::Serializer::Storable
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

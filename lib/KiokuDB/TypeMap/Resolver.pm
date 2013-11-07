@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Resolver::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Resolver::VERSION = '0.55';
+  $KiokuDB::TypeMap::Resolver::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Caching resolver for KiokuDB::TypeMap
@@ -133,7 +133,7 @@ KiokuDB::TypeMap::Resolver - Caching resolver for KiokuDB::TypeMap
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

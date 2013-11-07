@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Default::Storable::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Default::Storable::VERSION = '0.55';
+  $KiokuDB::TypeMap::Default::Storable::VERSION = '0.56';
 }
 use Moose;
 
@@ -27,7 +27,7 @@ KiokuDB::TypeMap::Default::Storable
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

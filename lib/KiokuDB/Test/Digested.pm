@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Test::Digested::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Test::Digested::VERSION = '0.55';
+  $KiokuDB::Test::Digested::VERSION = '0.56';
 }
 use Moose;
 
@@ -37,7 +37,7 @@ KiokuDB::Test::Digested
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

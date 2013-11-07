@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Reference::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Reference::VERSION = '0.55';
+  $KiokuDB::Reference::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: A symbolic reference to another KiokuDB::Entry.
@@ -55,7 +55,7 @@ KiokuDB::Reference - A symbolic reference to another KiokuDB::Entry.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

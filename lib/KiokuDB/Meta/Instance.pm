@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Meta::Instance::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Meta::Instance::VERSION = '0.55';
+  $KiokuDB::Meta::Instance::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Moose::Meta::Instance level support for lazy loading.
@@ -50,7 +50,7 @@ KiokuDB::Meta::Instance - Moose::Meta::Instance level support for lazy loading.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

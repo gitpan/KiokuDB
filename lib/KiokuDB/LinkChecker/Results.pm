@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::LinkChecker::Results::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::LinkChecker::Results::VERSION = '0.55';
+  $KiokuDB::LinkChecker::Results::VERSION = '0.56';
 }
 use Moose;
 
@@ -34,7 +34,7 @@ KiokuDB::LinkChecker::Results
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

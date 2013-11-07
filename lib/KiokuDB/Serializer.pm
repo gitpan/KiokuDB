@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Serializer::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Serializer::VERSION = '0.55';
+  $KiokuDB::Serializer::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Standalone serializer object
@@ -51,7 +51,7 @@ KiokuDB::Serializer - Standalone serializer object
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

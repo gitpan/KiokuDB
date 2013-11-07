@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::LinkChecker::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::LinkChecker::VERSION = '0.55';
+  $KiokuDB::LinkChecker::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Reference consistency checker
@@ -65,7 +65,7 @@ KiokuDB::LinkChecker - Reference consistency checker
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

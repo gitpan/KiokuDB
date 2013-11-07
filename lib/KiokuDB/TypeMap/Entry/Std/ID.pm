@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Entry::Std::ID::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Entry::Std::ID::VERSION = '0.55';
+  $KiokuDB::TypeMap::Entry::Std::ID::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Provides a default compile_id method
@@ -28,7 +28,7 @@ KiokuDB::TypeMap::Entry::Std::ID - Provides a default compile_id method
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

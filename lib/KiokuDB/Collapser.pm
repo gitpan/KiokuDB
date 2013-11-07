@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Collapser::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Collapser::VERSION = '0.55';
+  $KiokuDB::Collapser::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Collapse object hierarchies to entry data
@@ -422,7 +422,7 @@ KiokuDB::Collapser - Collapse object hierarchies to entry data
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

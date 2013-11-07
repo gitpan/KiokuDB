@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Default::Canonical::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Default::Canonical::VERSION = '0.55';
+  $KiokuDB::TypeMap::Default::Canonical::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: A KiokuDB::TypeMap::Default implementation that canonicalizes the standard types to simplified versions.
@@ -97,7 +97,7 @@ KiokuDB::TypeMap::Default::Canonical - A KiokuDB::TypeMap::Default implementatio
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 DESCRIPTION
 

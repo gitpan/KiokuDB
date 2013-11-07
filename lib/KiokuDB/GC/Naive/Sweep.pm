@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::GC::Naive::Sweep::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::GC::Naive::Sweep::VERSION = '0.55';
+  $KiokuDB::GC::Naive::Sweep::VERSION = '0.56';
 }
 use Moose;
 
@@ -19,7 +19,7 @@ BEGIN {
   $KiokuDB::GC::Naive::Sweep::Results::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::GC::Naive::Sweep::Results::VERSION = '0.55';
+  $KiokuDB::GC::Naive::Sweep::Results::VERSION = '0.56';
 }
     use Moose;
 
@@ -69,7 +69,7 @@ KiokuDB::GC::Naive::Sweep
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

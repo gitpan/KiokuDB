@@ -3,7 +3,7 @@ BEGIN {
   $Moose::Meta::Attribute::Custom::Trait::KiokuDB::Lazy::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $Moose::Meta::Attribute::Custom::Trait::KiokuDB::Lazy::VERSION = '0.55';
+  $Moose::Meta::Attribute::Custom::Trait::KiokuDB::Lazy::VERSION = '0.56';
 }
 
 use KiokuDB::Meta::Attribute::Lazy;
@@ -20,7 +20,7 @@ Moose::Meta::Attribute::Custom::Trait::KiokuDB::Lazy
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

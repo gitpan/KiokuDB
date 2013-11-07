@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Entry::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Entry::VERSION = '0.55';
+  $KiokuDB::Entry::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: An entry in the database
@@ -320,7 +320,7 @@ KiokuDB::Entry - An entry in the database
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::TypeMap::Default::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::TypeMap::Default::VERSION = '0.55';
+  $KiokuDB::Backend::TypeMap::Default::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: A role for backends with a default typemap
@@ -31,7 +31,7 @@ KiokuDB::Backend::TypeMap::Default - A role for backends with a default typemap
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::GC::Naive::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::GC::Naive::VERSION = '0.55';
+  $KiokuDB::GC::Naive::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Naive mark and sweep garbage collection
@@ -91,7 +91,7 @@ KiokuDB::GC::Naive - Naive mark and sweep garbage collection
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

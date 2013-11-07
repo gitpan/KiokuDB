@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Role::Query::Simple::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Role::Query::Simple::VERSION = '0.55';
+  $KiokuDB::Backend::Role::Query::Simple::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Simple query api
@@ -44,7 +44,7 @@ KiokuDB::Backend::Role::Query::Simple - Simple query api
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

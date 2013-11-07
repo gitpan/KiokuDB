@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Test::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Test::VERSION = '0.55';
+  $KiokuDB::Test::VERSION = '0.56';
 }
 use strict;
 use warnings;
@@ -54,7 +54,7 @@ KiokuDB::Test - Reusable tests for KiokuDB backend authors.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

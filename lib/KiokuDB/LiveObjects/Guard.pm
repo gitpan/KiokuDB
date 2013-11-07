@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::LiveObjects::Guard::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::LiveObjects::Guard::VERSION = '0.55';
+  $KiokuDB::LiveObjects::Guard::VERSION = '0.56';
 }
 use strict;
 use warnings;
@@ -47,7 +47,7 @@ KiokuDB::LiveObjects::Guard
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

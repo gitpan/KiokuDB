@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Entry::Closure::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Entry::Closure::VERSION = '0.55';
+  $KiokuDB::TypeMap::Entry::Closure::VERSION = '0.56';
 }
 use Moose;
 
@@ -201,7 +201,7 @@ KiokuDB::TypeMap::Entry::Closure
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

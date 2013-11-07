@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Default::JSON::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Default::JSON::VERSION = '0.55';
+  $KiokuDB::TypeMap::Default::JSON::VERSION = '0.56';
 }
 use Moose;
 
@@ -63,7 +63,7 @@ KiokuDB::TypeMap::Default::JSON
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

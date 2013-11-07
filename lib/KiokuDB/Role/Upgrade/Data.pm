@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Role::Upgrade::Data::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Role::Upgrade::Data::VERSION = '0.55';
+  $KiokuDB::Role::Upgrade::Data::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Classes that provide their own upgrade routine.
@@ -26,7 +26,7 @@ KiokuDB::Role::Upgrade::Data - Classes that provide their own upgrade routine.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

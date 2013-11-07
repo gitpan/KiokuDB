@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Test::Fixture::GIN::Class::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Test::Fixture::GIN::Class::VERSION = '0.55';
+  $KiokuDB::Test::Fixture::GIN::Class::VERSION = '0.56';
 }
 use Moose;
 
@@ -83,7 +83,7 @@ KiokuDB::Test::Fixture::GIN::Class
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

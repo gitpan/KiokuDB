@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Entry::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Entry::VERSION = '0.55';
+  $KiokuDB::TypeMap::Entry::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Role for KiokuDB::TypeMap entries
@@ -24,7 +24,7 @@ KiokuDB::TypeMap::Entry - Role for KiokuDB::TypeMap entries
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

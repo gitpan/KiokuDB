@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::GC::Naive::Mark::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::GC::Naive::Mark::VERSION = '0.55';
+  $KiokuDB::GC::Naive::Mark::VERSION = '0.56';
 }
 use Moose;
 
@@ -17,7 +17,7 @@ BEGIN {
   $KiokuDB::GC::Naive::Mark::Results::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::GC::Naive::Mark::Results::VERSION = '0.55';
+  $KiokuDB::GC::Naive::Mark::Results::VERSION = '0.56';
 }
     use Moose;
 
@@ -97,7 +97,7 @@ KiokuDB::GC::Naive::Mark
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

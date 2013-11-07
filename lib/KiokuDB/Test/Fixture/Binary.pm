@@ -5,7 +5,7 @@ BEGIN {
   $KiokuDB::Test::Fixture::Binary::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Test::Fixture::Binary::VERSION = '0.55';
+  $KiokuDB::Test::Fixture::Binary::VERSION = '0.56';
 }
 use Moose;
 
@@ -72,7 +72,7 @@ KiokuDB::Test::Fixture::Binary
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

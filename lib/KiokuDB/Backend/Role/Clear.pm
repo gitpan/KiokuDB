@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Role::Clear::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Role::Clear::VERSION = '0.55';
+  $KiokuDB::Backend::Role::Clear::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Backend clearing api
@@ -24,7 +24,7 @@ KiokuDB::Backend::Role::Clear - Backend clearing api
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

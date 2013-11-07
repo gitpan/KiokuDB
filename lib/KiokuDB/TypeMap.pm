@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::VERSION = '0.55';
+  $KiokuDB::TypeMap::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Class to collapsing/expanding logic.
@@ -187,7 +187,7 @@ KiokuDB::TypeMap - Class to collapsing/expanding logic.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

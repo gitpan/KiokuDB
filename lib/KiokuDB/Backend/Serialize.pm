@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Serialize::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Serialize::VERSION = '0.55';
+  $KiokuDB::Backend::Serialize::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Serialization role for backends
@@ -47,7 +47,7 @@ KiokuDB::Backend::Serialize - Serialization role for backends
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

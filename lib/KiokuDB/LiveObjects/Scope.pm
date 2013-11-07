@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::LiveObjects::Scope::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::LiveObjects::Scope::VERSION = '0.55';
+  $KiokuDB::LiveObjects::Scope::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Scope helper object
@@ -76,7 +76,7 @@ KiokuDB::LiveObjects::Scope - Scope helper object
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

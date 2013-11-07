@@ -91,7 +91,7 @@ my %WriteMakefileArgs = (
     "base" => 0,
     "if" => 0
   },
-  "VERSION" => "0.55",
+  "VERSION" => "0.56",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -178,8 +178,8 @@ delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
 if ($] < 5.010) {
     $WriteMakefileArgs{PREREQ_PM} = {
         %{ $WriteMakefileArgs{PREREQ_PM} },
-        "Tie::RefHash::Weak" => "0.09",
         "Variable::Magic" => "0.24",
+        "Tie::RefHash::Weak" => "0.09",
     };
 }
 

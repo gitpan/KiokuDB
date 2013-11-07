@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Entry::Set::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Entry::Set::VERSION = '0.55';
+  $KiokuDB::TypeMap::Entry::Set::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: A typemap entry for KiokuDB::Sets
@@ -146,7 +146,7 @@ KiokuDB::TypeMap::Entry::Set - A typemap entry for KiokuDB::Sets
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 DESCRIPTION
 

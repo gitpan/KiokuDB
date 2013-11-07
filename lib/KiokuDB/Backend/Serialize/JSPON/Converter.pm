@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Serialize::JSPON::Converter::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Serialize::JSPON::Converter::VERSION = '0.55';
+  $KiokuDB::Backend::Serialize::JSPON::Converter::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Common functionality for JSPON expansion/collapsing
@@ -123,7 +123,7 @@ KiokuDB::Backend::Serialize::JSPON::Converter - Common functionality for JSPON e
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

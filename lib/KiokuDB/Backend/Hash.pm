@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Hash::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Hash::VERSION = '0.55';
+  $KiokuDB::Backend::Hash::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: In memory backend for testing purposes.
@@ -92,7 +92,7 @@ KiokuDB::Backend::Hash - In memory backend for testing purposes.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

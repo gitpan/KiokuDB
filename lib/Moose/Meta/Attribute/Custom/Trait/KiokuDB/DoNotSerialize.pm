@@ -3,7 +3,7 @@ BEGIN {
   $Moose::Meta::Attribute::Custom::Trait::KiokuDB::DoNotSerialize::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $Moose::Meta::Attribute::Custom::Trait::KiokuDB::DoNotSerialize::VERSION = '0.55';
+  $Moose::Meta::Attribute::Custom::Trait::KiokuDB::DoNotSerialize::VERSION = '0.56';
 }
 
 use KiokuDB::Meta::Attribute::DoNotSerialize;
@@ -20,7 +20,7 @@ Moose::Meta::Attribute::Custom::Trait::KiokuDB::DoNotSerialize
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

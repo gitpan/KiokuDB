@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Role::UUIDs::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Role::UUIDs::VERSION = '0.55';
+  $KiokuDB::Role::UUIDs::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: UUID generation role.
@@ -34,7 +34,7 @@ KiokuDB::Role::UUIDs - UUID generation role.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

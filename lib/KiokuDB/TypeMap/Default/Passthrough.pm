@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::TypeMap::Default::Passthrough::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::TypeMap::Default::Passthrough::VERSION = '0.55';
+  $KiokuDB::TypeMap::Default::Passthrough::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: A KiokuDB::TypeMap::Default instance suitable for Storable.
@@ -96,7 +96,7 @@ KiokuDB::TypeMap::Default::Passthrough - A KiokuDB::TypeMap::Default instance su
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 DESCRIPTION
 

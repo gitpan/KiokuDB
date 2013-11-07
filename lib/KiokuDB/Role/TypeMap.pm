@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Role::TypeMap::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Role::TypeMap::VERSION = '0.55';
+  $KiokuDB::Role::TypeMap::VERSION = '0.56';
 }
 use Moose::Role;
 
@@ -23,7 +23,7 @@ KiokuDB::Role::TypeMap
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

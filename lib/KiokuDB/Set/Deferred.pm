@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Set::Deferred::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Set::Deferred::VERSION = '0.55';
+  $KiokuDB::Set::Deferred::VERSION = '0.56';
 }
 use Moose;
 # ABSTRACT: Implementation of deferred set.
@@ -186,7 +186,7 @@ KiokuDB::Set::Deferred - Implementation of deferred set.
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

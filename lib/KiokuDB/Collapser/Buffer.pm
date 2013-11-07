@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Collapser::Buffer::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Collapser::Buffer::VERSION = '0.55';
+  $KiokuDB::Collapser::Buffer::VERSION = '0.56';
 }
 use Moose;
 
@@ -250,7 +250,7 @@ KiokuDB::Collapser::Buffer
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

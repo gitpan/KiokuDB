@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Test::Fixture::TXN::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Test::Fixture::TXN::VERSION = '0.55';
+  $KiokuDB::Test::Fixture::TXN::VERSION = '0.56';
 }
 use Moose;
 
@@ -286,7 +286,7 @@ KiokuDB::Test::Fixture::TXN
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 AUTHOR
 

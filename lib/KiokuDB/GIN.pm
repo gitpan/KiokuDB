@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::GIN::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::GIN::VERSION = '0.55';
+  $KiokuDB::GIN::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Gin assisted recollection
@@ -54,7 +54,7 @@ KiokuDB::GIN - Gin assisted recollection
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Backend::Serialize::JSPON::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Backend::Serialize::JSPON::VERSION = '0.55';
+  $KiokuDB::Backend::Serialize::JSPON::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: JSPON serialization helper
@@ -56,7 +56,7 @@ KiokuDB::Backend::Serialize::JSPON - JSPON serialization helper
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 

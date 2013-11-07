@@ -3,7 +3,7 @@ BEGIN {
   $KiokuDB::Role::UUIDs::SerialIDs::AUTHORITY = 'cpan:NUFFIN';
 }
 {
-  $KiokuDB::Role::UUIDs::SerialIDs::VERSION = '0.55';
+  $KiokuDB::Role::UUIDs::SerialIDs::VERSION = '0.56';
 }
 use Moose::Role;
 # ABSTRACT: Serial ID assignment based on a global counter.
@@ -25,7 +25,7 @@ KiokuDB::Role::UUIDs::SerialIDs - Serial ID assignment based on a global counter
 
 =head1 VERSION
 
-version 0.55
+version 0.56
 
 =head1 SYNOPSIS
 
