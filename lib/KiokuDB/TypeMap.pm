@@ -2,9 +2,7 @@ package KiokuDB::TypeMap;
 BEGIN {
   $KiokuDB::TypeMap::AUTHORITY = 'cpan:NUFFIN';
 }
-{
-  $KiokuDB::TypeMap::VERSION = '0.56';
-}
+$KiokuDB::TypeMap::VERSION = '0.57';
 use Moose;
 # ABSTRACT: Class to collapsing/expanding logic.
 
@@ -181,13 +179,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 KiokuDB::TypeMap - Class to collapsing/expanding logic.
 
 =head1 VERSION
 
-version 0.56
+version 0.57
 
 =head1 SYNOPSIS
 
@@ -270,7 +270,7 @@ Yuval Kogman <nothingmuch@woobling.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+This software is copyright (c) 2014 by Yuval Kogman, Infinity Interactive.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

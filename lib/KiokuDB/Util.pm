@@ -2,9 +2,7 @@ package KiokuDB::Util;
 BEGIN {
   $KiokuDB::Util::AUTHORITY = 'cpan:NUFFIN';
 }
-{
-  $KiokuDB::Util::VERSION = '0.56';
-}
+$KiokuDB::Util::VERSION = '0.57';
 use strict;
 use warnings;
 # ABSTRACT: Utility functions for working with KiokuDB
@@ -14,6 +12,7 @@ use Path::Class;
 use Carp qw(croak);
 use MooseX::YAML 0.04;
 use Scalar::Util qw(blessed);
+use Class::Load ();
 
 use namespace::clean;
 
@@ -56,7 +55,7 @@ sub dsn_to_backend {
         $moniker = $monikers{$moniker} || $moniker;
         my $class = "KiokuDB::Backend::$moniker";
 
-        Class::MOP::load_class($class);
+        Class::Load::load_class($class);
         return $class->new_from_dsn($rest, @args);
     } elsif ( my $args = _try_json($dsn) ) {
         my $dsn;
@@ -98,7 +97,7 @@ sub config_to_backend {
     return $backend if blessed($backend);
 
     my $backend_class = $backend->{class};
-    Class::MOP::load_class($backend_class);
+    Class::Load::load_class($backend_class);
 
     return $backend_class->new_from_dsn_params(
         ( defined($base) ? ( dir => $base->subdir("data") ) : () ),
@@ -207,13 +206,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 KiokuDB::Util - Utility functions for working with KiokuDB
 
 =head1 VERSION
 
-version 0.56
+version 0.57
 
 =head1 SYNOPSIS
 
@@ -281,7 +282,7 @@ Yuval Kogman <nothingmuch@woobling.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+This software is copyright (c) 2014 by Yuval Kogman, Infinity Interactive.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

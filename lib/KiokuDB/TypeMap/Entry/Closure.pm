@@ -2,14 +2,13 @@ package KiokuDB::TypeMap::Entry::Closure;
 BEGIN {
   $KiokuDB::TypeMap::Entry::Closure::AUTHORITY = 'cpan:NUFFIN';
 }
-{
-  $KiokuDB::TypeMap::Entry::Closure::VERSION = '0.56';
-}
+$KiokuDB::TypeMap::Entry::Closure::VERSION = '0.57';
 use Moose;
 
 use Carp qw(croak);
 use Scalar::Util qw(refaddr);
 use PadWalker 1.9;
+use Class::Load ();
 
 no warnings 'recursion';
 
@@ -129,7 +128,7 @@ sub compile_expand {
                 if ( defined(my $file = $data->{file}) ) {
                     require $file unless exists $INC{$file};
                 } else {
-                    Class::MOP::load_class($data->{package});
+                    Class::Load::load_class($data->{package});
                 }
 
                 unless ( defined(*{$glob}{CODE}) ) {
@@ -195,13 +194,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 KiokuDB::TypeMap::Entry::Closure
 
 =head1 VERSION
 
-version 0.56
+version 0.57
 
 =head1 AUTHOR
 
@@ -209,7 +210,7 @@ Yuval Kogman <nothingmuch@woobling.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+This software is copyright (c) 2014 by Yuval Kogman, Infinity Interactive.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

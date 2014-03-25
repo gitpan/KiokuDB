@@ -2,9 +2,7 @@ package KiokuDB::TypeMap::Entry::StorableHook;
 BEGIN {
   $KiokuDB::TypeMap::Entry::StorableHook::AUTHORITY = 'cpan:NUFFIN';
 }
-{
-  $KiokuDB::TypeMap::Entry::StorableHook::VERSION = '0.56';
-}
+$KiokuDB::TypeMap::Entry::StorableHook::VERSION = '0.57';
 use Moose;
 # ABSTRACT: Reuse existing Storable hooks for KiokuDB storage.
 
@@ -231,13 +229,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 KiokuDB::TypeMap::Entry::StorableHook - Reuse existing Storable hooks for KiokuDB storage.
 
 =head1 VERSION
 
-version 0.56
+version 0.57
 
 =head1 SYNOPSIS
 
@@ -251,7 +251,7 @@ Yuval Kogman <nothingmuch@woobling.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+This software is copyright (c) 2014 by Yuval Kogman, Infinity Interactive.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

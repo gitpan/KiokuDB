@@ -2,9 +2,7 @@ package KiokuDB::Stream::Objects;
 BEGIN {
   $KiokuDB::Stream::Objects::AUTHORITY = 'cpan:NUFFIN';
 }
-{
-  $KiokuDB::Stream::Objects::VERSION = '0.56';
-}
+$KiokuDB::Stream::Objects::VERSION = '0.57';
 use Moose;
 # ABSTRACT: Data::Stream::Bulk with live object management.
 
@@ -94,13 +92,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 KiokuDB::Stream::Objects - Data::Stream::Bulk with live object management.
 
 =head1 VERSION
 
-version 0.56
+version 0.57
 
 =head1 DESCRIPTION
 
@@ -114,7 +114,7 @@ Yuval Kogman <nothingmuch@woobling.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+This software is copyright (c) 2014 by Yuval Kogman, Infinity Interactive.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

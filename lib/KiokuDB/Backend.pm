@@ -2,12 +2,11 @@ package KiokuDB::Backend;
 BEGIN {
   $KiokuDB::Backend::AUTHORITY = 'cpan:NUFFIN';
 }
-{
-  $KiokuDB::Backend::VERSION = '0.56';
-}
+$KiokuDB::Backend::VERSION = '0.57';
 use Moose::Role;
 # ABSTRACT: Backend interface role
 
+use Class::Load ();
 use Moose::Util::TypeConstraints;
 use Try::Tiny;
 
@@ -19,10 +18,10 @@ coerce ( __PACKAGE__,
         my $class = delete $p{class} || die "Can't coerce backend from hash without a 'class' parameter";
 
         try {
-            Class::MOP::load_class("KiokuDB::Backend::$class");
+            Class::Load::load_class("KiokuDB::Backend::$class");
             "KiokuDB::Backend::$class"->new(%p);
         } catch {
-            Class::MOP::load_class($class);
+            Class::Load::load_class($class);
             $class->new(%p);
         };
     },
@@ -67,13 +66,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 KiokuDB::Backend - Backend interface role
 
 =head1 VERSION
 
-version 0.56
+version 0.57
 
 =head1 SYNOPSIS
 
@@ -281,7 +282,7 @@ Yuval Kogman <nothingmuch@woobling.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+This software is copyright (c) 2014 by Yuval Kogman, Infinity Interactive.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

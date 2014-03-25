@@ -2,9 +2,7 @@ package KiokuDB::Role::Scan;
 BEGIN {
   $KiokuDB::Role::Scan::AUTHORITY = 'cpan:NUFFIN';
 }
-{
-  $KiokuDB::Role::Scan::VERSION = '0.56';
-}
+$KiokuDB::Role::Scan::VERSION = '0.57';
 use MooseX::Role::Parameterized 0.10;
 # ABSTRACT: A role for entry scanning.
 
@@ -104,13 +102,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 KiokuDB::Role::Scan - A role for entry scanning.
 
 =head1 VERSION
 
-version 0.56
+version 0.57
 
 =head1 SYNOPSIS
 
@@ -165,7 +165,7 @@ Yuval Kogman <nothingmuch@woobling.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+This software is copyright (c) 2014 by Yuval Kogman, Infinity Interactive.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -2,9 +2,7 @@ package KiokuDB::Set::Storage;
 BEGIN {
   $KiokuDB::Set::Storage::AUTHORITY = 'cpan:NUFFIN';
 }
-{
-  $KiokuDB::Set::Storage::VERSION = '0.56';
-}
+$KiokuDB::Set::Storage::VERSION = '0.57';
 use Moose::Role;
 # ABSTRACT: Role for KiokuDB::Sets that are tied to storage.
 
@@ -20,13 +18,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 KiokuDB::Set::Storage - Role for KiokuDB::Sets that are tied to storage.
 
 =head1 VERSION
 
-version 0.56
+version 0.57
 
 =head1 SYNOPSIS
 
@@ -43,7 +43,7 @@ Yuval Kogman <nothingmuch@woobling.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Yuval Kogman, Infinity Interactive.
+This software is copyright (c) 2014 by Yuval Kogman, Infinity Interactive.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
